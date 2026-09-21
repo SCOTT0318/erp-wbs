@@ -1,0 +1,23 @@
+window.DOCS_DATA = [
+  { path: "README.md", title: "문서 인덱스", category: "안내", state: "current", description: "문서 분류와 우선 확인 순서" },
+  { path: "AI_HANDOFF.md", title: "AI 인수인계", category: "인수인계", state: "current", description: "최신 구성, 구현 범위와 보존 원칙" },
+  { path: "handoff/2026-09-17.md", title: "2026-09-17 인수인계", category: "인수인계", state: "history", description: "해당 일자의 구현·검증 기록" },
+  { path: "WBS.md", title: "ERP 전체 WBS", category: "WBS", state: "current", description: "3% 기준선과 완료·향후 작업 목록" },
+  { path: "WBS_METHOD.md", title: "WBS 관리 안내", category: "WBS", state: "current", description: "가중치 산정과 갱신 규칙" },
+  { path: "ERP_README.md", title: "ERP 개요", category: "개발", state: "current", description: "기능, 기술 구성과 실행 개요" },
+  { path: "NODE_REBUILD.md", title: "개발·재빌드 안내", category: "개발", state: "current", description: "Windows·Miniconda 개발 및 검증 명령" },
+  { path: "PRODUCTION.md", title: "생산 업무 계약", category: "업무", state: "current", description: "생산·재고·컨테이너 규칙과 API" },
+  { path: "WORKSPACE_SEARCH_CALENDAR.md", title: "업무공간·검색·달력", category: "업무", state: "current", description: "통합 검색, 월간 납기와 공휴일" },
+  { path: "NAS_AUTH.md", title: "NAS 인증", category: "운영", state: "current", description: "DSM 직접 인증과 계정 동기화" },
+  { path: "STANDALONE_DATABASE.md", title: "독립 운영 DB", category: "운영", state: "current", description: "현재 앱·DB 분리 운영 기준" },
+  { path: "NAS_POSTGRES_SETUP.md", title: "NAS 설치·장애 대응", category: "운영", state: "current", description: "현재 절차와 날짜별 과거 전환 기록" },
+  { path: "DATABASE_README.md", title: "DB·백업", category: "운영", state: "current", description: "데이터, 백업과 서명 키 보존 원칙" },
+  { path: "ENV_UPLOAD_GUIDE.md", title: "환경 파일 배치", category: "운영", state: "current", description: "비공개 환경 파일 원본과 업로드 위치" },
+  { path: "SYNOLOGY_DSM_WEB_LOGIN_MANUAL.md", title: "DSM 웹 로그인 매뉴얼", category: "운영", state: "current", description: "DSM 직접 API 조회 설계 원문" },
+  { path: "UPDATE_PAGE.md", title: "업데이트 안내 페이지", category: "서비스", state: "current", description: "독립 점검 안내 서비스 사용법" },
+  { path: "ERROR_PAGES.md", title: "공용 오류 페이지", category: "서비스", state: "current", description: "Web Station 오류 화면 구성" },
+  { path: "UI_ASSETS_README.md", title: "UI 자산", category: "서비스", state: "current", description: "로고·아이콘과 라이선스" },
+  { path: "VALIDATION.md", title: "검증 기록", category: "검증", state: "history", description: "날짜별 빌드·테스트·운영 관찰" },
+  { path: "NAS_DIRECTORY_README.md", title: "Directory bridge 이력", category: "과거자료", state: "history", description: "현재 운영에서 사용하지 않는 이전 조회 서비스" },
+  { path: "NAS_RECREATE_CHECK.md", title: "NAS 재생성 점검 이력", category: "과거자료", state: "history", description: "2026-09-15 당시 구성 점검 기록" }
+];

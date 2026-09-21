@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TempChain ERP WBS 구축 현황">
+  <title>TempChain ERP WBS</title>
+  <link rel="stylesheet" href="./css/wbs.css">
+</head>
+<body>
+  <header class="topbar">
+    <strong class="brand-text">TempChain ERP WBS</strong>
+    <time id="current-date" aria-label="현재 날짜"></time>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">PROJECT CONTROL</p>
+        <h1 id="page-title">ERP 구축 현황</h1>
+      </div>
+      <div id="progress-card" class="progress-card" aria-label="전체 진행률">
+        <div class="progress-heading"><span>전체 진행률</span><strong id="progress-value">0%</strong></div>
+        <div id="progress-track" class="progress-track" role="progressbar" aria-label="전체 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-bar"></span></div>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="프로젝트 요약">
+      <article><span>전체 작업 패키지</span><strong id="total-count">0</strong><small>세부 WBS 항목</small></article>
+      <article><span>완료</span><strong id="done-count">0</strong><small>현재 코드·문서로 확인</small></article>
+      <article><span>앞으로 할 일</span><strong id="todo-count">0</strong><small>부서별 확정·설계·구현·검증</small></article>
+    </section>
+
+    <section class="section-block completed-block" aria-labelledby="completed-title">
+      <div class="section-title">
+        <div><p class="eyebrow">COMPLETED BASELINE</p><h2 id="completed-title">지금까지 완료된 기반</h2></div>
+      </div>
+      <div id="completed-grid" class="completed-grid"></div>
+    </section>
+
+    <section class="section-block" aria-labelledby="wbs-title">
+      <div class="section-title">
+        <div><p class="eyebrow">MASTER PLAN</p><h2 id="wbs-title">전체 WBS</h2></div>
+        <p id="result-summary" aria-live="polite"></p>
+      </div>
+
+      <div class="controls" aria-label="WBS 필터">
+        <label class="search-field">
+          <span class="sr-only">작업 검색</span>
+          <input id="search" type="search" placeholder="작업명, 설명, 산출물 검색" autocomplete="off">
+        </label>
+        <div class="filter-group" role="group" aria-label="상태 필터">
+          <button class="filter active" type="button" data-status="all">전체</button>
+          <button class="filter" type="button" data-status="done">완료</button>
+          <button class="filter" type="button" data-status="planned">예정</button>
+        </div>
+      </div>
+
+      <div class="table-shell">
+        <table>
+          <thead><tr><th>WBS</th><th>작업 패키지</th><th>상태</th><th>주요 산출물</th></tr></thead>
+          <tbody id="wbs-body"></tbody>
+        </table>
+        <div id="empty-state" class="empty-state" hidden>조건에 맞는 작업이 없습니다.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>민감한 환경값·계정·운영 데이터는 포함하지 않습니다.</p>
+    <a href="./docs/WBS.md">산정 기준 및 상세 문서</a>
+  </footer>
+
+  <script src="./js/wbs-data.js"></script>
+  <script src="./js/wbs.js"></script>
+</body>
+</html>
