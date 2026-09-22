@@ -1,3 +1,16 @@
+## 2026-09-22 파일·Docker·미사용 코드 정리 검증
+
+- 환경: Ubuntu Desktop, Conda `codex`, Node.js 26.5.1, 로컬 Docker Desktop(`desktop-linux`, Engine `docker-desktop`). npm 명령은 `erp/`에서 실행했습니다.
+- `npm run build`, `npm run lint`: 통과. API `tsc`와 웹 `vue-tsc`에 `--noEmit --noUnusedLocals --noUnusedParameters`를 추가한 검사도 통과했습니다.
+- `env -u ERP_TEST_DATABASE_URL npm test`: API 70개 + 보조/bridge 23개, 총 93개 통과. 임시 로컬 PostgreSQL만 사용했습니다. 첫 시도는 샌드박스 로컬 포트 제한(EPERM)으로 중단됐으며 권한 확장 후 통과했습니다.
+- 두 앱 Compose `config --quiet`, 파일 내용 일치, 두 Docker ignore 파일 바이트 일치, NAS 재빌드 스크립트 `sh -n`: 통과. 비공개 환경 값은 출력하지 않았습니다.
+- 루트·directory·점검 페이지 Dockerfile의 COPY 원본 경로 18/5/5개 존재를 확인했습니다. API/web target을 로컬 검증 전용 태그로 실제 빌드했습니다.
+- 네트워크·운영 마운트 없는 일회성 컨테이너에서 API UID 1000, 환경파일/소스/테스트/npm 미포함, 서버 JS 구문, `pg_dump 18.6`을 확인했습니다. 웹 이미지는 임시 api 호스트 항목과 `/tmp`만 제공한 `nginx -t`를 통과했습니다. 앱 서버는 시작하지 않았으며 검증용 두 이미지 태그를 제거했습니다.
+- 임시 Git 저장소에 제외 규칙만 복사하여 비공개/생성 경로 16개 제외와 소스/예시 경로 7개 허용을 확인했습니다. 원본 작업 사본의 추적 여부 검증은 아니며 이미 추적된 파일은 `.gitignore`로 해제되지 않습니다.
+- 삭제 근거: 루트 `package-lock.json`은 `packages: {}`이고 루트 package.json/참조가 없습니다. API `passwordField`는 컴파일러와 참조 검색 모두 미사용으로 확인했습니다. `searchFields`, `nasDepartment`, `koreaHolidayCoverage`는 같은 파일 내부에서만 사용되어 export만 제거했습니다.
+- 보존: 모든 실제 DB/백업/환경파일/키/스냅샷/로고/라이선스, bridge와 복구 도구, 이전 WBS 사본. PostgreSQL Docker target은 이전 백업 도구의 이미지 보존 맥락을 명시했습니다.
+- 한계: Git 저장소 메타데이터를 사용할 수 없어 원본 Git diff/추적 상태/커밋을 수행하지 않았습니다. 수정 전 텍스트 사본과 diff를 검토했습니다. `erp-db/compose.yaml` 부재는 기존 상태이며 새 DB 구성으로 복원하지 않았습니다. 브라우저·NAS 배포·운영 DB/계정·동기화 완료 상태는 미검증입니다.
+
 ## 2026-09-17 현황판·인수인계 정리
 
 - erp-wbs/build.mjs 실행: 기능 20개, 구현 14·부분 3·예정 3, 산정 77.5%, 기능 및 부대 작업 근거 파일 존재 확인.

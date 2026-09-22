@@ -1,3 +1,13 @@
+## 2026-09-22 Ubuntu 파일·Docker·코드 정리
+
+- 현재 작업 환경은 Ubuntu Desktop + Conda `codex`입니다. 아래 과거 Windows/`scott` 기록보다 우선합니다.
+- 빈 루트 `package-lock.json`, API 미사용 `passwordField`, 내부 전용 선언 3개의 export를 정리했습니다. ERP 잠금 파일과 사용자 기능은 유지합니다.
+- Dockerfile 웹 COPY 입력을 명시하고 API 설치/정리 RUN을 통합했습니다. Compose 두 파일의 테스트 주석·공백 차이를 제거하고 누락된 `.dockerignore`를 `Dockerfile.dockerignore`와 동일하게 복구했습니다.
+- 루트 `.gitignore`에 NAS `*.env`, API 데이터, bridge 키/스냅샷, 보존 Git 이력, `.staging`, Synology 메타데이터 제외를 복구했습니다. 기존 비공개 원본은 삭제하지 않았으며 Git 제외는 동기화 제외가 아닙니다.
+- 이전 bridge 코드·Dockerfile.directory·PostgreSQL target·백업 도구·작업 폴더의 WBS 사본은 보존합니다. WBS 원본은 이 문서가 있는 바탕화면 프로젝트이며 `erp-docs/`는 계속 비어 있습니다.
+- 빌드·린트·미사용 선언 검사·93개 테스트·API/web 이미지 빌드·네트워크 없는 일회성 이미지 검사를 통과했습니다. 검증용 이미지 태그는 제거했습니다. 세부 근거는 [검증 기록](VALIDATION.md)을 참고합니다.
+- 현재 사본은 `git status`가 저장소로 인식하지 못하며 `erp-db/compose.yaml`도 없습니다. Git 재초기화·역사 복원·커밋·push·NAS 배포·개발 서버 조작·운영 데이터 변경은 하지 않았습니다. 브라우저 회귀 검증은 미수행입니다.
+
 ## 2026-09-21 문서·WBS 기준선
 
 - 모든 Markdown 문서를 `/home/tempchian-1/바탕화면/erp-wbs/docs/`에서 관리하고 WBS 현황판은 `/home/tempchian-1/바탕화면/erp-wbs/index.html`에서 제공합니다.
