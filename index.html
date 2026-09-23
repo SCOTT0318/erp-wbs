@@ -3,75 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TempChain ERP WBS 구축 현황">
-  <title>TempChain ERP WBS</title>
+  <meta name="description" content="TempChain ERP 구축 WBS: 부서별 업무, 보안, 배포, 최적화 계획">
+  <title>TempChain ERP | 구축 로드맵</title>
   <link rel="stylesheet" href="./css/wbs.css">
 </head>
 <body>
   <header class="topbar">
-    <strong class="brand-text">TempChain ERP WBS</strong>
-    <time id="current-date" aria-label="현재 날짜"></time>
+    <div class="shell topbar-inner">
+      <a class="brand" href="#dashboard" aria-label="TempChain ERP WBS 대시보드">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span><strong>TempChain</strong><small>ERP PROGRAM OFFICE</small></span>
+      </a>
+      <div class="topbar-meta"><span class="topbar-caption">WORK BREAKDOWN STRUCTURE</span><span class="topbar-divider"></span><time id="current-date" aria-label="현재 날짜"></time></div>
+    </div>
   </header>
 
-  <main>
+  <main class="shell">
     <section class="hero" aria-labelledby="page-title">
-      <div>
-        <p class="eyebrow">PROJECT CONTROL</p>
-        <h1 id="page-title">ERP 구축 현황</h1>
+      <div class="hero-copy">
+        <p class="eyebrow">ERP TRANSFORMATION / MASTER PLAN</p>
+        <h1 id="page-title">업무 전체를 잇는<br><em>ERP 구축 로드맵</em></h1>
+        <p>생산부·사업부·기술개발부의 요청 업무와 보안, 서버 배포, 성능 최적화까지 한 화면에서 추적합니다.</p>
+        <div class="hero-tags"><span>부서별 업무 범위</span><span>연계·승인 흐름</span><span>검증·운영 준비</span></div>
       </div>
-      <div id="progress-card" class="progress-card" aria-label="전체 진행률">
-        <div class="progress-heading"><span>전체 진행률</span><strong id="progress-value">0%</strong></div>
-        <div id="progress-track" class="progress-track" role="progressbar" aria-label="전체 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-bar"></span></div>
+      <div class="hero-progress" aria-label="전체 진행률 요약">
+        <div class="hero-progress-top"><span>확인된 구축 기준선</span><span class="hero-status">BASELINE</span></div>
+        <div class="hero-progress-value"><strong id="progress-value">3%</strong><span>전체 ERP 기준</span></div>
+        <div id="progress-track" class="progress-track" role="progressbar" aria-label="확인된 전체 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="3"><span id="progress-bar"></span></div>
+        <p>기준일 <span id="baseline-date">2026.09.21</span> · 신규 요청 범위는 진행률에 미반영</p>
       </div>
     </section>
 
-    <section class="metrics" aria-label="프로젝트 요약">
-      <article><span>전체 작업 패키지</span><strong id="total-count">0</strong><small>세부 WBS 항목</small></article>
-      <article><span>완료</span><strong id="done-count">0</strong><small>현재 코드·문서로 확인</small></article>
-      <article><span>앞으로 할 일</span><strong id="todo-count">0</strong><small>부서별 확정·설계·구현·검증</small></article>
-    </section>
-
-    <section class="section-block completed-block" aria-labelledby="completed-title">
-      <div class="section-title">
-        <div><p class="eyebrow">COMPLETED BASELINE</p><h2 id="completed-title">지금까지 완료된 기반</h2></div>
+    <nav class="tab-nav" aria-label="페이지 탭">
+      <div class="tab-list" role="tablist" aria-label="ERP WBS 화면">
+        <button id="tab-dashboard" class="tab-button" type="button" role="tab" aria-selected="true" aria-controls="panel-dashboard" tabindex="0" data-tab="dashboard">대시보드<span>Overview</span></button>
+        <button id="tab-details" class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="panel-details" tabindex="-1" data-tab="details">상세사항<span>Work packages</span></button>
       </div>
-      <div id="completed-grid" class="completed-grid"></div>
-    </section>
+      <span class="tab-context">요청 범위 정리 <strong id="scope-date">2026.09.23</strong></span>
+    </nav>
 
-    <section class="section-block" aria-labelledby="wbs-title">
-      <div class="section-title">
-        <div><p class="eyebrow">MASTER PLAN</p><h2 id="wbs-title">전체 WBS</h2></div>
-        <p id="result-summary" aria-live="polite"></p>
+    <section id="panel-dashboard" class="tab-panel" role="tabpanel" aria-labelledby="tab-dashboard">
+      <div class="section-intro">
+        <div><p class="eyebrow">PROGRAM SNAPSHOT</p><h2>구축 현황 한눈에 보기</h2></div>
+        <p>완료 기반과 향후 업무 범위를 분리해 표시합니다. 항목 수는 업무 규모이며 완료율 산식이 아닙니다.</p>
+      </div>
+      <section class="metric-grid" aria-label="프로젝트 핵심 수치">
+        <article class="metric-card metric-primary"><span class="metric-label">전체 WBS 항목</span><strong id="total-count">0</strong><small>기반 + 요청 범위</small><i aria-hidden="true">01</i></article>
+        <article class="metric-card"><span class="metric-label">확인된 기반</span><strong id="done-count">0</strong><small>구현 근거가 있는 항목</small><i aria-hidden="true">02</i></article>
+        <article class="metric-card"><span class="metric-label">검토·구현 예정</span><strong id="planned-count">0</strong><small>신규 상세 업무 패키지</small><i aria-hidden="true">03</i></article>
+        <article class="metric-card"><span class="metric-label">업무 영역</span><strong id="stream-count">0</strong><small>부서별 + 공통 기반</small><i aria-hidden="true">04</i></article>
+      </section>
+
+      <div class="dashboard-row">
+        <section class="panel-card scope-panel" aria-labelledby="scope-title">
+          <div class="panel-heading"><div><p class="eyebrow">SCOPE ARCHITECTURE</p><h2 id="scope-title">부서별 업무 구조</h2></div><span class="pill">4개 영역</span></div>
+          <p class="panel-lead">요청된 기능을 실제 처리 흐름 단위로 나눴습니다. 각 영역을 누르면 상세 WBS로 이동합니다.</p>
+          <div id="scope-grid" class="scope-grid"></div>
+        </section>
+        <aside class="panel-card decision-panel" aria-labelledby="decision-title">
+          <div class="panel-heading"><div><p class="eyebrow">DECISION LOG</p><h2 id="decision-title">확정이 필요한 기준</h2></div><span class="signal-dot" aria-hidden="true"></span></div>
+          <ol class="decision-list">
+            <li><span>01</span><div><strong>현행 업무와 서식</strong><p>부서별 실제 신청·승인·수불·시험 절차 및 예외 확인</p></div></li>
+            <li><span>02</span><div><strong>역할과 승인 범위</strong><p>누가 작성·조회·승인·취소·다운로드할지 확정</p></div></li>
+            <li><span>03</span><div><strong>재고 반영 시점</strong><p>생산 실적·입고·출고의 자동 반영 여부와 책임자 결정</p></div></li>
+            <li><span>04</span><div><strong>서버·일정·수용 기준</strong><p>운영 경로, 배포 책임, 성능 목표와 완료 조건 합의</p></div></li>
+          </ol>
+          <div class="decision-foot">일정·담당자·신규 가중치 <strong>확인 전</strong></div>
+        </aside>
       </div>
 
-      <div class="controls" aria-label="WBS 필터">
-        <label class="search-field">
-          <span class="sr-only">작업 검색</span>
-          <input id="search" type="search" placeholder="작업명, 설명, 산출물 검색" autocomplete="off">
-        </label>
-        <div class="filter-group" role="group" aria-label="상태 필터">
-          <button class="filter active" type="button" data-status="all">전체</button>
-          <button class="filter" type="button" data-status="done">완료</button>
-          <button class="filter" type="button" data-status="planned">예정</button>
+      <section class="panel-card flow-panel" aria-labelledby="flow-title">
+        <div class="panel-heading"><div><p class="eyebrow">CROSS-DEPARTMENT HANDOFF</p><h2 id="flow-title">부서 간 연결 흐름</h2></div><span class="section-number">01 / 03</span></div>
+        <div id="handoff-grid" class="handoff-grid"></div>
+        <p class="small-note">연결 흐름은 요구사항 초안입니다. 특히 시험 결과의 출하 판정 연계는 현업 규칙 확인 후 확정합니다.</p>
+      </section>
+
+      <section class="panel-card delivery-panel" aria-labelledby="delivery-title">
+        <div class="panel-heading"><div><p class="eyebrow">END-TO-END DELIVERY</p><h2 id="delivery-title">보안에서 운영 최적화까지</h2></div><span class="section-number">02 / 03</span></div>
+        <div class="delivery-steps">
+          <article><span>01</span><h3>업무·권한 정의</h3><p>현행 서식, 상태 전이, 부서별 권한, 데이터 분류</p></article>
+          <article><span>02</span><h3>설계·구현</h3><p>신청·승인·수불·시험 흐름, API·DB·Excel/PDF</p></article>
+          <article><span>03</span><h3>보안·품질 검증</h3><p>권한 경계, 동시성, 파일 보호, 부서 연계·현업 확인</p></article>
+          <article><span>04</span><h3>서버 배포·전환</h3><p>PC 서버·DB, NAS 프록시·TLS, 백업·롤백·접속 검증</p></article>
+          <article><span>05</span><h3>성능·운영</h3><p>부하 측정, DB·웹 최적화, 관측·알림·인수</p></article>
         </div>
-      </div>
+        <p class="small-note">각 단계의 완료 여부는 상세사항의 검증 기준과 실제 작업 증거로 판정합니다.</p>
+      </section>
 
-      <div class="table-shell">
-        <table>
-          <thead><tr><th>WBS</th><th>작업 패키지</th><th>상태</th><th>주요 산출물</th></tr></thead>
-          <tbody id="wbs-body"></tbody>
-        </table>
-        <div id="empty-state" class="empty-state" hidden>조건에 맞는 작업이 없습니다.</div>
-      </div>
+      <section class="panel-card baseline-panel" aria-labelledby="baseline-title">
+        <div class="panel-heading"><div><p class="eyebrow">VERIFIED FOUNDATION</p><h2 id="baseline-title">이미 구축된 기반</h2></div><span id="baseline-count" class="pill pill-green">18개 확인</span></div>
+        <p class="panel-lead">기존 ERP 코드·문서에서 확인된 기반입니다. 신규 업무의 운영 인수나 현재 서버 배포 완료를 뜻하지 않습니다.</p>
+        <div id="baseline-grid" class="baseline-grid"></div>
+      </section>
     </section>
 
+    <section id="panel-details" class="tab-panel" role="tabpanel" aria-labelledby="tab-details" hidden>
+      <div class="section-intro details-intro">
+        <div><p class="eyebrow">WORK PACKAGE REGISTER</p><h2>상세 업무 패키지</h2></div>
+        <p>업무 목표, 연결 관계, 세부 작업, 산출물과 수용 기준을 확인합니다. 신규 항목은 모두 예정입니다.</p>
+      </div>
+      <div class="detail-notice"><strong>상태 기준</strong><span>기존 기반 18개는 구현 근거 확인 · 신규 업무는 요구사항 검토·설계·구현·검증 전 단계 · 진행률 3% 유지</span></div>
+      <div class="detail-controls" aria-label="상세 업무 필터">
+        <label class="search-field"><span class="sr-only">업무 검색</span><input id="search" type="search" placeholder="업무명, 설명, 연결 부서, 산출물, 수용 기준 검색" autocomplete="off"></label>
+        <label class="select-field"><span>영역</span><select id="group-filter"><option value="all">전체 영역</option><option value="1">기존 기반</option><option value="2">생산부</option><option value="3">사업부</option><option value="4">기술개발부</option><option value="5">공통 기반·운영</option></select></label>
+        <label class="select-field"><span>상태</span><select id="status-filter"><option value="all">전체 상태</option><option value="done">완료 기반</option><option value="planned">예정</option></select></label>
+        <button id="toggle-all" class="outline-button" type="button">모두 접기</button>
+      </div>
+      <div class="result-line"><p id="result-summary" aria-live="polite"></p><span>행을 펼쳐 세부 검증 기준 확인</span></div>
+      <div id="detail-list" class="detail-list"></div>
+      <div id="empty-state" class="empty-state" hidden>조건에 맞는 업무가 없습니다. 검색어나 필터를 변경해 주세요.</div>
+    </section>
   </main>
 
-  <footer>
-    <p>민감한 환경값·계정·운영 데이터는 포함하지 않습니다.</p>
-    <a href="./docs/WBS.md">산정 기준 및 상세 문서</a>
-  </footer>
-
+  <footer class="footer"><div class="shell footer-inner"><p>TempChain ERP WBS · 민감한 계정·환경값·운영 데이터는 포함하지 않습니다.</p><a href="./docs/WBS.md">WBS 산정 기준 및 문서 ↗</a></div></footer>
   <script src="./js/wbs-data.js"></script>
   <script src="./js/wbs.js"></script>
 </body>
