@@ -88,6 +88,10 @@ h1 em { color: #8ce6d1; font-style: normal; }
 .metric-label { color: #657b89; font-size: 12px; font-weight: 800; }
 .metric-card strong { margin: 12px 0 2px; color: var(--navy); font-size: 37px; line-height: 1.1; letter-spacing: -.07em; }
 .metric-card small { color: #82919e; font-size: 11px; }
+.update-panel { margin-top: 20px; }
+.update-list { display: grid; gap: 12px; margin: 18px 0 0; padding: 0; list-style: none; }
+.update-list li { display: grid; grid-template-columns: 145px minmax(0, 1fr); gap: 12px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.update-list strong { color: var(--navy); }
 
 .dashboard-row { display: grid; grid-template-columns: minmax(0, 2.1fr) minmax(280px, .9fr); align-items: start; gap: 16px; margin-top: 20px; }
 .panel-card { min-width: 0; padding: 29px; border: 1px solid var(--line); border-radius: 17px; background: #fff; box-shadow: var(--shadow); }
@@ -216,7 +220,9 @@ h1 em { color: #8ce6d1; font-style: normal; }
 .task-description { color: #718494; }
 .status-badge { display: inline-block; padding: 4px 7px; border-radius: 5px; font-size: 10px; font-weight: 900; white-space: nowrap; }
 .status-badge.done { color: #087e68; background: #e5f6ef; }
+.status-badge.in_progress { color: #916118; background: #fff2d9; }
 .status-badge.planned { color: #517b9c; background: #e9f2f7; }
+.task-evidence { display: block; margin-top: 6px; color: #667e8c; font-size: 10px; }
 .empty-state { padding: 60px 20px; border: 1px dashed #ccdadf; border-radius: 13px; background: #fff; color: var(--muted); font-size: 13px; text-align: center; }
 
 .footer { border-top: 1px solid var(--line); background: #fff; }
@@ -262,6 +268,7 @@ h1 em { color: #8ce6d1; font-style: normal; }
   .metric-card { min-height: 125px; padding: 17px; }
   .metric-card strong { font-size: 31px; }
   .panel-card { padding: 20px; }
+  .update-list li { grid-template-columns: 1fr; gap: 2px; }
   .panel-heading h2 { font-size: 20px; }
   .scope-grid, .handoff-grid { grid-template-columns: 1fr; }
   .scope-card { min-height: 0; }

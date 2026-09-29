@@ -257,11 +257,13 @@
     }
   ];
 
-  const planned = groups.flatMap(group => group.streams.flatMap((stream, streamIndex) => {
+  const scoped = groups.flatMap(group => group.streams.flatMap((stream, streamIndex) => {
     stream.id = `${group.id}.${streamIndex + 1}`;
     stream.tasks = stream.tasks.map(([title, description, deliverables, acceptance], taskIndex) => ({
       id: `${stream.id}.${taskIndex + 1}`, title, description, deliverables, acceptance,
-      status: "planned", groupId: group.id, groupName: group.name,
+      status: group.id === "5" ? "planned" : "in_progress",
+      evidence: group.id === "5" ? "" : "2026-09-29 tempchian-erp 4786021 구현 대응·격리 검증. 공식 서식·현업 인수 등 수용 기준은 확인 중",
+      groupId: group.id, groupName: group.name,
       streamId: stream.id, streamName: stream.name, connection: stream.connection
     }));
     return stream.tasks;
@@ -276,11 +278,13 @@
 
   window.WBS_DATA = {
     baselineProgress: 3,
+    currentProgress: 5,
     baselineDate: "2026-09-21",
     scopeDate: "2026-09-23",
+    updateDate: "2026-09-29",
     completed,
     groups,
     handoffs,
-    tasks: [...completed, ...planned]
+    tasks: [...completed, ...scoped]
   };
 })();

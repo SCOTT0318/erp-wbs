@@ -2,7 +2,7 @@ window.DOCS_DATA = [
   { path: "README.md", title: "문서 인덱스", category: "안내", state: "current", description: "문서 분류와 우선 확인 순서" },
   { path: "AI_HANDOFF.md", title: "AI 인수인계", category: "인수인계", state: "current", description: "최신 구성, 구현 범위와 보존 원칙" },
   { path: "handoff/2026-09-17.md", title: "2026-09-17 인수인계", category: "인수인계", state: "history", description: "해당 일자의 구현·검증 기록" },
-  { path: "WBS.md", title: "ERP 전체 WBS", category: "WBS", state: "current", description: "3% 기준선과 완료·향후 작업 목록" },
+  { path: "WBS.md", title: "ERP 전체 WBS", category: "WBS", state: "current", description: "2026-09-29 진행률 5%와 구현 진행·예정 작업 목록" },
   { path: "WBS_METHOD.md", title: "WBS 관리 안내", category: "WBS", state: "current", description: "가중치 산정과 갱신 규칙" },
   { path: "ERP_README.md", title: "ERP 개요", category: "개발", state: "current", description: "기능, 기술 구성과 실행 개요" },
   { path: "NODE_REBUILD.md", title: "개발·재빌드 안내", category: "개발", state: "current", description: "Windows·Miniconda 개발 및 검증 명령" },

@@ -16,11 +16,12 @@
     const date = Object.fromEntries(parts.map(part => [part.type, part.value]));
     $("#current-date").textContent = `${date.year}.${date.month}.${date.day}`;
     $("#baseline-date").textContent = data.baselineDate.replaceAll("-", ".");
+    $("#update-date").textContent = data.updateDate.replaceAll("-", ".");
     $("#scope-date").textContent = data.scopeDate.replaceAll("-", ".");
   }
 
   function renderProgress() {
-    const progress = Math.min(100, Math.max(0, Number(data.baselineProgress) || 0));
+    const progress = Math.min(100, Math.max(0, Number(data.currentProgress) || 0));
     $("#progress-value").textContent = `${progress}%`;
     $("#progress-bar").style.width = `${progress}%`;
     $("#progress-track").setAttribute("aria-valuenow", String(progress));
@@ -29,8 +30,8 @@
   function renderMetrics() {
     $("#total-count").textContent = data.tasks.length;
     $("#done-count").textContent = data.completed.length;
-    $("#planned-count").textContent = data.tasks.length - data.completed.length;
-    $("#stream-count").textContent = allStreams.length;
+    $("#progress-count").textContent = data.tasks.filter(task => task.status === "in_progress").length;
+    $("#planned-count").textContent = data.tasks.filter(task => task.status === "planned").length;
     $("#baseline-count").textContent = `${data.completed.length}개 확인`;
   }
 
@@ -62,10 +63,10 @@
       <thead><tr><th>WBS</th><th>세부 작업 / 처리 범위</th><th>주요 산출물</th><th>수용·검증 기준</th><th>상태</th></tr></thead>
       <tbody>${tasks.map(task => `<tr>
         <td class="task-id">${escapeHtml(task.id)}</td>
-        <td><strong class="task-title">${escapeHtml(task.title)}</strong><span class="task-description">${escapeHtml(task.description)}</span></td>
+        <td><strong class="task-title">${escapeHtml(task.title)}</strong><span class="task-description">${escapeHtml(task.description)}</span>${task.evidence ? `<span class="task-evidence">${escapeHtml(task.evidence)}</span>` : ""}</td>
         <td>${escapeHtml(task.deliverables)}</td>
         <td>${escapeHtml(task.acceptance || "기존 소스·문서에서 구현 기반 확인. 운영 인수와 별개")}</td>
-        <td><span class="status-badge ${escapeHtml(task.status)}">${task.status === "done" ? "완료 기반" : "예정"}</span></td>
+        <td><span class="status-badge ${escapeHtml(task.status)}">${{ done: "완료 기반", in_progress: "진행 중", planned: "예정" }[task.status]}</span></td>
       </tr>`).join("")}</tbody>
     </table></div>`;
   }

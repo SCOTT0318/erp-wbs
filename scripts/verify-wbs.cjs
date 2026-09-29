@@ -17,17 +17,20 @@ global.window = { addEventListener() {} };
 require(path.join(root, "js/wbs-data.js"));
 const data = window.WBS_DATA;
 assert.equal(data.baselineProgress, 3);
+assert.equal(data.currentProgress, 5);
+assert.equal(data.updateDate, "2026-09-29");
 assert.equal(data.completed.length, 18);
 assert.equal(data.groups.length, 4);
 assert.equal(data.tasks.length, 113);
-assert.equal(data.tasks.filter(task => task.status === "planned").length, 95);
+assert.equal(data.tasks.filter(task => task.status === "in_progress").length, 65);
+assert.equal(data.tasks.filter(task => task.status === "planned").length, 30);
 assert.ok(Math.abs(data.completed.reduce((sum, task) => sum + task.weight, 0) - 3) < 1e-8);
 assert.equal(new Set(data.tasks.map(task => task.id)).size, data.tasks.length);
 data.groups.forEach(group => group.streams.forEach(stream => stream.tasks.forEach(task => {
   for (const field of ["title", "description", "deliverables", "acceptance", "connection"]) {
     assert.ok(task[field], `${task.id}: ${field} 누락`);
   }
-  assert.equal(task.status, "planned");
+  assert.equal(task.status, group.id === "5" ? "planned" : "in_progress");
 })));
 
 const elements = new Map();
@@ -62,10 +65,13 @@ require(path.join(root, "js/wbs.js"));
 
 assert.equal(element("#total-count").textContent, 113);
 assert.equal(element("#done-count").textContent, 18);
-assert.equal(element("#planned-count").textContent, 95);
-assert.equal(element("#stream-count").textContent, 19);
+assert.equal(element("#progress-count").textContent, 65);
+assert.equal(element("#planned-count").textContent, 30);
+assert.equal(element("#progress-value").textContent, "5%");
+assert.equal(element("#progress-track")["aria-valuenow"], "5");
 assert.match(element("#scope-grid").innerHTML, /생산부/);
 assert.match(element("#detail-list").innerHTML, /Excel·PDF/);
+assert.match(element("#detail-list").innerHTML, /2026-09-29 tempchian-erp 4786021/);
 assert.equal(element("#panel-details").hidden, true);
 
 element("#tab-details").handlers.click();
@@ -76,6 +82,10 @@ element("#group-filter").handlers.change();
 element("#search").value = "VIP";
 element("#search").handlers.input();
 assert.match(element("#result-summary").textContent, /6개 표시/);
+element("#status-filter").value = "in_progress";
+element("#status-filter").handlers.change();
+assert.match(element("#result-summary").textContent, /6개 표시/);
+assert.equal(element("#empty-state").hidden, true);
 element("#status-filter").value = "done";
 element("#status-filter").handlers.change();
 assert.equal(element("#empty-state").hidden, false);
