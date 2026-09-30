@@ -28,9 +28,9 @@
       </div>
       <div class="hero-progress" aria-label="전체 진행률 요약">
         <div class="hero-progress-top"><span>전체 구축 진행률</span><span class="hero-status">IN PROGRESS</span></div>
-        <div class="hero-progress-value"><strong id="progress-value">5%</strong><span>전체 ERP 기준</span></div>
-        <div id="progress-track" class="progress-track" role="progressbar" aria-label="전체 구축 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="5"><span id="progress-bar"></span></div>
-        <p>기존 <span id="baseline-date">2026.09.21</span> 3% → 갱신 <span id="update-date">2026.09.29</span> 5% · 구현 진척에 따른 관리 추정치</p>
+        <div class="hero-progress-value"><strong id="progress-value">6%</strong><span>전체 ERP 기준</span></div>
+        <div id="progress-track" class="progress-track" role="progressbar" aria-label="전체 구축 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="6"><span id="progress-bar"></span></div>
+        <p>기존 <span id="baseline-date">2026.09.21</span> 3% → 갱신 <span id="update-date">2026.09.30</span> 6% · 구현 진척에 따른 관리 추정치</p>
       </div>
     </section>
 
@@ -50,18 +50,18 @@
       <section class="metric-grid" aria-label="프로젝트 핵심 수치">
         <article class="metric-card metric-primary"><span class="metric-label">전체 WBS 항목</span><strong id="total-count">0</strong><small>기반 + 요청 범위</small><i aria-hidden="true">01</i></article>
         <article class="metric-card"><span class="metric-label">확인된 기반</span><strong id="done-count">0</strong><small>구현 근거가 있는 항목</small><i aria-hidden="true">02</i></article>
-        <article class="metric-card"><span class="metric-label">구현 진행 중</span><strong id="progress-count">0</strong><small>부서별 상세 업무</small><i aria-hidden="true">03</i></article>
+        <article class="metric-card"><span class="metric-label">구현 진행 중</span><strong id="progress-count">0</strong><small>부서 업무·공통 기반·운영</small><i aria-hidden="true">03</i></article>
         <article class="metric-card"><span class="metric-label">검토·구현 예정</span><strong id="planned-count">0</strong><small>공통 기반·운영 업무</small><i aria-hidden="true">04</i></article>
       </section>
 
       <section class="panel-card update-panel" aria-labelledby="update-title">
-        <div class="panel-heading"><div><p class="eyebrow">2026.09.29 / ERP IMPLEMENTATION</p><h2 id="update-title">오늘 반영한 작업</h2></div><span class="pill">ERP 커밋 4786021</span></div>
+        <div class="panel-heading"><div><p class="eyebrow">2026.09.30 / ERP IMPLEMENTATION</p><h2 id="update-title">오늘 반영한 작업</h2></div><span class="pill">오늘 대화·검증 기록</span></div>
         <ul class="update-list">
-          <li><strong>생산부 33개 항목</strong><span>의뢰 접수·생산 계획·재작업, 로트 입출고·검수·예약·실사·대사, 자원·컨테이너 인계 화면과 API 구현 대응</span></li>
-          <li><strong>사업부 20개 항목</strong><span>구매·생산 의뢰·출고 신청, 부서 지정 승인자 결재, 신청서 Excel/PDF 발행·첨부·이력 구현 대응</span></li>
-          <li><strong>기술개발부 12개 항목</strong><span>챔버 기준정보·예약·충돌 검사와 VIP 샘플 이동·시험·결과 관리 구현 대응</span></li>
-          <li><strong>문서·데모 환경</strong><span>ERP 사용·운영 문서를 통합 정리하고 원격 Ubuntu 데모의 컨테이너 상태와 HTTPS 응답을 확인. 실사용·운영 인수는 미검증</span></li>
-          <li><strong>검증 및 잔여</strong><span>세 앱 빌드·린트, 신규 부서 테스트 22개와 브라우저·출력 검사 통과. 전체 API 테스트 104개 중 8개는 기존 Windows 외부 백업 문제로 실패. 공식 서식·현업 인수·재고 이관·운영 배포는 후속 확인</span></li>
+          <li><strong>생산부 우선 개선</strong><span>자재·컨테이너·소형·생산관리 독립 대시보드·업무 탭·달력, Lot 일괄 등록·로거 연결, AS·수리 현황 구현</span></li>
+          <li><strong>구매·생산 의뢰</strong><span>전 부서 공통 구매 신청·권한별 구매 관리 분리, 생산 의뢰 전용화·소속 자동 적용·입력 간소화. 입고 신청 대상은 미확정</span></li>
+          <li><strong>화면·인증</strong><span>버튼 고정 사이드바·상단 토글, 챔버·VIP 샘플 독립 분리. 시간 만료·시간 표시 제거, 일반 로그인 재진입 시 재로그인·선택 시 유지</span></li>
+          <li><strong>공통·운영 8개 착수</strong><span>권한·세션·스키마·회귀·배포 8개를 진행 중으로 전환. 정리 전 API·웹·관리자 배포·healthy·LAN 응답 확인, 이후 변경은 운영 미배포</span></li>
+          <li><strong>검증 및 잔여</strong><span>빌드·타입 검사, 인증 43개·창 재진입 2개·보조 25개 통과. 최종 API 113개 중 105개 통과·기존 외부 백업 8개 실패. 실제 화면 조작·현업 인수·최신 변경 배포는 남음</span></li>
         </ul>
       </section>
 
@@ -111,9 +111,9 @@
     <section id="panel-details" class="tab-panel" role="tabpanel" aria-labelledby="tab-details" hidden>
       <div class="section-intro details-intro">
         <div><p class="eyebrow">WORK PACKAGE REGISTER</p><h2>상세 업무 패키지</h2></div>
-        <p>업무 목표, 연결 관계, 세부 작업, 산출물과 수용 기준을 확인합니다. 부서별 구현 대응 65개는 진행 중입니다.</p>
+        <p>업무 목표, 연결 관계, 세부 작업, 산출물과 수용 기준을 확인합니다. 부서 업무 65개와 공통·운영 8개가 진행 중입니다.</p>
       </div>
-      <div class="detail-notice"><strong>상태 기준</strong><span>기존 기반 18개 완료 기반 · 부서 업무 65개 구현 진행 중 · 공통 업무 30개 예정 · 전체 진행률 5%는 관리 추정치</span></div>
+      <div class="detail-notice"><strong>상태 기준</strong><span>기존 기반 18개 완료 기반 · 부서 업무 65개 + 공통·운영 8개 진행 중 · 공통 업무 22개 예정 · 전체 진행률 6%는 관리 추정치</span></div>
       <div class="detail-controls" aria-label="상세 업무 필터">
         <label class="search-field"><span class="sr-only">업무 검색</span><input id="search" type="search" placeholder="업무명, 설명, 연결 부서, 산출물, 수용 기준 검색" autocomplete="off"></label>
         <label class="select-field"><span>영역</span><select id="group-filter"><option value="all">전체 영역</option><option value="1">기존 기반</option><option value="2">생산부</option><option value="3">사업부</option><option value="4">기술개발부</option><option value="5">공통 기반·운영</option></select></label>
