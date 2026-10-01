@@ -287,14 +287,41 @@
     "5.5.5": "생산부 정리 전 서버 배포·healthy·LAN/health/정적 파일 응답 확인. 이후 Lot·대시보드·인증 변경은 운영 미배포"
   };
 
+  // 10월 1일 업무일지·소스·검증 기록. 진행률·완료일·done 상태는 새로 산정하지 않는다.
+  const octoberEvidence = {
+    "2.1.2": "생산 계획을 생산관리 내부 탭으로 통합, 기존 경로·권한·자료 보존. 실제 배정 수용은 남음",
+    "2.1.4": "불량·재작업 탭 통합·부서 일정 반영. 관련 API 회귀 37개 통과, 실제 정산·재고 반영 수용은 남음",
+    "2.2.5": "재고·실사 대시보드·업무 일정 분리, 관리자 자료 조회·변경 보호. 실물 대사 미수행",
+    "2.3.1": "자재·소형 입고 QC를 기술개발부로 분리, 지정 승인자·관리자만 판정. 생산부 우회 차단·수량 보존·격리/해제 검증. 실제 QC 실적 미확인",
+    "2.3.4": "생산부 재고·실사와 기술개발부 QC 화면·판정 권한 구분. 실제 실사 승인·현업 인수는 남음",
+    "2.4.1": "생산 기준정보·개체 관리 대시보드와 관련 일정 구현. 관리자 미사용 자료 삭제는 참조·재고·버전 검사",
+    "2.6.2": "컨테이너 출고·예약 공통 개체 선택에 검색·전체 선택/해제 구현·격리 화면 검사. 운영 출고 미수행",
+    "3.4.5": "사업부 홈은 부서 전체 일정, 개별 업무는 해당 일정만 표시. 실제 의뢰 완료 수용은 남음",
+    "4.1.6": "기술개발부 달력에 예약 기간·가동중지·교정 기한과 선택일 상세 반영. 실제 장비 가동 확인은 남음",
+    "4.2.3": "기술개발부 일정에 샘플 보관 기한·시험·QC 기록 반영. 실제 VIP 시험 실적은 미확인",
+    "5.1.3": "업무·역할·부서·직급·실제 처리 권한·사용자 조건의 알림과 중복 방지·읽음 처리 구현. 외부 푸시/이메일·현업 전달 확인은 범위 밖 또는 미수행",
+    "5.2.2": "최신 계정 기준 업무 부서 선택·달력 서버 권한 검사, 일반 계정 프로필 수정 차단, QC 지정 승인자 권한. 격리 권한/달력/프로필 27개 통과",
+    "5.2.3": "프로필을 조회·비밀번호 변경 중심으로 정리. 실제 NAS 로그인·비밀번호 변경은 미검증",
+    "5.2.5": "관리자 데이터 상세·담당자/활동 조회, 제한 수정·삭제의 변경 전 자료·사유 감사 보존. 개인 메모·알림 제외, 실제 운영 수정/삭제 미수행",
+    "5.3.2": "개인 메모·알림 규칙·수신 내역 독립 모듈과 과거 서명 백업 호환 검사. 운영 백업·복원은 미수행",
+    "5.4.1": "실행별 빌드·타입 검사와 격리 API/화면 검사 확인. 일정/권한 실행 API 120개 중 112개 통과·기존 외부 백업 8개 실패. 검사 실행별 집계는 docs/WBS.md 참조",
+    "5.5.1": "로컬 개발 DB tempchain-erp-local을 loopback 5432로 전환·기존 데이터/자격 증명 보존. 전달 기록상 SSH DB와 실행 API도 내부 5432이며 호스트 비공개",
+    "5.5.2": "LAN 웹·관리자·API 응답 200, 새 workspace 미인증 401 확인. 공개 DDNS는 점검 페이지·공개 API health 404, NAS 프록시 유지",
+    "5.5.3": "승인된 SSH 서버에 API·웹·관리자 이미지 배포·실행 이미지 일치와 환경/포트/마운트/네트워크 보존 확인. 적용 전 pg_dump 사본은 서명 복원용 백업과 별개",
+    "5.5.5": "10월 1일 API·웹·관리자 배포·healthy·LAN/진입 정적 파일 응답 확인. 최신 Lot·대시보드·인증 변경의 전일 미배포 기록을 갱신, 공개 전환·현업 수용은 미완료",
+    "5.5.6": "첫 배포의 검증 Host 오류로 이전 앱 자동 복구 확인 후 허용 LAN Host로 재배포. 이전 컨테이너 보존, 실제 업무·데이터 복원 리허설은 남음"
+  };
+  const historicalEvidence = id => todayEvidence[id]
+    ? `2026-09-30 ${todayEvidence[id]}. 상세 근거·미검증 범위: docs/WBS.md 9월 30일 기록`
+    : id.startsWith("5.") ? "" : "2026-09-29 tempchian-erp 4786021 구현 대응·격리 검증. 공식 서식·현업 인수 등 수용 기준은 확인 중";
+
   const scoped = groups.flatMap(group => group.streams.flatMap((stream, streamIndex) => {
     stream.id = `${group.id}.${streamIndex + 1}`;
     stream.tasks = stream.tasks.map(([title, description, deliverables, acceptance], taskIndex) => ({
       id: `${stream.id}.${taskIndex + 1}`, title, description, deliverables, acceptance,
-      status: group.id === "5" && !todayEvidence[`${stream.id}.${taskIndex + 1}`] ? "planned" : "in_progress",
-      evidence: todayEvidence[`${stream.id}.${taskIndex + 1}`]
-        ? `2026-09-30 ${todayEvidence[`${stream.id}.${taskIndex + 1}`]}. 상세 근거·미검증 범위: docs/WBS.md 9월 30일 기록`
-        : group.id === "5" ? "" : "2026-09-29 tempchian-erp 4786021 구현 대응·격리 검증. 공식 서식·현업 인수 등 수용 기준은 확인 중",
+      status: group.id === "5" && !todayEvidence[`${stream.id}.${taskIndex + 1}`] && !octoberEvidence[`${stream.id}.${taskIndex + 1}`] ? "planned" : "in_progress",
+      evidence: [historicalEvidence(`${stream.id}.${taskIndex + 1}`), octoberEvidence[`${stream.id}.${taskIndex + 1}`]
+        ? `2026-10-01 ${octoberEvidence[`${stream.id}.${taskIndex + 1}`]}. 상세 근거: docs/WBS.md 10월 1일 기록` : ""].filter(Boolean).join(" / "),
       groupId: group.id, groupName: group.name,
       streamId: stream.id, streamName: stream.name, connection: stream.connection
     }));
@@ -313,7 +340,7 @@
     currentProgress: 6,
     baselineDate: "2026-09-21",
     scopeDate: "2026-09-23",
-    updateDate: "2026-09-30",
+    updateDate: "2026-10-01",
     completed,
     groups,
     handoffs,

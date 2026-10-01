@@ -18,13 +18,13 @@ require(path.join(root, "js/wbs-data.js"));
 const data = window.WBS_DATA;
 assert.equal(data.baselineProgress, 3);
 assert.equal(data.currentProgress, 6);
-assert.equal(data.updateDate, "2026-09-30");
+assert.equal(data.updateDate, "2026-10-01");
 assert.equal(data.completed.length, 18);
 assert.equal(data.groups.length, 4);
 assert.equal(data.tasks.length, 113);
-assert.equal(data.tasks.filter(task => task.status === "in_progress").length, 73);
-assert.equal(data.tasks.filter(task => task.status === "planned").length, 22);
-const commonStarted = new Set(["5.2.2", "5.2.3", "5.3.2", "5.4.1", "5.5.1", "5.5.2", "5.5.3", "5.5.5"]);
+assert.equal(data.tasks.filter(task => task.status === "in_progress").length, 76);
+assert.equal(data.tasks.filter(task => task.status === "planned").length, 19);
+const commonStarted = new Set(["5.1.3", "5.2.2", "5.2.3", "5.2.5", "5.3.2", "5.4.1", "5.5.1", "5.5.2", "5.5.3", "5.5.5", "5.5.6"]);
 assert.ok(Math.abs(data.completed.reduce((sum, task) => sum + task.weight, 0) - 3) < 1e-8);
 assert.equal(new Set(data.tasks.map(task => task.id)).size, data.tasks.length);
 data.groups.forEach(group => group.streams.forEach(stream => stream.tasks.forEach(task => {
@@ -34,7 +34,7 @@ data.groups.forEach(group => group.streams.forEach(stream => stream.tasks.forEac
   assert.equal(task.status, group.id === "5" && !commonStarted.has(task.id) ? "planned" : "in_progress");
   if (task.status === "in_progress") assert.ok(task.evidence, `${task.id}: 진행 근거 누락`);
 })));
-assert.match(html, /2026\.09\.30/);
+assert.match(html, /2026\.10\.01/);
 assert.match(html, /전체 진행률 6%/);
 assert.match(data.tasks.find(task => task.id === "2.6.1").evidence, /로거/);
 assert.doesNotMatch(data.tasks.find(task => task.id === "4.2.3").description, /챔버 예약 연결/);
@@ -71,14 +71,15 @@ require(path.join(root, "js/wbs.js"));
 
 assert.equal(element("#total-count").textContent, 113);
 assert.equal(element("#done-count").textContent, 18);
-assert.equal(element("#progress-count").textContent, 73);
-assert.equal(element("#planned-count").textContent, 22);
+assert.equal(element("#progress-count").textContent, 76);
+assert.equal(element("#planned-count").textContent, 19);
 assert.equal(element("#progress-value").textContent, "6%");
 assert.equal(element("#progress-track")["aria-valuenow"], "6");
 assert.match(element("#scope-grid").innerHTML, /생산부/);
 assert.match(element("#detail-list").innerHTML, /Excel·PDF/);
 assert.match(element("#detail-list").innerHTML, /2026-09-29 tempchian-erp 4786021/);
 assert.match(element("#detail-list").innerHTML, /2026-09-30/);
+assert.match(element("#detail-list").innerHTML, /2026-10-01/);
 assert.equal(element("#panel-details").hidden, true);
 
 element("#tab-details").handlers.click();

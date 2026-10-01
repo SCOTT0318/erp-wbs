@@ -30,7 +30,7 @@
         <div class="hero-progress-top"><span>전체 구축 진행률</span><span class="hero-status">IN PROGRESS</span></div>
         <div class="hero-progress-value"><strong id="progress-value">6%</strong><span>전체 ERP 기준</span></div>
         <div id="progress-track" class="progress-track" role="progressbar" aria-label="전체 구축 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="6"><span id="progress-bar"></span></div>
-        <p>기존 <span id="baseline-date">2026.09.21</span> 3% → 갱신 <span id="update-date">2026.09.30</span> 6% · 구현 진척에 따른 관리 추정치</p>
+        <p>기존 <span id="baseline-date">2026.09.21</span> 3% · 기록 갱신 <span id="update-date">2026.10.01</span> · 9월 30일 관리 추정치 6% 유지</p>
       </div>
     </section>
 
@@ -55,13 +55,13 @@
       </section>
 
       <section class="panel-card update-panel" aria-labelledby="update-title">
-        <div class="panel-heading"><div><p class="eyebrow">2026.09.30 / ERP IMPLEMENTATION</p><h2 id="update-title">오늘 반영한 작업</h2></div><span class="pill">오늘 대화·검증 기록</span></div>
+        <div class="panel-heading"><div><p class="eyebrow">2026.10.01 / ERP IMPLEMENTATION</p><h2 id="update-title">오늘 반영한 작업</h2></div><span class="pill">업무일지·소스·검증 기록</span></div>
         <ul class="update-list">
-          <li><strong>생산부 우선 개선</strong><span>자재·컨테이너·소형·생산관리 독립 대시보드·업무 탭·달력, Lot 일괄 등록·로거 연결, AS·수리 현황 구현</span></li>
-          <li><strong>구매·생산 의뢰</strong><span>전 부서 공통 구매 신청·권한별 구매 관리 분리, 생산 의뢰 전용화·소속 자동 적용·입력 간소화. 입고 신청 대상은 미확정</span></li>
-          <li><strong>화면·인증</strong><span>버튼 고정 사이드바·상단 토글, 챔버·VIP 샘플 독립 분리. 시간 만료·시간 표시 제거, 일반 로그인 재진입 시 재로그인·선택 시 유지</span></li>
-          <li><strong>공통·운영 8개 착수</strong><span>권한·세션·스키마·회귀·배포 8개를 진행 중으로 전환. 정리 전 API·웹·관리자 배포·healthy·LAN 응답 확인, 이후 변경은 운영 미배포</span></li>
-          <li><strong>검증 및 잔여</strong><span>빌드·타입 검사, 인증 43개·창 재진입 2개·보조 25개 통과. 최종 API 113개 중 105개 통과·기존 외부 백업 8개 실패. 실제 화면 조작·현업 인수·최신 변경 배포는 남음</span></li>
+          <li><strong>생산·QC 분리</strong><span>기술개발부 지정 승인자·관리자 입고 QC 판정, 생산부 재고·실사 분리. 생산 계획·불량/재작업 내부 탭과 공통 컨테이너 선택 화면</span></li>
+          <li><strong>일정·개인 업무</strong><span>부서 전체/업무별 일정·선택일 상세·공휴일·화면 정렬, 작성자 전용 메모·조건별 알림·실시간 검색 구현</span></li>
+          <li><strong>서버 권한·감사</strong><span>부서 선택·달력 권한과 프로필 수정 차단, 관리자 데이터 보호·제한 수정/삭제·변경 사유 이력. 개인 메모·알림은 관리자 조회 제외</span></li>
+          <li><strong>배포·개발 DB</strong><span>SSH API·웹·관리자 배포·healthy·LAN 확인, 이전 앱·DB·백업·설정 보존. 로컬 DB tempchain-erp-local·loopback 5432 전환·보호 검사</span></li>
+          <li><strong>검증 및 잔여</strong><span>격리 API·화면 검사 통과. 일정/권한 실행 API 120개 중 112개 통과·기존 외부 백업 8개 실패. 공개 DDNS는 점검 페이지, 실제 NAS 인증·운영 복원·현업 인수 미검증</span></li>
         </ul>
       </section>
 
@@ -111,9 +111,9 @@
     <section id="panel-details" class="tab-panel" role="tabpanel" aria-labelledby="tab-details" hidden>
       <div class="section-intro details-intro">
         <div><p class="eyebrow">WORK PACKAGE REGISTER</p><h2>상세 업무 패키지</h2></div>
-        <p>업무 목표, 연결 관계, 세부 작업, 산출물과 수용 기준을 확인합니다. 부서 업무 65개와 공통·운영 8개가 진행 중입니다.</p>
+        <p>업무 목표, 연결 관계, 세부 작업, 산출물과 수용 기준을 확인합니다. 부서 업무 65개와 공통·운영 11개가 진행 중입니다.</p>
       </div>
-      <div class="detail-notice"><strong>상태 기준</strong><span>기존 기반 18개 완료 기반 · 부서 업무 65개 + 공통·운영 8개 진행 중 · 공통 업무 22개 예정 · 전체 진행률 6%는 관리 추정치</span></div>
+      <div class="detail-notice"><strong>상태 기준</strong><span>기존 기반 18개 완료 기반 · 부서 업무 65개 + 공통·운영 11개 진행 중 · 공통 업무 19개 예정 · 전체 진행률 6% 유지 · 신규 완료 판정 없음</span></div>
       <div class="detail-controls" aria-label="상세 업무 필터">
         <label class="search-field"><span class="sr-only">업무 검색</span><input id="search" type="search" placeholder="업무명, 설명, 연결 부서, 산출물, 수용 기준 검색" autocomplete="off"></label>
         <label class="select-field"><span>영역</span><select id="group-filter"><option value="all">전체 영역</option><option value="1">기존 기반</option><option value="2">생산부</option><option value="3">사업부</option><option value="4">기술개발부</option><option value="5">공통 기반·운영</option></select></label>
