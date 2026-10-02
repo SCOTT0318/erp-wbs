@@ -15,14 +15,12 @@
     }).formatToParts(new Date());
     const date = Object.fromEntries(parts.map(part => [part.type, part.value]));
     $("#current-date").textContent = `${date.year}.${date.month}.${date.day}`;
-    $("#baseline-date").textContent = data.baselineDate.replaceAll("-", ".");
-    $("#update-date").textContent = data.updateDate.replaceAll("-", ".");
-    $("#scope-date").textContent = data.scopeDate.replaceAll("-", ".");
   }
 
   function renderProgress() {
-    const progress = Math.min(100, Math.max(0, Number(data.currentProgress) || 0));
+    const progress = data.calculateProgress(data.tasks.filter(task => task.groupId));
     $("#progress-value").textContent = `${progress}%`;
+    $("#detail-progress-value").textContent = `${progress}%`;
     $("#progress-bar").style.width = `${progress}%`;
     $("#progress-track").setAttribute("aria-valuenow", String(progress));
   }

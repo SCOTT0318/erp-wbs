@@ -311,6 +311,30 @@
     "5.5.5": "10월 1일 API·웹·관리자 배포·healthy·LAN/진입 정적 파일 응답 확인. 최신 Lot·대시보드·인증 변경의 전일 미배포 기록을 갱신, 공개 전환·현업 수용은 미완료",
     "5.5.6": "첫 배포의 검증 Host 오류로 이전 앱 자동 복구 확인 후 허용 LAN Host로 재배포. 이전 컨테이너 보존, 실제 업무·데이터 복원 리허설은 남음"
   };
+  const octoberSecondEvidence = {
+    "2.1.2": "실제 날짜·명시 시간대 검증과 공통 편집·응답 순서 보호. 실제 생산 배정·현업 승인 미확인",
+    "2.2.1": "월 드롭다운·권한 있는 업무 제목/기록 검색·ID 직접 상세·자동 조회. 실제 자재 원장 수용은 남음",
+    "2.3.5": "38개 공개 검색식·월/선택일 조회·관리자 전체 일정. 실제 수불·실물 대사 미수행",
+    "3.4.5": "승인 이력 한글 표시·실제 대상 링크·일정·과거 기록 직접 조회. 실제 부서 간 완료 수용 미확인",
+    "4.1.6": "연도/월 선택·가동률 API 유효 월 범위·조회 순서 보호. 실제 장비·집계 수용 미확인",
+    "4.2.3": "권한별 기록 검색·첫 목록 밖 상세·이력 한글화. 실제 VIP 시험·기밀 접근 수용은 남음",
+    "5.1.1": "LAN HTTP UUID v4 공통 함수·입력 동일 재시도 ID 유지·입력 변경 시 ID 교체. 전사 참조 체계 합의는 남음",
+    "5.2.2": "38개 기록·업무 제목의 권한 필터, 관리자 사진 편집 권한·일반 계정 조회 전용 보존. 직원 인수 미확인",
+    "5.2.3": "일반 로그인 창 키 형식·필수 검사·키 없는 과거 세션 폐기, Origin/복원 잠금 경계. 기존 시간 정책 유지, 직원 NAS/OTP 미검증",
+    "5.2.4": "32단계 JSON 가림·첨부 본문 검색 제외·5,000단계 회귀, 날짜/시간대·백업 형식/길이·파일 링크/마운트 보호. 운영 파일 수용은 남음",
+    "5.2.5": "감사 처리자·실제 대상·승인 동작/사유 연결, 한글 셀·원문 보존·전체 이력 백업 회귀. 과거 소속 추정 안 함",
+    "5.2.6": "Fastify/fast-uri 의존성 조치 후 audit 알려진 취약점 0개. 이미지·운영 설정·지속 점검 미완료",
+    "5.3.2": "v9 유지·38 GIN v3 생성/서명 복원 재구축·같은 거래의 세션 폐기, 개발 catalog 읽기 확인. 운영 이관 대사 미완료",
+    "5.3.4": "실제 개발 DB 백업 생성/다운로드/재업로드 동일성, 격리 50테이블 전체 이력 manifest·HDD 원본/NAS 사본 실패 분리. 실제 양쪽 저장·운영 복원 미수행",
+    "5.4.1": "단계별 API·웹·모의 Edge 검사. 최신 전체 API 150=137통과/1Windows레거시 실패/12Linux 제외, 초기 Docker 6/2와 후속13/13 구분",
+    "5.4.3": "5,001개 격리 생산실적의 선택 검색·깊은 JSON·페이지/늦은 응답·실패 재시도 확인. 통합 현업·운영 부하 미검증",
+    "5.5.1": "기존 로컬 DB 재사용 보호 코드 정리·서버 저장소 읽기 전용 조사. 실제 5432 전환은 10월 1일, 오늘 전환/재시작 없음",
+    "5.5.2": "NAS 전용 계정 DSM 로그인1회·공유 존재/읽기/쓰기 권한 조회·로그아웃 확인. 서버 SMB 마운트·실제 파일 쓰기 없음",
+    "5.5.3": "HDD UUID/ext4/rw/원래 키·NAS 실제 마운트·독립 경로 검사 실행기와 준비 절차. 기존 원본/키 보존, 실제 연결·이번 운영 배포 남음",
+    "5.5.5": "이번 소스 067ec05는 로컬 구현·검사 및 서버/NAS 조회 근거. 오늘 코드 운영 배포·실사용·공개 전환은 미완료",
+    "5.6.2": "38개 GIN valid/ready 확인·격리 5,001건 선택 검색4.192ms. 단일 fixture이며 운영 SLO·동시 사용자 목표 미검증",
+    "5.6.3": "API/권한/편집/조회/UUID 공통화, 자동 조회·번호 페이지·메뉴/월 선택·프로필 편집 복구. 대량 문서/운영 성능 미검증"
+  };
   const historicalEvidence = id => todayEvidence[id]
     ? `2026-09-30 ${todayEvidence[id]}. 상세 근거·미검증 범위: docs/WBS.md 9월 30일 기록`
     : id.startsWith("5.") ? "" : "2026-09-29 tempchian-erp 4786021 구현 대응·격리 검증. 공식 서식·현업 인수 등 수용 기준은 확인 중";
@@ -319,9 +343,11 @@
     stream.id = `${group.id}.${streamIndex + 1}`;
     stream.tasks = stream.tasks.map(([title, description, deliverables, acceptance], taskIndex) => ({
       id: `${stream.id}.${taskIndex + 1}`, title, description, deliverables, acceptance,
-      status: group.id === "5" && !todayEvidence[`${stream.id}.${taskIndex + 1}`] && !octoberEvidence[`${stream.id}.${taskIndex + 1}`] ? "planned" : "in_progress",
+      status: group.id === "5" && !todayEvidence[`${stream.id}.${taskIndex + 1}`] && !octoberEvidence[`${stream.id}.${taskIndex + 1}`] && !octoberSecondEvidence[`${stream.id}.${taskIndex + 1}`] ? "planned" : "in_progress",
       evidence: [historicalEvidence(`${stream.id}.${taskIndex + 1}`), octoberEvidence[`${stream.id}.${taskIndex + 1}`]
-        ? `2026-10-01 ${octoberEvidence[`${stream.id}.${taskIndex + 1}`]}. 상세 근거: docs/WBS.md 10월 1일 기록` : ""].filter(Boolean).join(" / "),
+        ? `2026-10-01 ${octoberEvidence[`${stream.id}.${taskIndex + 1}`]}. 상세 근거: docs/WBS.md 10월 1일 기록` : "",
+        octoberSecondEvidence[`${stream.id}.${taskIndex + 1}`]
+          ? `2026-10-02 ${octoberSecondEvidence[`${stream.id}.${taskIndex + 1}`]}. 상세: docs/daily-work-logs/박범준/2026-10-02.html` : ""].filter(Boolean).join(" / "),
       groupId: group.id, groupName: group.name,
       streamId: stream.id, streamName: stream.name, connection: stream.connection
     }));
@@ -335,12 +361,24 @@
     { from: "기술개발부", to: "생산부", title: "시험 결과 → 출하 판정", detail: "시험 판정과 제품 가용성 연계 여부는 현업 확인 후 결정" }
   ];
 
+  // 작업량 기반 관리 추정: 기존 기반 가중치는 유지하고 잔여 WBS는 동일 단위로 계산한다.
+  // Progress credit records implementation underway; it does not mark field acceptance or deployment complete.
+  const baselineProgress = Number(completed.reduce((sum, task) => sum + task.weight, 0).toFixed(6));
+  const progressCredit = { planned: 0, in_progress: 0.25, done: 1 };
+  function calculateProgress(workItems) {
+    const credited = workItems.reduce((sum, task) => sum + (progressCredit[task.status] ?? 0), 0);
+    const fraction = workItems.length ? credited / workItems.length : 0;
+    return Math.round(baselineProgress + (100 - baselineProgress) * fraction);
+  }
+
   window.WBS_DATA = {
-    baselineProgress: 3,
-    currentProgress: 6,
+    baselineProgress,
+    currentProgress: calculateProgress(scoped),
+    calculateProgress,
+    progressCredit,
     baselineDate: "2026-09-21",
     scopeDate: "2026-09-23",
-    updateDate: "2026-10-01",
+    updateDate: "2026-10-02",
     completed,
     groups,
     handoffs,
