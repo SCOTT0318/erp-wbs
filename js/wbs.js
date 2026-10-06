@@ -9,14 +9,6 @@
   const allStreams = data.groups.flatMap(group => group.streams);
   const openStreams = new Set(["baseline", ...allStreams.map(stream => stream.id)]);
 
-  function renderDate() {
-    const parts = new Intl.DateTimeFormat("en-CA", {
-      timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit"
-    }).formatToParts(new Date());
-    const date = Object.fromEntries(parts.map(part => [part.type, part.value]));
-    $("#current-date").textContent = `${date.year}.${date.month}.${date.day}`;
-  }
-
   function renderProgress() {
     const progress = data.calculateProgress(data.tasks.filter(task => task.groupId));
     $("#progress-value").textContent = `${progress}%`;
@@ -196,7 +188,6 @@
 
   window.addEventListener("hashchange", () => showTab(location.hash.slice(1)));
 
-  renderDate();
   renderProgress();
   renderMetrics();
   renderDashboard();
