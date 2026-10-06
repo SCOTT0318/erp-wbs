@@ -8,6 +8,17 @@
   <link rel="stylesheet" href="./css/wbs.css">
   <style>
     .hero-copy { align-self: center; }
+    .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 36px; }
+    .hero-progress-group { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .hero-progress-group .hero-progress { min-width: 0; padding: 22px; }
+    .hero-progress-group h2 { margin: 0; color: #d2eee7; font-size: 14px; }
+    .hero-progress-group .hero-progress-value strong { font-size: 50px; }
+    .hero-progress-group .hero-progress-value > span { font-size: 11px; }
+    .hero-progress-group .progress-track { margin-bottom: 12px; }
+    .hero-progress-group p { font-size: 12px; line-height: 1.7; }
+    .hero-progress-group .progress-remaining { margin-top: 9px; color: #a5edd7; font-weight: 700; }
+    @media (max-width: 1000px) { .hero { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .hero-progress-group { grid-template-columns: 1fr; } }
     .october-record { display: grid; gap: 10px; margin-top: 18px; min-width: 0; }
     .october-record details { min-width: 0; border: 1px solid var(--line); border-radius: 9px; }
     .october-record summary { padding: 14px 16px; color: var(--navy); font-size: 13px; font-weight: 700; cursor: pointer; overflow-wrap: anywhere; }
@@ -33,9 +44,20 @@
       <div class="hero-copy">
         <h1 id="page-title">ERP WBS</h1>
       </div>
-      <div class="hero-progress" aria-label="현재 서비스 시작 전 기반 준비 진행률" title="20개 동일 점수 점검 중 14개 확인 완료. 진행 중·예정은 0점">
-        <div class="hero-progress-value"><strong id="progress-value">70%</strong></div>
-        <div id="progress-track" class="progress-track" role="progressbar" aria-label="현재 서비스 시작 전 기반 준비 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70"><span id="progress-bar" style="width: 70%"></span></div>
+      <div class="hero-progress-group" aria-label="전체 ERP와 프로토타입 준비 진행률">
+        <section class="hero-progress" aria-labelledby="overall-progress-title">
+          <h2 id="overall-progress-title">전체 ERP 구축</h2>
+          <div class="hero-progress-value"><strong id="overall-progress-value">약 7%</strong><span>현재 추정</span></div>
+          <div id="overall-progress-track" class="progress-track" role="progressbar" aria-label="전체 ERP 구축 진행률 추정" aria-valuemin="0" aria-valuemax="100" aria-valuenow="7"><span id="overall-progress-bar" style="width: 7%"></span></div>
+          <p>준비한 기본 기능과 앞으로 구현할 서비스 전체를 기준으로 한 현재 추정치입니다.</p>
+        </section>
+        <section id="prototype-progress" class="hero-progress" aria-labelledby="prototype-progress-title" title="20개 동일 점수 점검 중 14개 확인 완료. 진행 중·예정은 0점">
+          <h2 id="prototype-progress-title">프로토타입 준비</h2>
+          <div class="hero-progress-value"><strong id="progress-value">70%</strong></div>
+          <div id="progress-track" class="progress-track" role="progressbar" aria-label="프로토타입 기반 준비 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" aria-describedby="prototype-progress-description progress-remaining"><span id="progress-bar" style="width: 70%"></span></div>
+          <p id="prototype-progress-description">접속·로그인 후 기본 화면을 볼 수 있는 프로토타입 단계까지의 기반 준비율입니다.</p>
+          <p id="progress-remaining" class="progress-remaining">남은 준비 30%</p>
+        </section>
       </div>
     </section>
 

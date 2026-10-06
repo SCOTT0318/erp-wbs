@@ -16,7 +16,13 @@
     $("#progress-track").setAttribute("aria-valuenow", String(progress));
     const basis = `${data.progressBasis}: ${data.tasks.length}개 동일 점수 점검 중 ${data.completed.length}개 확인 완료. 진행 중·예정은 0점`;
     $("#progress-track").setAttribute("aria-valuetext", `${progress}% · ${basis}`);
-    $(".hero-progress").setAttribute("title", basis);
+    $("#prototype-progress").setAttribute("title", basis);
+    $("#progress-remaining").textContent = `남은 준비 ${100 - progress}%`;
+    const overall = data.overallProgress;
+    $("#overall-progress-value").textContent = `약 ${overall.estimate}%`;
+    $("#overall-progress-bar").style.width = `${overall.estimate}%`;
+    $("#overall-progress-track").setAttribute("aria-valuenow", String(overall.estimate));
+    $("#overall-progress-track").setAttribute("aria-valuetext", `약 ${overall.estimate}% · ${overall.basis} 기준의 ${overall.source}`);
   }
 
   function renderMetrics() {

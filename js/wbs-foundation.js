@@ -77,7 +77,8 @@
     return items.length ? Math.round(100 * items.filter(task => task.status === "done").length / items.length) : 0;
   }
   window.WBS_DATA = {
-    updateDate: "2026-10-06", progressBasis: "서비스 시작 전 기반 준비",
+    updateDate: "2026-10-06", progressBasis: "프로토타입 단계까지의 기반 준비",
+    overallProgress: { estimate: 7, basis: "준비한 기본 기능과 앞으로 구현할 서비스 전체", source: "2026-10-06 사용자 추정" },
     calculateProgress, currentProgress: calculateProgress(tasks), groups, tasks,
     completed: tasks.filter(task => task.status === "done"),
     handoffs: [
