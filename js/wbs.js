@@ -7,14 +7,16 @@
     .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;").replaceAll("'", "&#039;");
   const allStreams = data.groups.flatMap(group => group.streams);
-  const openStreams = new Set(["baseline", ...allStreams.map(stream => stream.id)]);
+  const openStreams = new Set(allStreams.map(stream => stream.id));
 
   function renderProgress() {
-    const progress = data.calculateProgress(data.tasks.filter(task => task.groupId));
+    const progress = data.calculateProgress(data.tasks);
     $("#progress-value").textContent = `${progress}%`;
-    $("#detail-progress-value").textContent = `${progress}%`;
     $("#progress-bar").style.width = `${progress}%`;
     $("#progress-track").setAttribute("aria-valuenow", String(progress));
+    const basis = `${data.progressBasis}: ${data.tasks.length}개 동일 점수 점검 중 ${data.completed.length}개 확인 완료. 진행 중·예정은 0점`;
+    $("#progress-track").setAttribute("aria-valuetext", `${progress}% · ${basis}`);
+    $(".hero-progress").setAttribute("title", basis);
   }
 
   function renderMetrics() {
@@ -56,7 +58,7 @@
         <td><strong class="task-title">${escapeHtml(task.title)}</strong><span class="task-description">${escapeHtml(task.description)}</span>${task.evidence ? `<span class="task-evidence">${escapeHtml(task.evidence)}</span>` : ""}</td>
         <td>${escapeHtml(task.deliverables)}</td>
         <td>${escapeHtml(task.acceptance || "기존 소스·문서에서 구현 기반 확인. 운영 인수와 별개")}</td>
-        <td><span class="status-badge ${escapeHtml(task.status)}">${{ done: "완료 기반", in_progress: "진행 중", planned: "예정" }[task.status]}</span></td>
+        <td><span class="status-badge ${escapeHtml(task.status)}">${{ done: "확인 완료", in_progress: "진행 중", planned: "예정" }[task.status]}</span></td>
       </tr>`).join("")}</tbody>
     </table></div>`;
   }
@@ -72,7 +74,7 @@
     if (status !== "all" && task.status !== status) return false;
     if (!query) return true;
     const text = [task.id, task.title, task.description, task.deliverables, task.acceptance,
-      task.groupName, task.streamName, task.connection].join(" ").toLocaleLowerCase("ko-KR");
+      task.groupName, task.streamName, task.connection, task.evidence].join(" ").toLocaleLowerCase("ko-KR");
     return text.includes(query);
   }
 
@@ -82,20 +84,6 @@
     const status = $("#status-filter").value;
     const sections = [];
     let visible = 0;
-
-    if (groupFilter === "all" || groupFilter === "1") {
-      const baseline = data.completed.filter(task => matches(task, query, status));
-      if (baseline.length) {
-        visible += baseline.length;
-        sections.push(`<section class="detail-group tone-slate" aria-labelledby="group-baseline-title">
-          <div class="detail-group-heading"><div><span class="group-index">01 / BASELINE</span><h3 id="group-baseline-title">기존 구축 기반</h3><p>이미 확인된 기반 기능. 신규 세부 업무 완료와 구분합니다.</p></div><strong>${baseline.length}개 표시</strong></div>
-          <details class="stream-card" data-stream="baseline" ${openStreams.has("baseline") ? "open" : ""}>
-            <summary><span class="stream-code">1.x</span><span class="stream-summary"><strong>기반 기능 목록</strong><small>기존 소스·문서에서 구현 기반이 확인된 항목</small></span><span class="stream-task-count">${baseline.length} / ${data.completed.length}개 표시</span><span class="chevron" aria-hidden="true"></span></summary>
-            <div class="stream-body">${renderRows(baseline)}</div>
-          </details>
-        </section>`);
-      }
-    }
 
     data.groups.forEach(group => {
       if (groupFilter !== "all" && groupFilter !== group.id) return;
