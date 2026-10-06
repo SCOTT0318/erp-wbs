@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TempChain ERP 구축 WBS: 부서별 업무, 보안, 배포, 최적화 계획">
+  <meta name="description" content="TempChain ERP WBS: 10월 6일 현재 공통 기능, 업무 제거, 보안·문서·공개 운영 검증과 이전 구축 이력">
   <title>TempChain ERP | ERP WBS</title>
   <link rel="stylesheet" href="./css/wbs.css">
   <style>
+    .hero-copy { align-self: center; }
+    .scope-change { margin: 0 0 18px; padding: 14px 18px; border: 1px solid #b9ddd4; border-radius: 10px; background: #e9f6f1; color: var(--navy); font-size: 13px; line-height: 1.7; }
+    .scope-change strong { display: block; margin-bottom: 3px; }
     .october-record { display: grid; gap: 10px; margin-top: 18px; min-width: 0; }
     .october-record details { min-width: 0; border: 1px solid var(--line); border-radius: 9px; }
     .october-record summary { padding: 14px 16px; color: var(--navy); font-size: 13px; font-weight: 700; cursor: pointer; overflow-wrap: anywhere; }
@@ -23,7 +26,7 @@
     .october-record table { width: 100%; min-width: 640px; border-collapse: collapse; }
     .october-record th, .october-record td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
     .october-record th { background: var(--canvas); color: var(--navy); }
-    @media (max-width: 600px) { .october-record .record-body { padding: 12px; } .october-record summary { padding: 13px 12px; } }
+    @media (max-width: 600px) { .update-panel .panel-heading { flex-wrap: wrap; gap: 12px; } .october-record .record-body { padding: 12px; } .october-record summary { padding: 13px 12px; } }
   </style>
 </head>
 <body>
@@ -42,10 +45,10 @@
       <div class="hero-copy">
         <h1 id="page-title">ERP WBS</h1>
       </div>
-      <div class="hero-progress" aria-label="전체 진행률 요약" title="WBS 작업량 기준 추정: 기존 기반 3% + 나머지 97% × 업무별 진척 평균. 예정 0%, 구현 진행 중 25%, 완료 100%를 반영합니다. 현업 수용·운영 배포 완료와 별도로 관리합니다.">
-        <div class="hero-progress-top"><span>전체 구축 진행률</span><span class="hero-status">IN PROGRESS</span></div>
-        <div class="hero-progress-value"><strong id="progress-value">24%</strong><span>WBS 작업량 기준</span></div>
-        <div id="progress-track" class="progress-track" role="progressbar" aria-label="전체 구축 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="24"><span id="progress-bar" style="width: 24%"></span></div>
+      <div class="hero-progress" aria-label="이전 WBS 진행률 기록" title="2026-10-02 이전 업무 범위의 기록입니다. 10월 6일 기존 부서 업무를 제거했으며 새 요구사항 확정 전까지 현재 진행률을 재산정하지 않습니다.">
+        <div class="hero-progress-top"><span>이전 WBS 진행률</span><span class="hero-status">2026.10.02</span></div>
+        <div class="hero-progress-value"><strong id="progress-value">24%</strong><span>이전 범위 기록</span></div>
+        <div id="progress-track" class="progress-track" role="progressbar" aria-label="10월 2일 이전 WBS 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="24"><span id="progress-bar" style="width: 24%"></span></div>
       </div>
     </section>
 
@@ -58,17 +61,423 @@
 
     <section id="panel-dashboard" class="tab-panel" role="tabpanel" aria-labelledby="tab-dashboard">
       <div class="section-intro">
-        <div><p class="eyebrow">PROGRAM SNAPSHOT</p><h2>구축 현황 한눈에 보기</h2></div>
+        <div><p class="eyebrow">PROGRAM SNAPSHOT</p><h2>현재 변경과 이전 WBS 기록</h2></div>
       </div>
-      <section class="metric-grid" aria-label="프로젝트 핵심 수치">
-        <article class="metric-card metric-primary"><span class="metric-label">전체 WBS 항목</span><strong id="total-count">113</strong><small>기반 + 요청 범위</small><i aria-hidden="true">01</i></article>
-        <article class="metric-card"><span class="metric-label">확인된 기반</span><strong id="done-count">18</strong><small>구현 근거가 있는 항목</small><i aria-hidden="true">02</i></article>
-        <article class="metric-card"><span class="metric-label">구현 진행 중</span><strong id="progress-count">83</strong><small>부서 업무·공통 기반·운영</small><i aria-hidden="true">03</i></article>
-        <article class="metric-card"><span class="metric-label">검토·구현 예정</span><strong id="planned-count">12</strong><small>공통 기반·운영 업무</small><i aria-hidden="true">04</i></article>
+      <div id="current-scope-notice" class="scope-change"><strong>2026.10.06 현재: 기존 부서 업무 제거 · 공통 기반 유지 · 새 업무 준비</strong>아래 24%·113개 항목은 10월 2일 이전 WBS 기록입니다. 삭제된 기능을 완료로 집계하지 않았으며 현재 진행률·새 완료일은 산정하지 않았습니다.</div>
+      <section class="metric-grid" aria-label="10월 2일 이전 WBS 수치">
+        <article class="metric-card metric-primary"><span class="metric-label">이전 WBS 항목</span><strong id="total-count">113</strong><small>기반 + 요청 범위</small><i aria-hidden="true">01</i></article>
+        <article class="metric-card"><span class="metric-label">당시 확인된 기반</span><strong id="done-count">18</strong><small>구현 근거가 있는 항목</small><i aria-hidden="true">02</i></article>
+        <article class="metric-card"><span class="metric-label">당시 구현 진행 중</span><strong id="progress-count">83</strong><small>부서 업무·공통 기반·운영</small><i aria-hidden="true">03</i></article>
+        <article class="metric-card"><span class="metric-label">당시 검토·구현 예정</span><strong id="planned-count">12</strong><small>공통 기반·운영 업무</small><i aria-hidden="true">04</i></article>
+      </section>
+
+      <section id="update-october-sixth" class="panel-card update-panel" aria-labelledby="update-october-sixth-title">
+        <div class="panel-heading"><div><p class="eyebrow">2026.10.06 / CURRENT ERP SCOPE</p><h2 id="update-october-sixth-title">10월 6일 작업·검증 기록</h2></div><span class="pill">20개 상세 작업 · 박범준</span></div>
+        <ul class="update-list"><li><strong>기존 업무 제거</strong><span>생산부·사업부·기술개발부와 공통 거래처·자재·재고·판매의 화면·API·업무 로직·전용 테스트 전체 제거. 새 부서 업무는 요구사항 확정 전이며 재구현 미착수</span></li>
+<li><strong>현재 공통 기반</strong><span>NAS 직접 인증·계정·부서·프로필·개인 메모·접속 현황·서명 백업 유지. 신규 DB는 공통 7개 테이블. 홈은 순수 월간 달력과 부서별 서비스 준비 안내</span></li>
+<li><strong>보안 준비·권한</strong><span>DB 검증 TLS·API HTTPS·명시 신뢰 프록시·Secure 쿠키의 3대 분리 조건 준비. 관리자 API 경계와 최초 암호 정책 강화. 경영진 메뉴 제외·NAS 신원 유지; 별도 조회 권한 미구현</span></li>
+<li><strong>문서·공개 관리자</strong><span>기술 MD/HTML 분리·안전한 변환·접근 가능한 대화/Git 이력 정리. 로그인 후 /md 문서 11개와 동일 DDNS /admin/ 제공. 관리 역할 검사·루트 관리 API 차단 유지</span></li>
+<li><strong>실제 운영 확인</strong><span>지시된 보안 작업에서 ERP 전용 DB 초기화; 후속 문서 배포에서는 DB·계정·NAS 신원·키·백업·설정을 보존하고 앱만 교체. 실제 NAS 일반 계정의 LAN·공개 HTTPS 로그인, 문서·관리자 접근 제한 등 132개 확인 통과</span></li>
+<li><strong>검사와 잔여</strong><span>전체 build/lint·격리 API 통과, Linux 전용 13 제외. 웹 41/41·모의 Docker 20/20·합성 화면 31/31·문서 모의 화면 37/37. 실제 3대 이전·공휴일 API·Linux 외부 백업 인수·관리자 실제 계정 변경/백업/복원은 남음</span></li></ul>
+        <div class="october-record">
+<details class="record-group"><summary>20개 작업 상세</summary><div class="record-body"><details class="record-task"><summary>1. 전 부서 업무 기능과 공통 업무 기능 제거</summary><div class="record-body"><ul>
+<li>생산부·사업부·기술개발부의 기존 전용 업무 화면과 공통 거래처·자재·재고·판매 기능 전체 제거</li>
+<li>메뉴를 감추는 방식에 그치지 않고 연결된 화면, 라우터, API 등록, 업무 로직, 입력·조회 보조 코드, 업무 타입 정의까지 정리</li>
+<li>생산 자재·재고 이동·컨테이너·출고·주문·생산 결과, 생산 의뢰·출고 신청·구매 신청·구매 관리·실사·생산 계획·재작업 관련 코드 제거</li>
+<li>기술개발의 챔버·VIP 샘플·예약·시험·품질 관련 화면과 처리 코드 제거</li>
+<li>업무 문서·첨부·부서 결재·보고·업무 데이터 관리, 업무 검색·알림·업무 대시보드 및 업무 일정 연결 제거</li>
+<li>제거한 기능에만 종속된 SQL·마이그레이션·검색 인덱스 생성·알림 배포와 전용 테스트 정리</li>
+<li>기존 구현 이력과 현재 제공 기능의 차이를 문서에 반영하고, 삭제된 업무를 구현 완료 항목으로 다시 집계하지 않도록 현재 기준 명시</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>2. 공통 계정·인증·개인 기능 중심으로 ERP 구성 정리</summary><div class="record-body"><ul>
+<li>로그인·로그아웃·프로필·계정·부서·개인 메모·현재 접속 현황·백업을 공통 기반으로 유지</li>
+<li>일반 ERP와 독립 관리자 앱의 기능 범위를 재정리하고 관리 기능은 관리자 앱에서 제공</li>
+<li>일반 사용자 응답에서 생산 권한·업무 공간 권한·결재자·구매 권한·거래처 부서 등 제거된 업무 전용 필드 삭제</li>
+<li>관리자 홈에서 업무 처리 건수·거래처·생산 지표와 업무 달력 제거</li>
+<li>관리자 홈을 현재 접속 인원·활성 계정·운영 부서 중심의 기본 운영 현황으로 정리</li>
+<li>현재 접속 인원은 최근 활동 시간과 동일 계정 중복 제외 기준 유지</li>
+<li>감사 기록 저장과 공통 세션 처리는 유지하고 업무 알림 자동 배포만 제거</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>3. 신규 DB 구조 축소와 기존 DB 시작 동작 보호</summary><div class="record-body"><ul>
+<li>신규 ERP DB를 감사 기록, 부서, ERP 표식, 개인 메모, 스키마 이력, 세션, 사용자 등 공통 7개 테이블로 구성</li>
+<li>계정용 부서 식별과 계정 마이그레이션을 업무 코드에서 분리</li>
+<li>기본 부서의 이름·코드·시스템 식별자와 변경 제한을 계정 소속 관리 계약으로 유지</li>
+<li>NAS 식별자·직급·그룹·관리자 지정 부서·프로필 이미지·최근 접속·개인 메모의 저장 구조 유지</li>
+<li>제거한 업무 스키마를 신규 DB에 다시 만들지 않으면서 기존 스키마 버전 및 ERP 전용 표식 유지</li>
+<li>앱 시작 과정에 기존 업무 테이블이나 알 수 없는 테이블을 자동 삭제하는 처리 추가 없음</li>
+<li>ERP 전용 표식 없는 기존 스키마와 코드보다 최신인 스키마의 시작 거부 유지</li>
+<li>기능 제거에 따른 코드 정리와 마스터가 별도로 지시한 운영 ERP DB 초기화를 구분해 기록</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>4. 서명된 기존 백업의 복원 호환 유지</summary><div class="record-body"><ul>
+<li>삭제한 업무 테이블은 과거 서명 백업의 호환 검사에 필요한 이름 목록으로만 유지</li>
+<li>호환 목록을 업무 화면·업무 스키마 생성·업무 마이그레이션 재도입에 사용하지 않도록 분리</li>
+<li>기존 v8·v9 서명 백업의 필수 테이블 구성과 허용된 과거 모듈의 완전한 구성을 검사하는 계약 유지</li>
+<li>일부 테이블만 있는 모듈, 알 수 없는 테이블, 다른 스키마, 중복 이름을 복원 대상으로 받아들이지 않는 검사 유지</li>
+<li>복원 전 안전 백업, 서명·내용 해시·파일 크기·ERP 표식·활성 관리자·스키마 버전 검사 유지</li>
+<li>복원 검증·개인 메모 구조 보완·세션 폐기·감사 기록을 같은 트랜잭션에서 처리하는 계약 유지</li>
+<li>알 수 없는 외부 의존성을 연쇄 삭제하지 않고 복원 실패 시 롤백하는 구조 유지</li>
+<li>내부 서명 키와 백업 비활성 상태에서도 필요한 DB 유지보수 잠금 유지</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>5. 같은 사내망의 DB·백엔드·프론트엔드 분리 보안 준비</summary><div class="record-body"><ul>
+<li>향후 세 컴퓨터로 나누는 운영을 위한 분리 배포 설정과 보안 조건 추가</li>
+<li>API의 HTTPS 인증서·키 경로를 검사하고 두 파일이 함께 제공되지 않거나 인증서가 잘못되면 시작 중단</li>
+<li>API TLS의 최소 버전을 설정하고 DB를 열거나 마이그레이션하기 전에 인증서 유효성 검사</li>
+<li>전달 헤더를 신뢰할 프록시는 명시한 사설 또는 loopback IP만 허용하고 기본값은 신뢰하지 않도록 구성</li>
+<li>전체 대역·임의 호스트·공개 IP를 신뢰 프록시로 지정하는 설정 거부</li>
+<li>PostgreSQL 연결은 인증서와 접속 대상 이름을 모두 검증하는 방식 지원</li>
+<li>DB 연결 URL의 임의 호스트·사용자·포트 우회 및 중복 매개변수 거부</li>
+<li>API 연결과 백업·복원 명령이 같은 검증된 DB 대상과 TLS 정책을 사용하도록 공통 연결 처리 적용</li>
+<li>상속된 PostgreSQL 환경 설정이 백업 명령의 접속 대상을 바꾸지 않도록 정리</li>
+<li>분리 모드에서는 DB 인증서 검증·API HTTPS·신뢰 프록시·Secure 쿠키·정확한 HTTPS Origin을 모두 요구</li>
+<li>분리용 프록시 템플릿과 인증서·DB 접근·방화벽 적용 안내 작성</li>
+<li>현재 실행기는 동일 Docker 호스트 기준이며 실제 세 PC 이전 완료와 구분</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>6. 초기 관리자 암호 정책과 관리 API 경계 강화</summary><div class="record-body"><ul>
+<li>빈 DB의 초기 관리자에 적용되던 짧은 기본 암호 예외 제거</li>
+<li>모든 초기 관리자 암호에 길이 정책 적용하고 로그인 ID 형식 검사 유지</li>
+<li>초기 관리자 생성은 사용자 없는 DB에만 적용하고 재시작 시 기존 암호·비활성 상태를 덮어쓰지 않도록 유지</li>
+<li>계정 조회·수정 및 부서 생성·수정 API를 관리자 전용 경로로 이동</li>
+<li>일반 사용자에게 필요한 로그인 후 부서 목록 조회만 기존 공통 경로에 유지</li>
+<li>API 진입과 변경 트랜잭션 안에서 관리자 권한 재확인 유지</li>
+<li>마지막 활성 관리자 해제, 사용 중인 부서 비활성화 등 기존 관리 보호 유지</li>
+<li>역할·활성·인증 방식 변경 시 전체 세션 폐기 유지</li>
+<li>관리자 자신의 부서만 수정할 때 현재 편집 세션을 유지하는 기존 계약 유지</li>
+<li>관리자 화면과 NAS 회귀 검사의 호출 경로를 변경된 관리 API 경계에 맞게 수정</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>7. 오류 페이지와 관리자 접근 제한 화면 정리</summary><div class="record-body"><ul>
+<li>오류 페이지의 로고·카드 위치를 기존 로그인 화면과 맞추도록 수정</li>
+<li>파랑·초록 배경, 왼쪽 흰 TEMPCHAIN 로고, 오른쪽 흰 카드의 데스크톱 배치 적용</li>
+<li>좁은 화면에서는 카드를 중앙에 배치하고 카드 안 로고·여백·글자 크기 조정</li>
+<li>오류 번호·짧은 제목·간단한 안내 위주로 문구 정리</li>
+<li>반복된 설명·영문 보조 문구·불필요하게 긴 안내 제거</li>
+<li>관리자 접근 제한 화면에도 같은 배치와 간결한 안내 적용</li>
+<li>로그아웃 동작·실패 안내와 화면 접근성 유지</li>
+<li>정적 오류 페이지와 관리자 접근 제한 화면의 데스크톱·경계 폭·모바일 배치 확인 기록 확보</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>8. 홈 월간 달력과 부서 선택 화면 구성</summary><div class="record-body"><ul>
+<li>홈에 순수 월간 달력과 개인 메모를 함께 배치하고 좁은 화면에서는 한 열로 전환</li>
+<li>연도·월 선택, 이전·다음 달 이동, 오늘 복귀, 선택 날짜 표시 제공</li>
+<li>한국 시간 기준 오늘 표시와 앞뒤 달 날짜를 포함한 월간 표 구현</li>
+<li>연도 범위 경계·월말·윤년 날짜를 처리하고 월 변경 시 선택일을 해당 월의 마지막 날짜에 맞게 보정</li>
+<li>한국 자정·브라우저 다시 활성화·탭 표시 전환 때 오늘 표시 갱신</li>
+<li>오늘·선택 날짜 상태, 날짜 버튼 설명, 선택 날짜 안내 및 이동 후 포커스 처리 적용</li>
+<li>홈 및 공통 탐색에서 활성 부서를 선택해 부서 준비 화면으로 이동하도록 구성</li>
+<li>부서 선택을 계정 소속 변경과 분리하고 계정 수정 API 호출 없이 화면 이동으로 처리</li>
+<li>부서 화면에 부서 이름·선택 필드·“현재 서비스 준비 중입니다.” 안내 제공</li>
+<li>존재하지 않거나 비활성인 부서의 직접 접속은 목록 확인 후 홈으로 이동</li>
+<li>부서 목록 로딩·실패·재조회 상태 처리와 계정 전환 시 목록 초기화 적용</li>
+<li>오래된 조회 응답이 다른 계정의 목록을 덮어쓰지 않도록 요청 세대 구분 적용</li>
+<li>삭제한 업무 일정·생산 일정 API와 달력 연결 없음</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>9. 경영진 메뉴 제외와 NAS 신원 계약 보존</summary><div class="record-body"><ul>
+<li>부서 탐색과 선택 목록에서 경영진 코드 및 경영진·경연진 이름 제외</li>
+<li>이름 공백·문자 정규화와 코드 대소문자를 고려해 메뉴 필터 적용</li>
+<li>실제 NAS CEO·CTO 계정·직급·신원·동기화 정보 유지</li>
+<li>경영진 메뉴 제외를 계정 삭제나 NAS 인증 해제로 확대하지 않도록 구성</li>
+<li>경영진 별도 조회 권한은 이번 변경에서 신설되지 않았음을 현재 상태에 명시</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>10. 요청된 ERP 전용 DB 초기화와 보안 작업 배포</summary><div class="record-body"><ul>
+<li>마스터가 지시한 준비 단계의 ERP 전용 DB 전체 초기화 수행 기록 확인</li>
+<li>초기화 후 DB 재시작과 공통 스키마 생성, DSM 계정 재등록 확인 기록 확보</li>
+<li>다른 DB·클러스터 역할·NAS 자료·백업·서명 키·환경 설정·점검 서비스는 초기화 범위에서 제외</li>
+<li>DB·API의 호스트 포트 미게시와 지정 LAN 관리자 바인딩 유지</li>
+<li>공개 HTTPS 상태 확인, 인증 없는 세션 거부, 허용하지 않은 Origin·Host 차단 확인</li>
+<li>제거된 업무 경로와 당시 공개하지 않던 관리 경로의 접근 차단 확인</li>
+<li>이후 문서·관리자 후속 배포에서는 DB를 다시 초기화하지 않고 앱만 교체</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>11. NAS 직접 로그인 유지 및 지정 검증 계정 확인</summary><div class="record-body"><ul>
+<li>보안 정비·초기화·앱 교체 과정에서 NAS 직접 인증 설정과 DSM 조회 계약 유지</li>
+<li>NAS 계정 로그인은 실제 DSM 인증과 현재 계정 신원·그룹·활성 상태 재확인 흐름 유지</li>
+<li>NAS 연동 실패를 로컬 암호 로그인으로 대체하지 않는 기존 계약 유지</li>
+<li>시작·수동 동기화의 사용자·그룹·소속 조회, NAS UID·토큰 전달 및 관리자 지정 부서 보존 유지</li>
+<li>지정된 기존 지정 NAS 일반 검증 계정 NAS 일반 계정으로 LAN과 NAS 역방향 프록시의 DDNS에서 실제 로그인 확인</li>
+<li>로그인 후 세션 조회·화면 진입·새로고침·로그아웃 확인</li>
+<li>운영 계정 목록과 검증 계정 존재 확인 기록 확보</li>
+<li>입력 형식 오류는 강력 새로고침 후 사용자 로그인 성공으로 확인됐으며 개별 실패 필드는 미확보 상태로 기록</li>
+<li>개별 입력 원인이나 NAS 설정 변경으로 해결한 문제라고 단정하지 않도록 정리</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>12. 문서 보관 범위 정리와 MD·HTML 폴더 분리</summary><div class="record-body"><ul>
+<li>ERP 기술 안내의 중복·오래된 경로·현재 상태와 다른 설명 정리</li>
+<li>프로젝트 기술 문서와 관계없는 사진·원시 출력·일일 업무일지 자료 정리</li>
+<li>기술 문서 원본을 <code>erp-docs/md/</code>, 생성 HTML을 <code>erp-docs/html/</code>로 분리</li>
+<li>인수인계·NAS 인증·배포·백업·보안·검증 안내의 경로와 상호 참조 갱신</li>
+<li>현재 제공 기능 안내와 과거 업무 구현 기록을 구분해 유지</li>
+<li>로컬 화면·검증 결과·이번 업무일지는 Git에서 제외되는 개발 자료 경로에 보관</li>
+<li>환경 파일·암호·키·토큰·개인별 비공개 값은 기술 문서와 공개 결과에 포함하지 않도록 유지</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>13. 접근 가능한 프로젝트 대화와 Git 이력 기록</summary><div class="record-body"><ul>
+<li>현재 접근 가능한 프로젝트 대화의 원제목·요청·결정·당시 결과·중단 또는 미검증·후속 변경을 대화 이력에 정리</li>
+<li>접근 가능 범위를 명시하고 접근할 수 없는 대화나 삭제된 대화를 읽었다고 주장하지 않도록 작성</li>
+<li>현재 로컬 Git의 모든 참조에서 중복 없는 커밋을 모아 메시지·본문·파일 변경 기록 정리</li>
+<li>얕은 저장소 여부와 로컬 참조 범위를 구분하고 로컬에 없는 원격 커밋까지 확인한 것으로 확대하지 않도록 작성</li>
+<li>과거 완료 보고와 현재 기능 제공 여부를 구분하고 삭제된 부서 업무의 과거 기록은 이력으로 유지</li>
+<li>반복 갱신 가능한 Git 이력 생성 도구 추가</li>
+<li>원시 대화 출력·사진·비공개 설정을 문서에 쌓지 않고 확인 가능한 작업 내용 위주로 정리</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>14. 안전한 Markdown 변환과 독립 HTML 문서 묶음 생성</summary><div class="record-body"><ul>
+<li>제목·요약·갱신일·문서 목록·허용 목록과 문서별 HTML 생성 기능 추가</li>
+<li>한글 제목 앵커, 중복 제목 구분, 표·코드 블록·본문 내부 이동 처리</li>
+<li>같은 묶음의 문서 링크를 HTML 경로로 변환하고 본문 앵커 유지</li>
+<li>삭제된 원본의 이전 생성 HTML을 제거해 오래된 문서 출력이 남지 않도록 처리</li>
+<li>서버 없이 열 수 있는 목록·검색·스타일 포함 HTML 묶음 구성</li>
+<li>원시 HTML은 실행하지 않고 문자로 표시하며 위험 주소·이미지·자격 증명 포함 링크 차단</li>
+<li>문서 허용 목록 밖의 소스·환경 파일 상대 경로는 실행 가능한 링크로 제공하지 않도록 처리</li>
+<li>외부 링크의 새 창 보호와 오프라인 검색 스크립트의 콘텐츠 보안 정책 적용</li>
+<li>전체 빌드에서 문서 생성 후 API·웹·관리자 빌드가 이어지도록 연결</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>15. 로그인 후 문서를 읽는 API 구현</summary><div class="record-body"><ul>
+<li>문서 목록과 개별 HTML을 기존 ERP 로그인 세션으로 제공하는 읽기 전용 API 추가</li>
+<li>생성 manifest에 등록된 문서만 제공하고 임의 파일 이름·확장자·경로 이탈 요청 거부</li>
+<li>파일 이름 형식·크기·일반 파일 여부·심볼릭 링크·실제 생성 폴더 위치 확인</li>
+<li>문서 목록 누락·손상과 문서 없음의 응답을 구분하고 내부 서버 경로 노출 방지</li>
+<li>HTML 응답에 실행 제한 보안 정책과 캐시하지 않는 응답 적용</li>
+<li>MD 원본·Git·환경 설정을 정적 공개하지 않고 생성 HTML만 인증 API로 제공</li>
+<li>문서 응답 갱신일의 빈 값 처리 계약을 API·화면에 맞춰 정리</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>16. ERP 문서 목록·본문·검색·목차 화면 구현</summary><div class="record-body"><ul>
+<li>ERP 메뉴와 <code>/md</code> 경로에 로그인 후 문서 열람 화면 추가</li>
+<li>로그인 전 문서 접속 시 로그인으로 이동하고 성공 후 요청한 문서 경로로 복귀</li>
+<li>문서 제목·요약·갱신일을 카드로 제공하고 제목·요약 검색 구현</li>
+<li>문서 선택·목록 복귀·본문 목차·제목 이동·문서 간 내부 링크 이동 구현</li>
+<li>문서 이동과 새로고침 때 기존 창 인증 키 유지</li>
+<li>본문에서 허용된 문서 영역만 추출하고 스크립트·폼·iframe·이미지·위험 속성 제거</li>
+<li>링크와 내부 문서 이름 재검사, 목차 이동 뒤 제목 포커스 적용</li>
+<li>긴 표·코드는 본문 내부에서 스크롤하고 모바일 문서 목록은 접고 펼치는 방식 적용</li>
+<li>연속 요청·계정 변경의 이전 응답을 취소 또는 무효화해 잘못된 본문 표시 방지</li>
+<li>로그인 만료 응답을 공통 세션 종료 흐름으로 연결</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>17. 동일 DDNS의 독립 관리자 앱 진입 구성</summary><div class="record-body"><ul>
+<li>기존 NAS DDNS의 <code>/admin/</code>에서 독립 관리자 앱에 접속하도록 웹 프록시 연결</li>
+<li><code>/admin</code> 접속은 쿼리를 유지해 <code>/admin/</code>으로 이동</li>
+<li>접두사 아래 요청을 별도 관리자 컨테이너로 전달하고 앱 내부 경로에 맞게 접두사 처리</li>
+<li>관리자 라우터·진입 HTML·정적 자산의 기준 경로를 DDNS와 기존 LAN 진입에 맞게 분기</li>
+<li>깊은 관리자 경로 직접 접속과 새로고침에서 자산을 읽을 수 있도록 빌드 구성 변경</li>
+<li>공통 JSON API 및 백업 업로드·다운로드 경로를 공개 관리자 접두사에 맞게 적용</li>
+<li>관리자 인증 쿠키의 경로를 접두사에 맞게 바꾸고 HTTPS Secure·HttpOnly·SameSite 정책 유지</li>
+<li>공개 루트 관리 API 차단과 관리자 접두사 API의 로그인·관리자 역할 검사 유지</li>
+<li>기존 관리자 호스트 포트를 loopback·지정 LAN 바인딩 범위에 그대로 유지</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>18. 문서 포함 이미지와 설정 보존 배포 도구 구성</summary><div class="record-body"><ul>
+<li>Docker 문서 빌드 단계에서 MD를 변환하고 최종 API 이미지에는 생성 HTML만 포함</li>
+<li>로컬 검증 산출물·자격 증명이 이미지에 들어가지 않도록 Docker 제외 범위 유지</li>
+<li>API·관리자·웹을 대상으로 사전 점검·실제 교체·실패 복구를 수행하는 배포 도구 작성</li>
+<li>NAS 활성·기존 앱 정상 상태·교체 이미지·환경 이름·마운트·네트워크·보안 옵션·포트 확인</li>
+<li>기존 환경·마운트·보안 옵션·포트를 복제하고 예상하지 않은 새 환경이나 자동 볼륨은 거부</li>
+<li>이전 앱을 복구용으로 보존하고 API·관리자·웹의 정상 상태를 순서대로 확인하도록 처리</li>
+<li>새 앱 실패 시 이전 앱의 이름·네트워크·재시작 정책을 되돌리는 복구 흐름 구현</li>
+<li>원격 복구 자료의 접근 권한 제한과 출력에 비공개 Docker 상세가 섞이지 않는 처리 적용</li>
+<li>Docker 기본값 표현 차이는 같은 정책에 한해 정규화하고 마운트 배열 순서는 내용 전체를 비교하면서 정렬</li>
+<li>검증 문서에 초기 교체 중단·이전 앱 복구·후속 사전 비교 중단과 재배포 경위 기록</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>19. 문서·공개 관리자 SSH 배포와 실제 공개 로그인 검증</summary><div class="record-body"><ul>
+<li>SSH 서버의 문서 포함 API·독립 관리자·ERP 웹 앱 교체와 정상 상태 확인 기록 확보</li>
+<li>NAS 역방향 프록시를 통과하는 실제 공개 HTTPS 주소에서 지정 지정 NAS 일반 검증 계정 계정 로그인 수행</li>
+<li>문서 목록·본문·검색·내부 이동·목차·새로고침·창 인증 키 유지 확인</li>
+<li>데스크톱·모바일 문서 화면에서 본문 가로 넘침 없음 확인</li>
+<li>DDNS 관리자 루트·직접 하위 경로·실제 자산 제공 및 기존 LAN 관리자 진입 확인</li>
+<li>관리자 접두사 로그인·세션 조회는 성공하고 일반 계정의 관리자 화면·관리 API 접근 거부 확인</li>
+<li>공개 ERP·관리자 쿠키의 보안 속성과 각 경로 범위 확인</li>
+<li>비인증 문서·관리 API 거부, 공개 루트 관리 API 차단, 로그아웃 후 문서 접근 거부 확인</li>
+<li>최종 API 교체 후 운영에서 제공하는 모든 문서 HTML과 최종 로컬 생성 HTML의 동일성 확인</li>
+<li>이 배포에서는 DB와 점검 서비스를 교체하지 않고 기존 DB·계정·NAS 신원·마운트·포트 설정 보존 확인 기록 확보</li>
+<li>관리자 권한의 실제 계정 변경·백업·복원 운영 검증은 이번 일반 계정 확인 범위에 포함하지 않도록 구분</li>
+</ul>
+</div></details>
+<details class="record-task"><summary>20. 코드·화면·보안 검사 결과와 운영 확인 범위 정리</summary><div class="record-body"><ul>
+<li>오늘 수행된 전체 빌드·정적 검사·격리 DB API 회귀·웹 회귀·Docker 실행기 회귀 통과 기록 확인</li>
+<li>제거 업무 경로 차단, 관리 API 권한, 초기 관리자 정책, 공통 스키마, 기존 데이터 시작 시 보존 검사 범위 정리</li>
+<li>기존 NAS 계정·세션·개인 메모·서명 백업 호환과 복원 실패 롤백 회귀 기록 정리</li>
+<li>문서 변환의 위험 링크·원시 HTML·이미지·문서 경로·내부 앵커 및 오프라인 묶음 검사 기록 정리</li>
+<li>합성 계정 화면 검사와 실제 NAS 계정 공개 로그인 확인을 구분해 기록</li>
+<li>Windows에서 적용되지 않는 Linux 외부 백업 성공 검사는 제외하고 Windows의 안전 거부 검사 유지</li>
+<li>의존성 갱신과 전체·운영 의존성 취약점 검사 결과 정리</li>
+<li>업무일지 작성 과정에서는 서비스를 시작·중지하거나 테스트·운영 배포를 다시 수행하지 않고 기존 결과와 소스 대조</li>
+</ul>
+</div></details></div></details>
+<details class="record-group"><summary>코드·합성 화면·실제 운영 검증 구분</summary><div class="record-body"><p>아래 수치는 전달된 10월 6일 검증 기록입니다. 격리·합성 검사와 실제 NAS 일반 계정 확인을 구분하며 합산하지 않습니다. 이번 WBS 반영 중 ERP 서비스를 변경하거나 운영 검사를 재실행하지 않았습니다.</p><div class="record-table" role="region" aria-label="10월 6일 검증·WBS 대응 표" tabindex="0"><table>
+<thead>
+<tr>
+<th>검사</th>
+<th>결과·범위</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>전체 <code>npm run build</code>·<code>npm run lint</code></td>
+<td>API·웹·관리자 통과</td>
+</tr>
+<tr>
+<td>Windows/scott 격리 PostgreSQL API</td>
+<td>문서 API 회귀를 포함한 전체 <code>npm test</code> 통과·Linux 전용 13 제외</td>
+</tr>
+<tr>
+<td><code>npm run test:web</code></td>
+<td>41/41 통과; DDNS 관리자 JSON·백업 경로 회귀 포함</td>
+</tr>
+<tr>
+<td><code>npm run test:docker</code></td>
+<td>20/20 통과; 모의 Docker와 템플릿 검사</td>
+</tr>
+<tr>
+<td>의존성 감사</td>
+<td>전체·운영 의존성 취약점 0건; <code>source-map-js</code> 1.2.2 반영</td>
+</tr>
+<tr>
+<td>Edge 합성 계정·API 화면</td>
+<td>31/31 통과; 홈 달력·부서 선택·경영진 제외·모바일·지연 응답 확인</td>
+</tr>
+<tr>
+<td>오류 화면</td>
+<td>정적 HTML 16개와 관리자 접근 제한 배치 확인; 1440·901·900·390·320px</td>
+</tr>
+<tr>
+<td>문서 HTML 생성기</td>
+<td>위험 링크·원시 HTML·이미지·내부 문서 링크·오프라인 묶음 5/5 통과</td>
+</tr>
+<tr>
+<td>문서 Edge 모의 화면</td>
+<td>37/37 통과; 문서 11개·검색·목차·내부 이동·탭 인증·401·1440/390/320px·오프라인 HTML</td>
+</tr>
+<tr>
+<td>문서·관리자 공개 HTTPS 실제 Edge</td>
+<td>132개 확인 통과·JS 오류 0; 지정 지정 NAS 일반 검증 계정 NAS 일반 계정 사용</td>
+</tr>
+</tbody></table></div>
+<p>실제 공개 확인은 일반 계정의 문서 열람·접두사 로그인·세션·관리자 권한 거부·쿠키·로그아웃 범위입니다. 관리자 권한의 실제 계정 변경·백업 생성·복원은 포함하지 않았습니다. 실패한 로그인 입력 필드는 미확보이며 원인을 특정한 수정으로 단정하지 않습니다.</p><p>초기 설정 비교 중단과 이전 앱 복구, 마운트 배열 순서 비교 중단 후 재배포 경위는 기록돼 있습니다. 최초 시도의 전용 원시 로그는 이번 조사에서 재확보하지 않았습니다. 후속 배포는 DB와 점검 서비스를 교체하지 않았습니다.</p></div></details>
+<details class="record-group"><summary>진행 중인 업무 · 이슈 · 다음 업무</summary><div class="record-body"><h2>진행 중인 업무</h2>
+<ul>
+<li>업무명: 같은 사내망의 DB·백엔드·프론트엔드 실제 분리 운영<ul>
+<li>진행 내용: 분리 모드의 보안 조건·검증된 TLS 연결·프록시 템플릿 준비. 실제 세 PC 이전, 대상 IP·인증서·방화벽 및 독립 실행기 적용은 미완료</li>
+<li>진행률: 미산정</li>
+</ul>
+</li>
+<li>업무명: 대한민국 공휴일 API 및 월간 달력 반영<ul>
+<li>진행 내용: 공식 API 데이터를 월 단위로 점검·수집해 달력에 반영하는 방향만 정리. API 키 설정·수집 구현·캐시·예약 실행·실제 공휴일 표시는 미구현</li>
+<li>진행률: 미산정</li>
+</ul>
+</li>
+<li>업무명: Linux HDD·NAS 외부 백업 운영 인수<ul>
+<li>진행 내용: 기존 Linux 전용 경로·서명 키 계약 유지. 실제 마운트·외부 사본 생성·복원 현장 확인은 미완료</li>
+<li>진행률: 미산정</li>
+</ul>
+</li>
+<li>업무명: 관리자 권한의 실제 운영 동작 확인<ul>
+<li>진행 내용: 공개 관리자 진입과 일반 계정 접근 제한 확인. 관리자 계정의 실제 계정 수정·백업 생성·복원은 이번 운영 검증 범위 밖</li>
+<li>진행률: 미산정</li>
+</ul>
+</li>
+<li>업무명: 새 부서 업무 요구사항 확정<ul>
+<li>진행 내용: 기존 업무 전체 제거 후 부서별 서비스 준비 안내 제공. 새 업무는 요구사항 확정 전이며 기능 재구현은 미착수</li>
+<li>진행률: 미산정</li>
+</ul>
+</li>
+</ul>
+<h2>이슈 및 확인 사항</h2>
+<ul>
+<li>오늘 주요 성과는 기존 업무 제거와 공통 기반·보안·문서 공개 구성 정비이며, 삭제된 부서 업무의 구현 완료나 운영 인수 완료로 평가 불가</li>
+<li>이전 WBS의 업무 구현 상태·진행률은 현재 제공 기능과 대조 필요. 제거된 기능과 미구현 공휴일·실제 세 PC 이전을 신규 완료로 집계 불가</li>
+<li>보안 작업 때 지시된 ERP DB 초기화와 후속 문서 배포의 DB 보존은 서로 다른 작업. 앱 시작·일반 앱 교체가 DB 초기화를 수행하는 정책 아님</li>
+<li>앞으로 DB 보존 시작 지시가 내려오면 해당 정책 전환 필요. 이번 정리로 NAS·다른 DB·서명 키·기존 백업까지 임의 초기화하는 권한 확장 없음</li>
+<li>NAS 로그인은 직접 DSM 인증을 계속 사용하며 연동 실패 시 로컬 로그인 대체 없음</li>
+<li>로그인 입력 오류의 개별 요청 필드가 확보되지 않아 원인을 특정한 코드 수정 완료로 기록 불가</li>
+<li>공개 관리자 접속 허용 이후 결과는 문서·관리자 후속 검증으로 판단. 그 이전 공개 관리자 차단 결과와 시간 순서 구분 필요</li>
+<li>과거 대화 이력은 당시 보고 내용의 정리이며 해당 과거 작업 전체를 오늘 독립 재검증한 결과 아님</li>
+<li>배포 비교 중단·자동 복구 경위는 현재 소스와 검증 문서에 기록돼 있으나, 해당 최초 시도의 전용 원시 로그는 이번 조사에서 재확보하지 않음</li>
+<li>분리 호스트 프록시 템플릿은 현재 단일 PC의 공개 관리자 연결과 구성이 달라 실제 이전 전에 관리 경로 검토 필요</li>
+<li>Linux 전용 백업 검사를 Windows에서 제외한 결과는 실제 NAS·HDD 백업 성공 또는 운영 복원 성공의 근거 아님</li>
+<li>코드 검사, 합성 화면 검사, 실제 일반 계정 로그인, 실제 관리자 변경·현장 인수의 완료 범위를 구분해 유지</li>
+</ul>
+<h2>다음 업무</h2>
+<ul>
+<li>확정된 세 PC의 주소·인증서·DB 계정·네트워크 접근 조건을 기준으로 실제 분리 실행과 연결 검증 진행</li>
+<li>분리 운영 전 공개 문서·관리자 경로, 프록시 전달 헤더와 인증 쿠키의 동일 동작 확인</li>
+<li>공휴일 API 이용 설정 후 월간 수집·저장·달력 반영 구현</li>
+<li>Linux의 실제 외부 저장 경로에서 서명 키 보존·사본 생성·복원 절차 인수</li>
+<li>별도 관리자 운영 확인 범위를 정한 뒤 실제 계정·백업 작업 검증</li>
+<li>새 부서 업무는 요구사항과 우선순위 확정 후 구현 착수</li>
+<li>WBS와 박범준 업무현황에 이번 상세 기록을 반영하면서 삭제·준비·완료·미검증 상태 구분</li>
+</ul>
+</div></details>
+<details class="record-group"><summary>기존 WBS와 현재 기능의 차이</summary><div class="record-body"><p>기존 WBS 데이터의 상태·완료일·가중치·진행률은 변경하지 않았습니다. 기존 24%와 113개 항목은 10월 2일 이전 범위의 기록이며, 현재 기능의 완료율로 사용하지 않습니다.</p><div class="record-table" role="region" aria-label="10월 6일 검증·WBS 대응 표" tabindex="0"><table>
+<thead>
+<tr>
+<th>기존 WBS 범위</th>
+<th>10월 6일 현재 반영 내용</th>
+<th>남은 확인 / 집계 방식</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2.x 생산부 · 3.x 사업부 · 4.x 기술개발부</td>
+<td>기존 업무 화면·API·로직·전용 테스트 제거; 부서별 준비 안내만 제공</td>
+<td>이전 구현은 이력으로 보존. 새 업무 요구사항 미확정·재구현 미착수; 제거를 구현 완료로 집계하지 않음</td>
+</tr>
+<tr>
+<td>1.x 기존 기반 · 5.1 공통 연계</td>
+<td>거래처·자재·재고·판매·업무 검색·알림·일정 제거. 인증·계정·부서·메모·접속·백업 유지</td>
+<td>기존 기반 18개 모두가 현재 제공되는 기능이라는 의미가 아님. 새 기능 범위 재정의 필요</td>
+</tr>
+<tr>
+<td>5.2.2 / 5.2.3 / 5.2.4 보안·세션·입력</td>
+<td>관리자 API 경계·최초 관리자 암호 정책·공통 인증 보존. 실제 NAS 일반 계정 로그인과 접근 제한 확인</td>
+<td>경영진 별도 조회 권한 미구현; 관리자 계정의 실제 변경 작업은 이번 운영 검증 범위 밖</td>
+</tr>
+<tr>
+<td>5.3.2 / 5.3.4 DB·복원</td>
+<td>신규 공통 7개 테이블·기존 DB 시작 보호·서명 v8/v9 복원 호환. 지시된 ERP DB 초기화 후 후속 앱 교체에서는 DB 보존</td>
+<td>Linux HDD/NAS 실제 마운트·사본·운영 복원 현장 인수 미완료</td>
+</tr>
+<tr>
+<td>5.4.1 회귀 · 5.5 서버·배포</td>
+<td>격리 API·합성 화면·Docker 회귀와 실제 공개 HTTPS 문서·관리자 접근 검사 구분. 설정 보존 앱 교체 확인</td>
+<td>모의 Docker는 실제 3대 이전 성공이 아님. 최초 중단·복구원시 로그는 이번 조사에서 재확보하지 않음</td>
+</tr>
+<tr>
+<td>신규 요구사항 검토</td>
+<td>홈 순수 월간 달력·로그인 후 /md·동일 DDNS /admin/ 구현·확인</td>
+<td>공휴일 API·월간 수집 미구현. 3대 PC 이전·인증서·방화벽·독립 실행기 미완료. 신규 WBS 번호·가중치·완료일 미산정</td>
+</tr>
+</tbody></table></div>
+</div></details>
+<details class="record-group"><summary>전달 기록의 근거 경로 · 운영 문서와 관리자</summary><div class="record-body"><h2>관련 파일 및 링크</h2>
+<ul>
+<li><span>현재 구현·운영 인수인계 <code>erp-docs/md/AI_HANDOFF.md</code></span></li>
+<li><span>오늘 코드·화면·SSH·공개 로그인 검증 기록 <code>erp-docs/md/VALIDATION.md</code></span></li>
+<li><span>세 PC 분리 보안 준비와 미완료 범위 <code>erp-docs/md/SPLIT_HOST_SECURITY.md</code></span></li>
+<li><span>공통 DB와 초기 관리자 정책 <code>erp-api/src/database.ts</code></span></li>
+<li><span>관리 계정·부서 API <code>erp-api/src/accounts.ts</code></span></li>
+<li><span>홈 월간 달력 <code>erp-web/apps/web/src/components/HomeCalendar.vue</code></span></li>
+<li><span>문서 생성 및 링크 안전 처리 <code>scripts/build-docs.mjs</code></span></li>
+<li><span>로그인 후 문서 제공 API <code>erp-api/src/documentation.ts</code></span></li>
+<li><span>ERP 문서 열람 화면 <code>erp-web/apps/web/src/views/DocumentationView.vue</code></span></li>
+<li><span>DDNS 문서·관리자 웹 프록시 <code>erp-web/deploy/pc/nginx.conf.template</code></span></li>
+<li><span>앱 교체와 복구 도구 <code>scripts/deploy-apps.py</code></span></li>
+<li><span>프로젝트 대화 이력 <code>erp-docs/md/HISTORY_CONVERSATIONS.md</code></span> · <span>로컬 Git 이력 <code>erp-docs/md/HISTORY_GIT.md</code></span></li>
+<li>운영 문서: <a href="https://tempchain.myds.me/md" target="_blank" rel="noopener noreferrer">https://tempchain.myds.me/md</a></li>
+<li>운영 관리자: <a href="https://tempchain.myds.me/admin/" target="_blank" rel="noopener noreferrer">https://tempchain.myds.me/admin/</a></li>
+</ul>
+</div></details>
+        </div>
       </section>
 
       <section class="panel-card update-panel" aria-labelledby="update-october-second-title">
-        <div class="panel-heading"><div><p class="eyebrow">2026.10.02 / ERP IMPLEMENTATION</p><h2 id="update-october-second-title">10월 2일 작업·검증 기록</h2></div><span class="pill">19개 상세 작업 · ERP 067ec05</span></div>
+        <div class="panel-heading"><div><p class="eyebrow">2026.10.02 / ERP IMPLEMENTATION</p><h2 id="update-october-second-title">10월 2일 이전 구현·검증 기록</h2></div><span class="pill">19개 상세 작업 · ERP 067ec05</span></div>
         <ul class="update-list">
           <li><strong>보안·코드 정리</strong><span>창 인증 키·UUID v4·Origin/복원 잠금·비밀 JSON/첨부 가림·날짜/시간대 검사, API·권한·재고/QC·계획·백업·편집/조회 모듈 분리</span></li>
           <li><strong>메뉴·달력·검색</strong><span>사이드바/공통 업무 1년 쿠키·접힘 애니메이션·모바일 포커스, 공통 연도/월 선택·자동 조회, 권한별 제목·38개 기록 검색·GIN v3·과거 기록 직접 상세</span></li>
@@ -616,7 +1025,7 @@
       </section>
 
       <section class="panel-card update-panel" aria-labelledby="update-title">
-        <div class="panel-heading"><div><p class="eyebrow">2026.10.01 / ERP IMPLEMENTATION</p><h2 id="update-title">10월 1일 반영 기록</h2></div><span class="pill">업무일지·소스·검증 기록</span></div>
+        <div class="panel-heading"><div><p class="eyebrow">2026.10.01 / ERP IMPLEMENTATION</p><h2 id="update-title">10월 1일 이전 반영 기록</h2></div><span class="pill">업무일지·소스·검증 기록</span></div>
         <ul class="update-list">
           <li><strong>생산·QC 분리</strong><span>기술개발부 지정 승인자·관리자 입고 QC 판정, 생산부 재고·실사 분리. 생산 계획·불량/재작업 내부 탭과 공통 컨테이너 선택 화면</span></li>
           <li><strong>일정·개인 업무</strong><span>부서 전체/업무별 일정·선택일 상세·공휴일·화면 정렬, 작성자 전용 메모·조건별 알림·실시간 검색 구현</span></li>
@@ -628,12 +1037,12 @@
 
       <div class="dashboard-row">
         <section class="panel-card scope-panel" aria-labelledby="scope-title">
-          <div class="panel-heading"><div><p class="eyebrow">SCOPE ARCHITECTURE</p><h2 id="scope-title">부서별 업무 구조</h2></div><span class="pill">4개 영역</span></div>
-          <p class="panel-lead">요청된 기능을 실제 처리 흐름 단위로 나눴습니다. 각 영역을 누르면 상세 WBS로 이동합니다.</p>
+          <div class="panel-heading"><div><p class="eyebrow">SCOPE ARCHITECTURE</p><h2 id="scope-title">이전 WBS 부서별 업무 구조</h2></div><span class="pill">4개 영역</span></div>
+          <p class="panel-lead">10월 2일 이전 요청 범위입니다. 해당 부서 업무는 10월 6일 제거됐으며, 각 영역에서 당시 WBS 기록을 확인할 수 있습니다.</p>
           <div id="scope-grid" class="scope-grid"></div>
         </section>
         <aside class="panel-card decision-panel" aria-labelledby="decision-title">
-          <div class="panel-heading"><div><p class="eyebrow">DECISION LOG</p><h2 id="decision-title">확정이 필요한 기준</h2></div><span class="signal-dot" aria-hidden="true"></span></div>
+          <div class="panel-heading"><div><p class="eyebrow">DECISION LOG</p><h2 id="decision-title">이전 계획의 확인 기준</h2></div><span class="signal-dot" aria-hidden="true"></span></div>
           <ol class="decision-list">
             <li><span>01</span><div><strong>현행 업무와 서식</strong><p>부서별 실제 신청·승인·수불·시험 절차 및 예외 확인</p></div></li>
             <li><span>02</span><div><strong>권한 세부 기준</strong><p>지정 승인자 외 대리 결재·기밀 자료 접근 범위 확인</p></div></li>
@@ -645,9 +1054,9 @@
       </div>
 
       <section class="panel-card flow-panel" aria-labelledby="flow-title">
-        <div class="panel-heading"><div><p class="eyebrow">CROSS-DEPARTMENT HANDOFF</p><h2 id="flow-title">부서 간 연결 흐름</h2></div><span class="section-number">01 / 03</span></div>
+        <div class="panel-heading"><div><p class="eyebrow">CROSS-DEPARTMENT HANDOFF</p><h2 id="flow-title">이전 부서 간 연결 계획</h2></div><span class="section-number">01 / 03</span></div>
         <div id="handoff-grid" class="handoff-grid"></div>
-        <p class="small-note">신청·생산·입출고의 구현 대응은 진행 중입니다. 시험 결과의 출하 판정 연계는 현업 규칙 확인 후 확정합니다.</p>
+        <p class="small-note">이 연결은 이전 업무 범위의 기록입니다. 관련 업무 코드는 10월 6일 제거했으며 새 부서 업무는 요구사항 확정 후 다시 정합니다.</p>
       </section>
 
       <section class="panel-card delivery-panel" aria-labelledby="delivery-title">
@@ -663,22 +1072,22 @@
       </section>
 
       <section class="panel-card baseline-panel" aria-labelledby="baseline-title">
-        <div class="panel-heading"><div><p class="eyebrow">VERIFIED FOUNDATION</p><h2 id="baseline-title">이미 구축된 기반</h2></div><span id="baseline-count" class="pill pill-green">18개 확인</span></div>
-        <p class="panel-lead">기존 ERP 코드·문서에서 확인된 기반입니다. 신규 업무의 운영 인수나 현재 서버 배포 완료를 뜻하지 않습니다.</p>
+        <div class="panel-heading"><div><p class="eyebrow">VERIFIED FOUNDATION</p><h2 id="baseline-title">이전에 확인한 기반</h2></div><span id="baseline-count" class="pill pill-green">18개 확인</span></div>
+        <p class="panel-lead">당시 코드·문서에서 확인한 기반 이력입니다. 거래처·재고·업무 검색 등은 10월 6일 제거했으므로 전체 목록을 현재 제공 기능으로 해석하지 않습니다.</p>
         <div id="baseline-grid" class="baseline-grid"></div>
       </section>
     </section>
 
     <section id="panel-details" class="tab-panel" role="tabpanel" aria-labelledby="tab-details" hidden>
       <div class="section-intro details-intro">
-        <div><p class="eyebrow">WORK PACKAGE REGISTER</p><h2>상세 업무 패키지</h2></div>
-        <p>업무 목표, 연결 관계, 세부 작업, 산출물과 수용 기준을 확인합니다. 부서 업무 65개와 공통·운영 18개가 진행 중입니다.</p>
+        <div><p class="eyebrow">WORK PACKAGE REGISTER</p><h2>이전 WBS 상세 업무 패키지</h2></div>
+        <p>10월 2일 이전 업무 목표·상태·수용 기준을 보존합니다. 관련 부서 업무는 10월 6일 제거됐으며 현재 기능·준비·미검증은 대시보드의 최신 기록에서 확인합니다.</p>
       </div>
-      <div class="detail-notice"><strong>상태 기준</strong><span>기존 기반 18개 완료 기반 · 부서 업무 65개 + 공통·운영 18개 진행 중 · 공통 업무 12개 예정 · 전체 진행률 <span id="detail-progress-value">24%</span> · 신규 완료 판정 없음</span></div>
+      <div class="detail-notice"><strong>이전 기록 기준</strong><span>10월 2일 당시 기반 18개 · 부서 65개 + 공통·운영 18개 진행 중 · 공통 12개 예정 · 당시 진행률 <span id="detail-progress-value">24%</span> · 신규 완료 판정 없음</span></div>
       <div class="detail-controls" aria-label="상세 업무 필터">
         <label class="search-field"><span class="sr-only">업무 검색</span><input id="search" type="search" placeholder="업무명, 설명, 연결 부서, 산출물, 수용 기준 검색" autocomplete="off"></label>
         <label class="select-field"><span>영역</span><select id="group-filter"><option value="all">전체 영역</option><option value="1">기존 기반</option><option value="2">생산부</option><option value="3">사업부</option><option value="4">기술개발부</option><option value="5">공통 기반·운영</option></select></label>
-        <label class="select-field"><span>상태</span><select id="status-filter"><option value="all">전체 상태</option><option value="done">완료 기반</option><option value="in_progress">진행 중</option><option value="planned">예정</option></select></label>
+        <label class="select-field"><span>당시 상태</span><select id="status-filter"><option value="all">전체 상태</option><option value="done">완료 기반</option><option value="in_progress">진행 중</option><option value="planned">예정</option></select></label>
         <button id="toggle-all" class="outline-button" type="button">모두 접기</button>
       </div>
       <div class="result-line"><p id="result-summary" aria-live="polite"></p><span>행을 펼쳐 세부 검증 기준 확인</span></div>
@@ -687,7 +1096,7 @@
     </section>
   </main>
 
-  <footer class="footer"><div class="shell footer-inner"><p>TempChain ERP WBS · 민감한 계정·환경값·운영 데이터는 포함하지 않습니다.</p><a href="./docs/WBS.md">WBS 산정 기준 및 문서 ↗</a></div></footer>
+  <footer class="footer"><div class="shell footer-inner"><p>TempChain ERP WBS · 민감한 계정·환경값·운영 데이터는 포함하지 않습니다.</p><a href="./docs/WBS.md">이전 WBS 산정 기준 및 문서 ↗</a></div></footer>
   <script src="./js/wbs-data.js"></script>
   <script src="./js/wbs.js"></script>
 </body>
