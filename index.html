@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TempChain ERP WBS: 10월 12일 생산부 배포·문서 개발 전용·NAS 부서별 증분 백업과 검증·남은 운영 인수 기록">
+  <meta name="description" content="TempChain ERP WBS: 10월 13일 부서별 대시보드·기술 문서·개발 관리자·부서 요구사항과 마지막 확인된 운영 배포·남은 인수 현황">
   <title>TempChain ERP | ERP WBS</title>
   <link rel="stylesheet" href="./css/wbs.css">
   <style>
@@ -49,7 +49,7 @@
           <h2 id="overall-progress-title">전체 ERP 구축</h2>
           <div class="hero-progress-value"><strong id="overall-progress-value">약 7%</strong><span>이전 사용자 추정</span></div>
           <div id="overall-progress-track" class="progress-track" role="progressbar" aria-label="전체 ERP 구축 진행률 추정" aria-valuemin="0" aria-valuemax="100" aria-valuenow="7"><span id="overall-progress-bar" style="width: 7%"></span></div>
-          <p>이전 사용자 추정치이며 10월 12일 재산정하지 않았습니다. 현재 ERP 문서의 전체 진행률은 미산정입니다.</p>
+          <p>이전 사용자 추정치이며 10월 13일 재산정하지 않았습니다. 현재 ERP 문서의 전체 진행률은 미산정입니다.</p>
         </section>
         <section id="prototype-progress" class="hero-progress" aria-labelledby="prototype-progress-title" title="20개 동일 점수 점검 중 14개 확인 완료. 진행 중·예정은 0점">
           <h2 id="prototype-progress-title">프로토타입 준비</h2>
@@ -75,6 +75,71 @@
         <article class="metric-card"><span class="metric-label">진행 중</span><strong id="progress-count">4</strong><small>실제 적용·운영 인수 남음</small><i aria-hidden="true">03</i></article>
         <article class="metric-card"><span class="metric-label">예정</span><strong id="planned-count">2</strong><small>독립 실행기·공휴일 동기화</small><i aria-hidden="true">04</i></article>
       </section>
+
+      <!-- october-thirteenth-record:start -->
+      <section id="update-october-thirteenth" class="panel-card update-panel" aria-labelledby="update-october-thirteenth-title">
+        <div class="panel-heading"><div><p class="eyebrow">2026.10.13 / CURRENT STATUS</p><h2 id="update-october-thirteenth-title">현재 ERP 상태 · 10월 13일 작업 반영</h2></div><span class="pill">소스·개발 검증·운영 근거 구분</span></div>
+        <ul class="update-list">
+          <li><strong>최신 개발 소스</strong><span>부서별 대시보드 분리·생산부 현황, 기술 소개 6탭·발표형 구조도 6장, NAS와 독립된 개발 테스트 관리자 도구 반영. 최신 커밋 ea21f4e, 로컬 원격 추적 ref의 푸시 기록 확인</span></li>
+          <li><strong>부서 요청 수집</strong><span>사업팀 해외구매 20단계·문서/단가 비교와 생산(물류)팀 제품·데이터로거 1:1 매칭 요청을 PDF에서 정리. 요구사항 문서화 단계이며 새 업무 화면·API·DB 구현은 미착수</span></li>
+          <li><strong>마지막 운영 근거</strong><span>10월 12일 20261012-backup-cleanup-r1의 생산부 기능·변경 후 부서 백업 배포와 앱 healthy 확인 기록. NAS 상태 카드 후속 단순화 및 10월 13일 화면 변경의 운영 반영은 미확인</span></li>
+          <li><strong>개발 검증</strong><span>전체 빌드·타입 검사와 웹·문서·개발 관리자·격리 인증 회귀 통과 기록. 모의 문서/부서 화면의 오류 0, 이미 실행 중인 개발 웹·관리자의 실제 HTTP 로그인·권한 조회·로그아웃 확인</span></li>
+          <li><strong>현재 제공 범위</strong><span>공통 인증·계정·부서·메모·백업과 생산부 자재·제품 구성·재고/생산·완제품 출고 유지. 업무 DB는 공통 7개·생산부 6개 총 13개 테이블. 사업부·기술개발부 업무 기능은 준비 상태</span></li>
+          <li><strong>남은 확인</strong><span>실제 생산·출고 저장과 실물 대사, 운영 관리자 변경·DB 복원·빈 내부 저장소로 NAS 복구·HDD 전환·현업 인수, 세 PC 이전·공휴일 API 및 새 요청의 상세 기준 확정</span></li>
+        </ul>
+        <div class="october-record">
+          <details class="record-group"><summary>오늘 소스에 반영한 화면·문서·개발 보호</summary><div class="record-body">
+            <h3>부서별 대시보드와 개인 자료 보호</h3>
+            <ul>
+              <li>공통 홈을 부서별 <code>/departments/:id</code> 화면으로 분리하고 선택 부서의 이름·URL을 사용. 루트 진입은 선택/활성 소속 부서로 이동하며 유효한 부서가 없으면 중립 선택 안내 제공</li>
+              <li>생산부에서만 실제 활성 생산부 소속 또는 관리자 권한에 따라 자재·재고 현황과 자재관리·제품구성·재고/생산 진입 제공. 다른 부서는 서비스 준비 안내 유지</li>
+              <li>각 부서에서 개인 달력·본인 메모 제공. 부서 선택으로 소속·권한을 부여하지 않으며 이전 부서의 늦은 응답 폐기, 계정 전환 시 선택·개인 자료 초기화</li>
+              <li>동시 부서 조회 공유·현황 중복 시작 방지, 비활성·미등록 부서 경로 보정, 모바일 제목을 별도 행에 배치하여 잘림 보완</li>
+            </ul>
+            <h3>개발 기술 문서 개편</h3>
+            <ul>
+              <li>기술 개요·작동 흐름·시스템 구조·사용 기술·서버 구성·상세 문서의 6탭 구성. 개요·요청/응답·앱 구조·인증/보호·기술 계층·서버 비교의 발표형 구조도 6장 제공</li>
+              <li>구조도 아래 핵심 기술 참고 3개와 상세 원문 링크 제공. 전체 Markdown 본문은 검색·상세 문서에서 유지하며 부서 요청 원문·허용 목록·본문 정화·키보드·오프라인 열람 보존</li>
+              <li>현재 단일 서버와 향후 세 PC 분리 계획, 현재 내부 HTTP와 향후 인증서 검증 HTTPS/TLS를 구분. NAS/로컬 인증이 공통 세션으로 합류하는 흐름 설명</li>
+              <li>공통 문서 13개와 부서 요청 2개를 허용 목록으로 생성. 문서 15개·오프라인 목록 포함 HTML 16개이며 PDF·일지·미등록 파일은 생성 대상에서 제외</li>
+              <li>운영 문서는 Docker 컨텍스트·이미지·메뉴·번들에서 제외하는 정책 유지. 운영 <code>/md</code>·<code>/api/documentation</code>·<code>/api/docs</code>의 익명/인증 404는 10월 12일 배포 기록 기준</li>
+            </ul>
+            <h3>개발 테스트 관리자와 실행 절차</h3>
+            <ul>
+              <li>NAS와 독립된 로컬 개발 관리자 생성·검증 도구 추가. 고정 로컬 Docker·DB 표식·스키마 v9·아이디 충돌을 확인하고 생성 트랜잭션 전후 기존 계정·부서를 비교</li>
+              <li>개발 DB에 테스트 관리자 1개 생성 및 비공개 자격 파일의 독점 저장·해시 일치 확인 기록. 기존 암호 재설정·DB 이관/초기화·NAS 계정/설정·기존 세션·백업 변경 없음</li>
+              <li>개발 웹 5174·관리자 5175에서 실제 HTTP 로그인·세션/관리자 조회 권한·로그아웃 후 401 확인. 브라우저 로그인 화면 조작·공개 NAS 로그인·운영 관리자 인수와 구분</li>
+              <li>루트 README에 Windows 11·Conda scott·Node.js 24 이상, 개발/배포 대상 분리·실행 순서·NAS 인증·백업 보존·문서 개발 전용·장애 확인 절차 정리</li>
+            </ul>
+          </div></details>
+          <details class="record-group"><summary>사업팀·생산(물류)팀 요청과 구현 전 확인</summary><div class="record-body">
+            <div class="record-table" role="region" aria-label="10월 13일 부서별 요구사항과 미확정 조건" tabindex="0"><table><thead><tr><th>요청 영역</th><th>문서에 정리한 내용</th><th>미확정·미구현 범위</th></tr></thead><tbody>
+              <tr><td>사업팀 해외구매</td><td>발주 요청부터 추후 송금까지 20단계, 오더별 기준 데이터 비교·경고, 두께별 VIP 헤베단가와 이전 발주 가격 비교</td><td>업무 요구 수집 단계. 구체적인 비교 필드·변경 승인·경고 후 저장 허용 정책 미확정, 새 업무 API/DB 미구현</td></tr>
+              <tr><td>사업팀 문서 출력</td><td>구매결의서·영문 발주서·검수의뢰서의 입력 항목과 Excel 내려받기 요청</td><td>참고 Excel 미제공, 결재 금액의 단위/통화·지급일 기준·검수 문서 관계 확인 필요. 금융·회계 모듈 범위 확정으로 확대하지 않음</td></tr>
+              <tr><td>제품·데이터로거</td><td>제품 코드로 시리얼 조회, 제품/로거 1:1 매칭, 특정 담당자 변경·저장 권한, 자동 변경 이력·추적</td><td>시리얼 형식·유일성·최초 이관/재매칭·담당자·이력 보존 기준 미확정. 기존 자재·BOM·출고와 별도 추가 요청이며 화면/API/DB/권한 구현 미착수</td></tr>
+            </tbody></table></div>
+            <p>제공된 PDF 원본 2개를 보존하고 사업팀·생산팀 하위 폴더의 Markdown으로 정리한 결과. 과거에 제거한 구매·로거 기능의 구현 이력을 현재 서비스 완료 근거로 재사용하지 않으며, 미제공 자료·업무 규칙을 추측해 확정하지 않음.</p>
+          </div></details>
+          <details class="record-group"><summary>개발 검증·Git 기록과 운영 반영의 차이</summary><div class="record-body">
+            <div class="record-table" role="region" aria-label="10월 13일 검증 수준과 운영 상태" tabindex="0"><table><thead><tr><th>근거</th><th>확인 결과</th><th>해석 범위</th></tr></thead><tbody>
+              <tr><td>빌드·회귀 기록</td><td>전체 빌드·타입 검사, 웹 69개·개발 관리자 도구 17개·격리 인증 7개·문서 12개 통과</td><td>저장된 개발 검증 기록. 전체 운영 API 회귀·현업 인수의 새 실행 결과로 확대하지 않음</td></tr>
+              <tr><td>모의 화면 결과</td><td>저장 JSON 기준 문서 214개·부서 대시보드 37개 확인, JavaScript 오류 각각 0. 문서 1894/1440/390/320px, 부서 390/320px 표시 확인</td><td>합성 HTTP 결과이며 실제 NAS 로그인·운영 배포 확인 아님. 검증 문서의 문서 186개와 최종 JSON 214개 차이 확인, 별도 실행 합산 제외. 커밋 이후 재검증 기록은 아님</td></tr>
+              <tr><td>개발 HTTP 인증</td><td>이미 실행 중인 로컬 웹/관리자 프록시에서 개발 관리자 로그인·조회·로그아웃, 기존 계정/부서 보존 확인</td><td>개발 계정의 실제 HTTP 범위. 외부 접속 변경·서비스 시작/중지·운영 데이터 변경의 근거가 아님</td></tr>
+              <tr><td>10월 13일 Git</td><td><code>6d80574</code> 부서 요청/문서, <code>962efae</code> 개발·배포 안내, <code>ea21f4e</code> 화면/기술 문서/개발 관리자. 로컬 <code>origin/master</code>와 HEAD 일치·각 푸시 reflog 확인</td><td>로컬 Git 기록 기준이며 원격 신규 조회는 미실시. 작업 당시 문서의 커밋/푸시 미실시 표현은 이후 커밋 이력과 시점을 구분</td></tr>
+              <tr><td>마지막 운영 배포</td><td><code>20261012-backup-cleanup-r1</code> 앱 healthy·공개 HTTPS/NAS 조회·기존 자료/백업 파일 보존 기록</td><td><code>a5b4eed</code> NAS 카드 단순화와 10월 13일 소스의 운영 배포 증거 미확보. 이번 WBS 갱신은 운영 상태를 새로 검사한 결과가 아님</td></tr>
+            </tbody></table></div>
+            <p>기존 기반 준비 20개 중 확인 완료 14개·진행 중 4개·예정 2개와 70% 유지. 전체 ERP 약 7%는 이전 사용자 추정, ERP 문서의 전체 진행률은 미산정. 새 요청 문서·개발 검사·Git 푸시를 운영 수용 완료나 새 진행률로 환산하지 않음.</p>
+          </div></details>
+          <details class="record-group"><summary>근거 경로와 다음 확인</summary><div class="record-body"><ul>
+            <li>현재 계약·검증 · <code>erp-docs/md/AI_HANDOFF.md</code> · <code>PROJECT_STATUS.md</code> · <code>VALIDATION.md</code> · <code>UI_GUIDE.md</code> · <code>ERP_OVERVIEW.md</code></li>
+            <li>요청 원문 정리 · <code>erp-docs/부서별_업무/사업팀/사업팀_업무요구사항.md</code> · <code>erp-docs/부서별_업무/생산팀/생산물류팀_업무요구사항.md</code></li>
+            <li>화면·개발 도구 · <code>erp-web/apps/web/src/components/ProductionDashboard.vue</code> · <code>DocumentationPresentation.vue</code> · <code>erp-web/apps/web/src/department-dashboard.ts</code> · <code>scripts/create-dev-test-admin.mjs</code></li>
+            <li>모의 검증 결과 · <code>erp-web/.dev-data/documentation-portal/result.json</code> · <code>erp-web/.dev-data/department-dashboards/result.json</code> · 부서 요청/README 검증 결과</li>
+            <li>다음 확인 · 신규 화면의 운영 반영 여부, 소모량·실물 재고·생산/출고 인수, 운영 관리자·복원/HDD 전환, 부서 요청의 서식·비교/결재·매칭/권한·이력 기준 확정</li>
+          </ul><p>이번 반영은 ERP Git 패치·현재 문서·저장된 검증 결과를 대조한 WBS 갱신. ERP 파일·서비스·DB·계정 변경과 WBS 커밋·푸시·배포는 수행하지 않음.</p></div></details>
+        </div>
+      </section>
+      <!-- october-thirteenth-record:end -->
 
       <!-- october-twelfth-record:start -->
       <section id="update-october-twelfth" class="panel-card update-panel" aria-labelledby="update-october-twelfth-title">
@@ -1242,8 +1307,8 @@
         <aside class="panel-card decision-panel" aria-labelledby="decision-title">
           <div class="panel-heading"><div><p class="eyebrow">DECISION LOG</p><h2 id="decision-title">남은 운영 확인</h2></div><span class="signal-dot" aria-hidden="true"></span></div>
           <ol class="decision-list">
-            <li><span>01</span><div><strong>외부 백업·복원</strong><p>NAS 실제 저장 확인·HDD 전환과 운영 복원 인수 남음</p></div></li>
-            <li><span>02</span><div><strong>관리자 실제 작업</strong><p>관리자 계정의 변경·백업·복원 확인</p></div></li>
+            <li><span>01</span><div><strong>외부 백업·복원</strong><p>NAS 저장 확인 기록 확보, 빈 내부 저장소 복구·HDD 전환·운영 복원 인수 남음</p></div></li>
+            <li><span>02</span><div><strong>관리자 실제 작업</strong><p>개발 HTTP 로그인·조회 확인, 운영 계정 변경·백업·복원 인수 남음</p></div></li>
             <li><span>03</span><div><strong>세 PC 분리 운영</strong><p>독립 실행기·인증서·방화벽·DB 이전</p></div></li>
             <li><span>04</span><div><strong>공휴일 동기화</strong><p>공식 API 수집·캐시·월간 갱신</p></div></li>
           </ol>

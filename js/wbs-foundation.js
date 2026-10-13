@@ -1,7 +1,8 @@
 (() => {
   "use strict";
 
-  // 2026-10-06 전달 업무일지의 서비스 시작 전 점검 목록.
+  // 2026-10-06 전달 업무일지의 서비스 시작 전 점검 기준선.
+  // 2026-10-13 ERP Git·현재 문서·저장 결과로 설명과 근거 갱신, 상태·배점 유지.
   // 각 점검은 1점이며 명시한 수용 기준 확인 완료만 점수를 준다.
   // 코드·격리 검증과 실제 운영 인수는 별도 점검으로 유지한다.
   const source = "2026-10-06 전달 업무일지";
@@ -73,17 +74,79 @@
     delete group.rows;
   });
   const tasks = groups.flatMap(group => group.streams.flatMap(stream => stream.tasks));
+  const currentEvidence = {
+    "1.1.1": {
+      evidence: "2026-10-12 마지막 운영 배포 기록: 실제 NAS 일반 계정의 공개 HTTPS 로그인·세션·로그아웃 확인. 10월 13일 개발 로컬 관리자 HTTP 검사는 별도 근거"
+    },
+    "1.1.2": {
+      evidence: "2026-10-13 ea21f4e·VALIDATION.md: 개발 관리자 생성 전후 기존 계정/부서 보존과 격리 인증 확인 기록. 운영 관리자 실제 변경 인수는 3.1.5에 남음"
+    },
+    "1.1.3": {
+      title: "공통 7개·업무 6개 DB 구조",
+      description: "공통 7개 보존 및 생산부 업무 6개 추가, ERP 표식·스키마 v9 유지",
+      deliverables: "공통 7개와 생산부 자재·구성·재고/생산/출고 6개 테이블",
+      acceptance: "신규 DB 표식·버전 보호와 실제 배포의 공통 자료 보존·업무 테이블 추가 확인",
+      evidence: "2026-10-12 production-r1: 공통 7개 보존·신규 업무 6개 빈 상태 추가로 총 13개 확인. 10월 13일 요구 수집으로 추가 업무 스키마를 만든 것은 아님"
+    },
+    "1.1.5": {
+      title: "부서별 달력·개인 메모",
+      description: "선택 부서별 대시보드·개인 달력·본인 메모와 계정/응답 보호",
+      deliverables: "부서별 /departments/:id·생산부 현황·개인 달력/메모",
+      acceptance: "합성 화면에서 날짜·개인 자료·부서/계정 전환·권한 분리·모바일·지연 응답 확인",
+      evidence: "2026-10-13 ea21f4e·부서 화면 JSON: 모의 37개·오류 0. 생산부만 실제 권한으로 현황 조회, 다른 부서는 준비 안내. 개발 소스이며 운영 반영 미확인; 공휴일은 4.1.5"
+    },
+    "2.1.1": {
+      evidence: "2026-10-06 초기 암호 격리 회귀 기록 보존. 2026-10-13 개발 관리자 도구는 고정 로컬 DB·표식/v9·충돌/재실행 보호, 기존 암호/계정 보존 검사 기록; 운영 계정 변경과 별도"
+    },
+    "2.1.4": {
+      title: "개발 문서·운영 제외 경계",
+      description: "개발 로그인·허용 목록·본문 정화 유지, 운영 문서 파일/메뉴/라우트 제외",
+      deliverables: "개발 문서 15개·발표형 구조도, 운영 문서 제외 설정",
+      acceptance: "개발 문서 인증·정화·경로 보호와 운영 /md·문서 API의 익명/인증 404 확인",
+      evidence: "2026-10-12 nodocs-r2 이후 운영 문서 제외 배포 확인. 2026-10-13 개발 문서 테스트 12개 통과 기록·모의 JSON 214개/오류 0, 구조도 6장. 새 개발 화면의 운영 배포와 구분"
+    },
+    "3.1.1": {
+      description: "전체 DB 서명 v8/v9와 부서 기준본/증분·선택 복원, 안전 백업·잠금·롤백",
+      deliverables: "전체 DB·부서 체인 검증 및 복원 회귀",
+      evidence: "2026-10-12 전체 DB/부서 체인·성공 업무 변경 후 백업·격리 복원 연결 확인. 공통 계정/메모/세션 보존하는 부서 복원과 전체 DB 세션 폐기 구분; 운영 복원은 3.1.4"
+    },
+    "3.1.2": {
+      evidence: "2026-10-12 backup-cleanup-r1: 계정 24·부서 4·총 13테이블, 공통/업무 자료·NAS 신원·DB/점검 실행·설정·키와 기존 백업 파일 632개 보존 대조 기록"
+    },
+    "3.1.3": {
+      description: "NAS 실제 마운트·파일/서명 일치 확인, HDD 원본 전환 인수 남음",
+      evidence: "2026-10-12 Linux NAS 마운트·쓰기/읽기·내부/NAS 기준본과 전체 DB 사본 일치 확인. HDD 원본 전환 미실시로 진행 중 유지; NAS 확인을 HDD까지 완료한 것으로 확대하지 않음"
+    },
+    "3.1.4": {
+      evidence: "2026-10-12 격리 DB 복원 및 같은 내부 체인의 NAS 가져오기 imported=0/databaseChanged=false 확인. 빈 내부 저장소 신규 복구·운영 DB 복원·실패 복구 인수는 미검증"
+    },
+    "3.1.5": {
+      evidence: "2026-10-12 운영 백업 이력/빈 폼 읽기와 10월 13일 개발 관리자 실제 HTTP 로그인·관리자 조회·로그아웃 확인 기록. 운영 관리자 계정 변경·백업/복원 전체 인수는 미완료"
+    },
+    "4.1.1": {
+      description: "API·웹·관리자 빌드와 영향 범위의 격리·모의 화면 회귀",
+      acceptance: "변경 범위에 맞는 빌드·타입·회귀 검사와 제외·한계를 분리한 결과 확인",
+      evidence: "2026-10-13 ERP 검증 문서: 전체 빌드/타입·웹 69·개발 관리자 17·격리 인증 7·문서 12 통과 기록. 저장 모의 JSON 문서 214·부서 37/오류 0. 당일 전체 운영 API 회귀 재실행 근거는 아님"
+    },
+    "4.1.2": {
+      title: "마지막 운영 배포·일반 계정 확인",
+      description: "10월 12일 단일 호스트 앱 healthy·공개 HTTPS·NAS 인증·권한 경계",
+      acceptance: "당시 API·웹·관리자 healthy와 실제 NAS 일반 계정 접속·조회 경계 확인",
+      evidence: "2026-10-12 backup-cleanup-r1: 공개 HTTPS 341·NAS 상태 29·화면 117/오류 0 기록. 이후 NAS 카드 단순화 a5b4eed와 10월 13일 소스의 운영 배포 미확인; 이번 갱신의 새 운영 검사 아님"
+    }
+  };
+  tasks.forEach(task => Object.assign(task, currentEvidence[task.id] || {}));
   function calculateProgress(items) {
     return items.length ? Math.round(100 * items.filter(task => task.status === "done").length / items.length) : 0;
   }
   window.WBS_DATA = {
-    updateDate: "2026-10-06", progressBasis: "프로토타입 단계까지의 기반 준비",
+    updateDate: "2026-10-13", progressBasis: "프로토타입 단계까지의 기반 준비",
     overallProgress: { estimate: 7, basis: "준비한 기본 기능과 앞으로 구현할 서비스 전체", source: "2026-10-06 사용자 추정" },
     calculateProgress, currentProgress: calculateProgress(tasks), groups, tasks,
     completed: tasks.filter(task => task.status === "done"),
     handoffs: [
       { from: "공통 기능", to: "보안 경계", title: "인증·DB → 접근 보호", detail: "NAS 신원과 공통 저장 구조 위에 역할·문서·TLS 정책 검증" },
-      { from: "백업 코드", to: "운영 인수", title: "격리 검사 → 실제 복구", detail: "서명·롤백 코드 검사 후 Linux HDD/NAS 저장과 복원 확인" },
+      { from: "백업 코드", to: "운영 인수", title: "NAS 저장 → 실제 복구", detail: "NAS 실제 저장 확인 기록에 이어 HDD 전환·빈 내부 저장소 복구·운영 복원 인수" },
       { from: "현재 배포", to: "분리 운영", title: "접속 확인 → 세 PC 준비", detail: "현재 단일 호스트 검증에 이어 독립 실행기·인증서·방화벽·이전 확인" }
     ]
   };

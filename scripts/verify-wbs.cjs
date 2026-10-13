@@ -21,7 +21,7 @@ assert.equal(historical.tasks.length, 113);
 assert.equal(historical.currentProgress, 24);
 require(path.join(root, "js/wbs-foundation.js"));
 const data = window.WBS_DATA;
-assert.equal(data.updateDate, "2026-10-06");
+assert.equal(data.updateDate, "2026-10-13");
 assert.equal(data.progressBasis, "프로토타입 단계까지의 기반 준비");
 assert.equal(data.overallProgress.estimate, 7);
 assert.match(data.overallProgress.source, /사용자 추정/);
