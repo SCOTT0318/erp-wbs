@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TempChain ERP WBS: 10월 7일 자재·제품 구성·재고·생산·완제품 출고 구현, 격리·모의 검사와 운영 미실시 기록">
+  <meta name="description" content="TempChain ERP WBS: 10월 12일 생산부 배포·문서 개발 전용·NAS 부서별 증분 백업과 검증·남은 운영 인수 기록">
   <title>TempChain ERP | ERP WBS</title>
   <link rel="stylesheet" href="./css/wbs.css">
   <style>
@@ -47,9 +47,9 @@
       <div class="hero-progress-group" aria-label="전체 ERP와 프로토타입 준비 진행률">
         <section class="hero-progress" aria-labelledby="overall-progress-title">
           <h2 id="overall-progress-title">전체 ERP 구축</h2>
-          <div class="hero-progress-value"><strong id="overall-progress-value">약 7%</strong><span>현재 추정</span></div>
+          <div class="hero-progress-value"><strong id="overall-progress-value">약 7%</strong><span>이전 사용자 추정</span></div>
           <div id="overall-progress-track" class="progress-track" role="progressbar" aria-label="전체 ERP 구축 진행률 추정" aria-valuemin="0" aria-valuemax="100" aria-valuenow="7"><span id="overall-progress-bar" style="width: 7%"></span></div>
-          <p>준비한 기본 기능과 앞으로 구현할 서비스 전체를 기준으로 한 현재 추정치입니다.</p>
+          <p>이전 사용자 추정치이며 10월 12일 재산정하지 않았습니다. 현재 ERP 문서의 전체 진행률은 미산정입니다.</p>
         </section>
         <section id="prototype-progress" class="hero-progress" aria-labelledby="prototype-progress-title" title="20개 동일 점수 점검 중 14개 확인 완료. 진행 중·예정은 0점">
           <h2 id="prototype-progress-title">프로토타입 준비</h2>
@@ -75,6 +75,114 @@
         <article class="metric-card"><span class="metric-label">진행 중</span><strong id="progress-count">4</strong><small>실제 적용·운영 인수 남음</small><i aria-hidden="true">03</i></article>
         <article class="metric-card"><span class="metric-label">예정</span><strong id="planned-count">2</strong><small>독립 실행기·공휴일 동기화</small><i aria-hidden="true">04</i></article>
       </section>
+
+      <!-- october-twelfth-record:start -->
+      <section id="update-october-twelfth" class="panel-card update-panel" aria-labelledby="update-october-twelfth-title">
+        <div class="panel-heading"><div><p class="eyebrow">2026.10.12 / DEPLOYMENT &amp; BACKUP</p><h2 id="update-october-twelfth-title">10월 12일 배포·백업 작업 기록</h2></div><span class="pill">박범준 · 구현·배포·검증 구분</span></div>
+        <ul class="update-list">
+          <li><strong>생산부 서버 반영</strong><span>10월 7일 확정한 자재·제품 구성·재고/생산·완제품 출고 기능의 API·웹·관리자 배포와 healthy 확인. 공통 7개와 신규 업무 6개로 총 13개 테이블, 기존 계정·부서·키·DB·점검 실행 보존</span></li>
+          <li><strong>문서 개발 전용</strong><span>후속 지시로 ERP 문서를 Docker 컨텍스트·이미지·운영 메뉴·본문 번들에서 제외. /md·문서 API는 익명·인증 모두 404, 개발 Markdown·HTML과 설명 화면 유지</span></li>
+          <li><strong>NAS·부서 백업</strong><span>Linux NAS 공유 마운트·쓰기/읽기·영구 등록 확인, 생산부 기준본과 서명된 증분 체인·선택 시점 복원 구현. 계정·권한·메모·세션을 유지하는 부서별 복원과 전체 DB 복원 구분</span></li>
+          <li><strong>변경 후 자동 백업</strong><span>당일 최초 10분 주기를 성공한 자재·구성·재고/생산/출고 커밋 후 실행으로 전환·배포. 조회·공통 정보 변경·롤백·동일 요청 재실행 제외, 동시 변경 병합·재시작 보완·NAS 재시도 포함</span></li>
+          <li><strong>정리·화면 후속</strong><span>백업 worker·부서 정의·관리자 이력/복원 상태 처리 정리 후 재배포. NAS 연결 상태를 연결됨/미연결로 단순화한 최신 소스는 별도 기록하며 해당 변경의 운영 반영 증거 미확보</span></li>
+          <li><strong>확인·남은 인수</strong><span>최신 정리 배포에서 API 152개·웹 62개, 공개 HTTPS 341개·NAS 상태 29개·화면 117개 확인 통과. 운영 업무 저장·운영 DB 복원·빈 내부 저장소로 NAS 복구·현업 인수는 미검증</span></li>
+        </ul>
+        <div class="october-record">
+          <details class="record-group"><summary>8개 통합 작업 상세</summary><div class="record-body">
+            <details class="record-task"><summary>1. 확정 생산부 기능의 운영 서버 반영</summary><div class="record-body"><ul>
+              <li>자재 CRUD·검색·필터, 기초자재·내함·외함·완제품 구분, 제품 구성(BOM), 재고 입력·생산 자동차감·완제품 출고의 최종 소스 배포</li>
+              <li>API → 관리자 → 웹 순서로 교체하고 세 앱 healthy 확인. 실제 운영 DB는 공통 7개 테이블과 신규 업무 6개 테이블의 총 13개 집합 확인</li>
+              <li>신규 업무 테이블은 빈 상태로 추가하고 예시 품목·구성·재고 자동 생성 제외. 기존 계정 24개·부서 4개·개인메모 0개, 안정 계정 필드·NAS 신원·스키마 v9·서명 키 보존 대조</li>
+              <li>DB·점검 컨테이너 ID·시작 시각·설정 유지. 운영 DB 초기화·DB 재시작·점검 목적지 전환 없이 앱만 반영</li>
+              <li>지정 NAS 일반 계정의 실제 공개 HTTPS 로그인과 업무 조회 권한 경계 확인. 실제 자재 저장·생산·출고 쓰기 및 현업 인수는 미검증</li>
+            </ul></div></details>
+            <details class="record-task"><summary>2. ERP 문서의 개발 전용 정책 적용</summary><div class="record-body"><ul>
+              <li>당일 최초 생산부 배포의 문서 포함 결과를 과거 기록으로 구분하고, 후속 지시로 운영 문서 제공 제거</li>
+              <li>Docker 문서 생성·복사 단계와 빌드 컨텍스트의 erp-docs 제외, 운영 웹의 문서 메뉴·본문 번들 제거</li>
+              <li>Docker 웹 빌드의 문서 설정 false와 운영 API의 문서 라우트 미등록 적용. /md·/api/documentation·/api/docs는 인증 여부와 무관하게 404 유지</li>
+              <li>개발 Markdown 원본·생성 HTML·로그인 후 문서 화면 유지. 개발 설명·검증·인수인계 정리가 운영 이미지에 문서를 다시 포함하는 작업은 아님</li>
+              <li>공개 HTTPS에서 일반 로그인·달력·내 정보·모바일·권한·쿠키·로그아웃과 문서 메뉴/번들 부재·문서 404 확인</li>
+            </ul></div></details>
+            <details class="record-task"><summary>3. Linux NAS 저장소 연결과 첫 백업 보존 확인</summary><div class="record-body"><ul>
+              <li>마스터의 root 실행으로 Linux 서버의 지정 NAS 공유 CIFS 마운트, SMB 3.1.1 암호화, UID 1000 임시 파일 생성·fsync·읽기·삭제와 fstab 등록 완료 확인</li>
+              <li>호스트 마운트 준비와 API의 NAS 연결 설정·앱 배포를 별도 단계로 수행. 기존 내부 백업 볼륨·서명 키 유지, HDD 원본 전환은 미실시</li>
+              <li>최초 부서 백업 배포에서 NAS 연결·자동 실행·당시 10분 설정, 생산부 첫 기준본 내부 1개·NAS 저장 1개 확인</li>
+              <li>내부·NAS 기준본의 실제 파일 바이트·키·HMAC·SHA·체인 일치 확인. 후속 변경 발생 백업 배포에서 전체 DB 백업 1개를 실제 생성하고 NAS 사본의 서명·덤프 SHA·바이트 일치 확인</li>
+              <li>NAS 파일 자동 삭제는 수행하지 않으며 기존 백업·환경·키·DB·점검 실행과 자료 보존</li>
+            </ul></div></details>
+            <details class="record-task"><summary>4. 부서별 기준본·증분 체인·선택 시점 복원 구축</summary><div class="record-body"><ul>
+              <li>생산부 자재·제품 구성·재고/생산/출고의 업무 6개 테이블을 부서별 범위로 등록. 사업부·기술개발부는 업무 테이블이 없어 업무자료 없음 표시·복원 차단</li>
+              <li>기준본과 이후 추가·수정·삭제 증분으로 시점 구성. 부서·테이블 범위·참조 계정 신원·HMAC·이전 파일 SHA·연속 체인을 함께 검사하고 중간 파일 누락·변조는 거부</li>
+              <li>복원 전 안전 기준본과 DB 유지보수 잠금, 선택 업무 테이블만 단일 트랜잭션으로 복원. 공통 계정·부서·권한·NAS 신원·개인메모·로그인 세션 유지, 공통 감사에 복원 기록 추가</li>
+              <li>재고·자재·구성 버전을 올려 복원 전 화면의 오래된 요청 차단, ID 시퀀스 하향 방지. 미지의 외부 참조는 CASCADE 삭제 없이 거부</li>
+              <li>기존 전체 DB 서명 v8/v9 복원과 부서별 복원 분리. 전체 DB 복원의 세션 폐기 계약 유지</li>
+              <li>NAS 체인 가져오기 CLI로 이미 같은 내부 체인이 있는 경우 imported=0·databaseChanged=false 확인. 빈 내부 저장소의 신규 가져오기와 실제 운영 DB 복원 인수는 미검증</li>
+            </ul></div></details>
+            <details class="record-task"><summary>5. 10분 주기에서 성공한 업무 변경 후 자동 백업으로 전환</summary><div class="record-body"><ul>
+              <li>당일 최초 10분 방식의 결과를 보존하고 최신 요청에 따라 자재·구성·재고/생산/출고의 성공 COMMIT 후 해당 부서 백업 실행으로 전환·운영 반영</li>
+              <li>조회·공통 계정/권한/메모 변경·롤백·동일 요청 재실행은 알림 대상에서 제외. trigger=change·intervalMinutes=null, 자동 활성 여부 automatic 유지</li>
+              <li>누적 변경을 직렬 실행기로 처리하며 동시 변경은 한 증분·복원 시점에 합쳐질 수 있음. 모든 업무 작업의 중간 상태를 각각 복원하는 보장과 구분</li>
+              <li>재시작 때 현재 DB 마지막 상태와 미전송 체인 보완, 변경이 없으면 새 파일 생성 제외. 기준본 이후 24시간이 지나면 다음 업무 변경에서 새 기준본 생성</li>
+              <li>NAS 장애 시 내부 백업 성공을 보존하고 2~30초 재시도. 기존 전체 DB 시간별 백업과 기존 키·서명·스키마 v9·13개 테이블 유지</li>
+              <li>실제 업무 API 저장 → 서명된 증분 생성 → 복원·재시도 연결은 격리 DB에서 확인. 운영에서는 업무자료를 변경하거나 DB를 복원하지 않음</li>
+            </ul></div></details>
+            <details class="record-task"><summary>6. 백업 코드·관리자 상태 처리 정리와 재배포</summary><div class="record-body"><ul>
+              <li>변경 알림·직렬 실행·NAS 재시도·시작 보완·종료 대기를 department-backup-worker.ts로 분리하고 부서 정의 중복 정리</li>
+              <li>관리자 백업 화면의 이력 선택·조회·응답 타입·작업 상태·복원 폼 초기화 정리, 기존 자동 백업·서명·부서 복원 범위 유지</li>
+              <li>정리한 API·웹·관리자 재배포와 healthy 확인. 공통/업무 자료·설정·NAS 신원·DB/점검 실행 상태 보존 대조</li>
+              <li>기존 내부·NAS 백업 파일 632개와 서명 키의 바이트 해시 일치 확인. 이번 정리 배포의 운영 검증은 이력 조회·빈 복원 폼 열기/취소와 읽기만 수행</li>
+            </ul></div></details>
+            <details class="record-task"><summary>7. NAS 연결 상태 화면 단순화 후속 소스</summary><div class="record-body"><ul>
+              <li>커밋 a5b4eed에서 관리자 NAS DB 백업의 상태를 연결됨/미연결로 단순화하고 NAS 주소 표시 유지</li>
+              <li>중복 설명·마지막 연결 확인 시각·운영체제 안내·상세 오류 문구를 해당 카드에서 제거하고 모의 화면 검증 기대값 조정</li>
+              <li>백업 엔진·서명·파일·자동 실행·부서 복원 동작 변경은 해당 커밋 범위에 없음. 이 소스 변경의 운영 배포와 실제 공개 화면 재확인 증거는 미확보</li>
+            </ul></div></details>
+            <details class="record-task"><summary>8. 오늘 기록과 현재 안내의 근거 정리</summary><div class="record-body"><ul>
+              <li>생산부 최초 배포 → 문서 제외 → NAS·부서별 10분 백업 → 변경 후 백업 → 코드 정리 배포 → NAS 상태 후속 소스를 날짜와 단계로 구분</li>
+              <li>오늘 정리 요청에 따라 ERP 문서·박범준 일일업무와 WBS 메인 HTML에 실제 작업 내용 반영. 과거 문서 포함·10분 방식·미배포 기록은 당시 근거로 보존</li>
+              <li>검사 수치는 단계별 결과이며 반복 검사 중복 합산 제외. 기록 갱신만으로 운영 상태를 새로 확인하거나 현업 인수를 완료한 것으로 판단하지 않음</li>
+            </ul></div></details>
+          </div></details>
+          <details class="record-group"><summary>당일 배포 순서와 최신 정책</summary><div class="record-body">
+            <div class="record-table" role="region" aria-label="10월 12일 배포 순서와 정책" tabindex="0"><table><thead><tr><th>단계</th><th>반영 내용·확인</th><th>최신 상태와 구분</th></tr></thead><tbody>
+              <tr><td>20261012-production-r1</td><td>생산부 기능·ERP 소개 배포, 앱 3개 healthy. 공개 HTTPS 209개·업무 조회 경계 22개 확인·오류 0</td><td>당시 문서 13개 제공은 이전 기록. 생산·출고 운영 쓰기 미검증</td></tr>
+              <tr><td>20261012-nodocs-r2</td><td>운영 문서 파일·메뉴·번들·라우트 제거, 앱 3개 healthy. NAS 실제 로그인·문서 404 등 325개 확인·오류 0</td><td>ERP 문서는 개발 전용. 후속 모든 백업 배포에서도 제외 정책 유지</td></tr>
+              <tr><td>20261012-department-backups-r1</td><td>Linux NAS 연결·부서별 기준본/증분·복원 앱 배포. 관리자 28개 확인, 생산부 첫 기준본의 내부·NAS 저장 확인</td><td>당시 자동 10분 방식은 후속 변경 후 방식으로 대체. 이 결과를 최신 방식의 완료 근거로 혼용하지 않음</td></tr>
+              <tr><td>20261012-event-backups-r2</td><td>성공한 업무 커밋 후 백업·재시도·재시작 보완 배포. 공개 341개·관리자 상태 29개·화면 117개 확인·오류 0</td><td>trigger=change·intervalMinutes=null. 운영 업무 저장·운영 복원은 미실시</td></tr>
+              <tr><td>20261012-backup-cleanup-r1</td><td>worker·부서 정의·관리자 폼 상태 정리 재배포. 앱 healthy·공개/상태/화면 확인·파일 632개 보존 대조 통과</td><td>최신 확인된 배포. 기존 서명·자동 실행·복원 범위 유지</td></tr>
+              <tr><td>a5b4eed 후속 소스</td><td>NAS DB 백업 카드의 연결됨/미연결 표시와 주소만 남기는 화면 단순화</td><td>커밋은 소스 보관 근거. 해당 변경의 운영 배포 증거 미확보</td></tr>
+            </tbody></table></div>
+          </div></details>
+          <details class="record-group"><summary>단계별 검사·실제 확인·자료 보존 범위</summary><div class="record-body">
+            <div class="record-table" role="region" aria-label="10월 12일 검사와 실제 운영 확인" tabindex="0"><table><thead><tr><th>단계·검사</th><th>확인 결과</th><th>실행 범위·한계</th></tr></thead><tbody>
+              <tr><td>최초 생산부 반영</td><td>build/lint, 격리 API 128·웹 62 통과, API Linux 전용 13 제외. Docker·문서 회귀 합계 34 통과·Unix 소켓 1 제외</td><td>모의 화면 합계 588개·JS 오류 0은 운영 쓰기 검증과 별도. 공개 실제 209개와 조회 경계 22개 구분</td></tr>
+              <tr><td>운영 문서 제외</td><td>build/lint, 격리 API 130·웹 62·Docker 24 통과. API Linux 13·Docker Unix 소켓 1 제외. 공개 실제 325개·오류 0</td><td>이미지/본문 번들 부재·문서 404·로그인·쿠키·모바일 확인, 업무 쓰기·운영 복원 제외</td></tr>
+              <tr><td>변경 후 자동 백업</td><td>API 149·웹 62 통과, API Linux 13 제외. 엔진·업무 저장/증분/복원 연결 19개 통과. 격리 Linux 외부 파일 17 통과·Windows 1 제외</td><td>실제 업무 저장·복원은 격리 DB. 공개 341개·상태 29개·화면 117개는 로그인·권한·상태·읽기·빈 폼 취소 범위</td></tr>
+              <tr><td>최신 백업 코드 정리</td><td>build/lint, API 152·웹 62 통과, API Linux 13 제외. 엔진/종료 17·화면 모의 67·배포 실행기 11개 통과</td><td>공개 HTTPS 341개·NAS 상태 29개·1440/390/320px 화면 117개 확인·오류 0. 운영 업무 저장·DB 복원·수동 백업 생성 없이 읽기 확인</td></tr>
+              <tr><td>NAS 실제 파일·키</td><td>내부/NAS 생산부 기준본 각 1개의 바이트·SHA·HMAC·체인·키 일치. 변경 후 배포에서 전체 DB 백업 1개 생성·NAS 사본 일치 확인</td><td>CLI 기존 체인 imported=0·databaseChanged=false. 빈 내부 저장소의 복구와 운영 DB 복원 성공으로 확대하지 않음</td></tr>
+              <tr><td>기존 자료·실행 상태</td><td>계정 24·부서 4·메모 0·13테이블, 공통/업무 자료 해시·NAS 신원·키·설정·DB/점검 ID·시작 시각 보존 대조</td><td>최신 정리에서 기존 내부/NAS 파일 632개 바이트 해시 일치. 환경값·계정 신원 원문·키·암호는 공개 기록에서 제외</td></tr>
+            </tbody></table></div>
+            <p>위 수치는 당일 배포·검증 기록의 범위를 재정리한 값이며 이번 문서 갱신에서 운영 검사를 새로 실행한 값이 아님. Windows의 Linux 전용 제외를 통과로 계산하지 않으며 단계 간 반복 확인을 하나의 총검사 수로 합산하지 않음.</p>
+          </div></details>
+          <details class="record-group"><summary>관련 WBS와 남은 운영 인수</summary><div class="record-body">
+            <div class="record-table" role="region" aria-label="10월 12일 WBS 근거와 남은 조건" tabindex="0"><table><thead><tr><th>연결 영역</th><th>오늘 확보한 근거</th><th>남은 확인</th></tr></thead><tbody>
+              <tr><td>생산부 자재·재고·생산·출고</td><td>확정 소스 운영 반영·업무 스키마 추가·조회 권한 경계</td><td>실제 생산부/관리자 계정의 저장·생산·출고·실물 대사·현업 인수, 테이프/접착제 실제 소모량 조사</td></tr>
+              <tr><td>문서·공개 접근 경계</td><td>개발 문서 유지·운영 문서 파일/메뉴/번들 제외·익명/인증 404</td><td>향후 배포에서도 동일 제외 정책 유지</td></tr>
+              <tr><td>NAS·백업·선택 복원</td><td>NAS 마운트/쓰기·실제 파일/서명 확인, 부서 체인·변경 후 자동 실행 배포·격리 복원</td><td>빈 내부 저장소로 NAS 체인 신규 가져오기·운영 DB 복원·시간/실패 복구·HDD 전환 인수</td></tr>
+              <tr><td>공통 기반·분리 운영</td><td>NAS 로그인·권한·세션·키·DB·점검 실행·자료 보존 대조</td><td>관리자 실제 계정 변경·직원 OTP, 실제 3대 이전·인증서·방화벽·공휴일 공식 API 연동</td></tr>
+            </tbody></table></div>
+            <p>기존 WBS의 전체 ERP 약 7%는 이전 사용자 추정이며 오늘 재산정하지 않음. 현재 ERP 문서의 전체 진행률은 미산정. 프로토타입 기반 준비 70%(20개 중 14개), 기존 상태·가중치·완료일과 과거 기록 보존. 오늘 배포·검사를 근거로 미검증 운영 인수 항목을 done으로 전환하지 않음.</p>
+          </div></details>
+          <details class="record-group"><summary>근거 문서·소스와 기록 범위</summary><div class="record-body"><ul>
+            <li>오늘 통합 일지 · erp-docs/daily-work-logs/박범준/2026-10-12.md</li>
+            <li>현행 설명·인수인계·검증 · erp-docs/md/ERP_OVERVIEW.md · erp-docs/md/AI_HANDOFF.md · erp-docs/md/VALIDATION.md</li>
+            <li>부서별 백업·체인 가져오기·복원 계약 · erp-docs/md/DATABASE_README.md</li>
+            <li>백업 실행 분리 · erp-api/src/department-backup-worker.ts</li>
+            <li>NAS 상태 후속 소스 · erp-admin/src/views/BackupsView.vue · scripts/verify-nas-backups-ui.mjs · a5b4eed</li>
+          </ul><p>현재 안내와 날짜별 과거 배포 결과를 구분해 기록. 이번 정리는 ERP 문서·WBS 적용 범위이며 추가 커밋·푸시·서비스 조작·서버 배포를 포함하지 않음.</p></div></details>
+        </div>
+      </section>
+      <!-- october-twelfth-record:end -->
 
       <!-- october-seventh-record:start -->
       <section id="update-october-seventh" class="panel-card update-panel" aria-labelledby="update-october-seventh-title">
@@ -1134,7 +1242,7 @@
         <aside class="panel-card decision-panel" aria-labelledby="decision-title">
           <div class="panel-heading"><div><p class="eyebrow">DECISION LOG</p><h2 id="decision-title">남은 운영 확인</h2></div><span class="signal-dot" aria-hidden="true"></span></div>
           <ol class="decision-list">
-            <li><span>01</span><div><strong>외부 백업·복원</strong><p>Linux HDD·NAS 실제 저장·사본·복원 인수</p></div></li>
+            <li><span>01</span><div><strong>외부 백업·복원</strong><p>NAS 실제 저장 확인·HDD 전환과 운영 복원 인수 남음</p></div></li>
             <li><span>02</span><div><strong>관리자 실제 작업</strong><p>관리자 계정의 변경·백업·복원 확인</p></div></li>
             <li><span>03</span><div><strong>세 PC 분리 운영</strong><p>독립 실행기·인증서·방화벽·DB 이전</p></div></li>
             <li><span>04</span><div><strong>공휴일 동기화</strong><p>공식 API 수집·캐시·월간 갱신</p></div></li>
@@ -1152,7 +1260,7 @@
         <div class="delivery-steps">
           <article><span>01</span><h3>공통 기능</h3><p>NAS 인증·계정·DB·감사·홈</p></article>
           <article><span>02</span><h3>보안 경계</h3><p>관리 권한·TLS 정책·문서·쿠키</p></article>
-          <article><span>03</span><h3>복구 인수</h3><p>실제 HDD·NAS 저장·운영 복원</p></article>
+          <article><span>03</span><h3>복구 인수</h3><p>NAS 저장 확인·HDD 전환·운영 복원</p></article>
           <article><span>04</span><h3>분리 운영</h3><p>독립 실행기·세 PC 이전·망 구성</p></article>
           <article><span>05</span><h3>시작 전 점검</h3><p>관리자 실제 작업·공휴일·회귀</p></article>
         </div>
