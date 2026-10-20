@@ -10,50 +10,29 @@
   const openStreams = new Set(allStreams.map(stream => stream.id));
 
   function renderProgress() {
-    const progress = data.calculateProgress(data.tasks);
-    $("#progress-value").textContent = `${progress}%`;
-    $("#progress-bar").style.width = `${progress}%`;
-    $("#progress-track").setAttribute("aria-valuenow", String(progress));
-    const basis = `${data.progressBasis}: ${data.tasks.length}개 동일 점수 점검 중 ${data.completed.length}개 확인 완료. 진행 중·예정은 0점`;
-    $("#progress-track").setAttribute("aria-valuetext", `${progress}% · ${basis}`);
-    $("#prototype-progress").setAttribute("title", basis);
-    $("#progress-remaining").textContent = `남은 준비 ${100 - progress}%`;
-    const overall = data.overallProgress;
-    $("#overall-progress-value").textContent = `약 ${overall.estimate}%`;
-    $("#overall-progress-bar").style.width = `${overall.estimate}%`;
-    $("#overall-progress-track").setAttribute("aria-valuenow", String(overall.estimate));
-    $("#overall-progress-track").setAttribute("aria-valuetext", `약 ${overall.estimate}% · ${overall.basis} 기준의 ${overall.source}`);
+    const progress = data.overallProgress.value;
+    $("#overall-progress-value").textContent = `약 ${progress}%`;
+    $("#overall-progress-bar").style.width = `${progress}%`;
+    $("#overall-progress-track").setAttribute("aria-valuenow", String(progress));
+    $("#overall-progress-track").setAttribute("aria-valuetext", `약 ${progress}%`);
   }
 
   function renderMetrics() {
-    $("#total-count").textContent = data.tasks.length;
-    $("#done-count").textContent = data.completed.length;
-    $("#progress-count").textContent = data.tasks.filter(task => task.status === "in_progress").length;
-    $("#planned-count").textContent = data.tasks.filter(task => task.status === "planned").length;
-    $("#baseline-count").textContent = `${data.completed.length}개 확인`;
+    $("#total-count").textContent = data.departments.length;
+    $("#done-count").textContent = data.departments.filter(item => item.status === "done").length;
+    $("#progress-count").textContent = data.departments.filter(item => item.status === "in_progress").length;
+    $("#planned-count").textContent = data.departments.filter(item => item.status === "planned").length;
   }
 
   function renderDashboard() {
-    $("#scope-grid").innerHTML = data.groups.map(group => {
-      const count = group.streams.reduce((sum, stream) => sum + stream.tasks.length, 0);
-      return `<a class="scope-card tone-${escapeHtml(group.tone)}" href="#details" data-group="${escapeHtml(group.id)}">
-        <div class="scope-card-top"><span>${escapeHtml(group.tag)}</span><strong>${escapeHtml(group.id)} / 04</strong></div>
-        <h3>${escapeHtml(group.name)}</h3><p>${escapeHtml(group.summary)}</p>
-        <div class="scope-count"><strong>${group.streams.length}</strong><span>업무 영역</span><strong>${count}</strong><span>상세 작업</span></div>
-        <ul>${group.streams.map(stream => `<li>${escapeHtml(stream.name)}</li>`).join("")}</ul>
-        <span class="scope-link">상세 범위 보기 <b aria-hidden="true">↗</b></span>
+    $("#scope-grid").innerHTML = data.departments.map(department => {
+      return `<a class="scope-card tone-${escapeHtml(department.tone)}" href="#details" data-group="${escapeHtml(department.id)}">
+        <h3>${escapeHtml(department.name)}</h3><strong class="department-progress">${department.progress === null ? "미산정" : `${department.progress}%`}</strong><p>${escapeHtml(department.detail)}</p>
+        <span class="status-badge ${escapeHtml(department.status)}">${{ done: "구축 완료", in_progress: "구축 중", planned: "완성 전" }[department.status]}</span>
+        <span class="scope-link">상세 보기 <b aria-hidden="true">↗</b></span>
       </a>`;
     }).join("");
-
-    $("#handoff-grid").innerHTML = data.handoffs.map((item, index) => `
-      <article class="handoff-card">
-        <div class="handoff-number">FLOW ${String(index + 1).padStart(2, "0")}</div>
-        <div class="handoff-route"><span>${escapeHtml(item.from)}</span><i aria-hidden="true">→</i><span>${escapeHtml(item.to)}</span></div>
-        <h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.detail)}</p>
-      </article>`).join("");
-
-    $("#baseline-grid").innerHTML = data.completed.map(task => `
-      <article class="baseline-item"><span>${escapeHtml(task.id)}</span><strong>${escapeHtml(task.title)}</strong></article>`).join("");
+    $("#progress-basis").innerHTML = '<p>2026년 10월 20일 마스터 평가 기준: 전체 완성도 약 10%, 사업부 0%, 기술개발부 0%. 생산부 수치는 별도 확인합니다.</p><p>ERP 초기 기초 뼈대 약 7%는 별도 참고 평가이며, 전체 약 10%에 더하지 않습니다.</p><p>기능 구현과 개발 검증 기록을 완성도로 자동 환산하지 않습니다. 전체 수치는 부서 평균이 아닌 관리 추정이며, 기존 45% 산정은 현재 기준에서 제외합니다.</p>';
   }
 
   function renderRows(tasks) {
@@ -92,7 +71,8 @@
     let visible = 0;
 
     data.groups.forEach(group => {
-      if (groupFilter !== "all" && groupFilter !== group.id) return;
+      const filterGroups = { foundation: ["1", "2", "3", "4"], production: ["5", "6"] };
+      if (groupFilter !== "all" && !(filterGroups[groupFilter] || [groupFilter]).includes(group.id)) return;
       const cards = [];
       let groupCount = 0;
       group.streams.forEach(stream => {

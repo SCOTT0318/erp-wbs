@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TempChain ERP WBS: 10월 13일 부서별 대시보드·기술 문서·개발 관리자·부서 요구사항과 마지막 확인된 운영 배포·남은 인수 현황">
+  <meta name="description" content="TempChain ERP WBS: 생산부·사업부·기술개발부 구축 현황">
   <title>TempChain ERP | ERP WBS</title>
   <link rel="stylesheet" href="./css/wbs.css">
   <style>
     .hero-copy { align-self: center; }
     .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 36px; }
-    .hero-progress-group { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .hero-progress-group { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
     .hero-progress-group .hero-progress { min-width: 0; padding: 22px; }
     .hero-progress-group h2 { margin: 0; color: #d2eee7; font-size: 14px; }
     .hero-progress-group .hero-progress-value strong { font-size: 50px; }
@@ -17,6 +17,15 @@
     .hero-progress-group .progress-track { margin-bottom: 12px; }
     .hero-progress-group p { font-size: 12px; line-height: 1.7; }
     .hero-progress-group .progress-remaining { margin-top: 9px; color: #a5edd7; font-weight: 700; }
+    .scope-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 20px; }
+    .scope-card { min-height: 210px; }
+    .department-progress { font-size: 30px; color: var(--navy); }
+    .stage-evidence { display: block; margin-top: 8px; font-size: 11px; color: var(--muted); }
+    @media (max-width: 700px) { .scope-grid { grid-template-columns: 1fr; } }
+    .history-record { margin-top: 20px; }
+    .history-record > summary { cursor: pointer; color: var(--navy); font-weight: 800; }
+    .history-record[open] > summary { margin-bottom: 20px; }
+    @media print { .history-record { display: none; } }
     @media (max-width: 1000px) { .hero { grid-template-columns: 1fr; } }
     @media (max-width: 600px) { .hero-progress-group { grid-template-columns: 1fr; } }
     .october-record { display: grid; gap: 10px; margin-top: 18px; min-width: 0; }
@@ -37,26 +46,28 @@
     .october-record th { background: var(--canvas); color: var(--navy); }
     @media (max-width: 600px) { .update-panel .panel-heading { flex-wrap: wrap; gap: 12px; } .october-record .record-body { padding: 12px; } .october-record summary { padding: 13px 12px; } }
   </style>
+  <link rel="stylesheet" href="./css/brand.css">
+  <link rel="icon" type="image/png" href="./assets/brand/tempchain-symbol.png">
 </head>
 <body>
+  <header class="company-header">
+    <div class="shell company-header-inner">
+      <a class="company-logo" href="./index.html" aria-label="TEMPCHAIN ERP WBS 홈"><img src="./assets/brand/tempchain-logo.png" alt="TEMPCHAIN" width="4096" height="515"></a>
+      <span class="workspace-label">ERP 프로젝트 <span>WORKSPACE</span></span>
+    </div>
+  </header>
   <main class="shell">
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy">
+        <p class="eyebrow">TEMPCHAIN · PROJECT OVERVIEW</p>
         <h1 id="page-title">ERP WBS</h1>
       </div>
-      <div class="hero-progress-group" aria-label="전체 ERP와 프로토타입 준비 진행률">
+      <div class="hero-progress-group" aria-label="전체 ERP 진행률">
         <section class="hero-progress" aria-labelledby="overall-progress-title">
-          <h2 id="overall-progress-title">전체 ERP 구축</h2>
-          <div class="hero-progress-value"><strong id="overall-progress-value">약 7%</strong><span>이전 사용자 추정</span></div>
-          <div id="overall-progress-track" class="progress-track" role="progressbar" aria-label="전체 ERP 구축 진행률 추정" aria-valuemin="0" aria-valuemax="100" aria-valuenow="7"><span id="overall-progress-bar" style="width: 7%"></span></div>
-          <p>이전 사용자 추정치이며 10월 13일 재산정하지 않았습니다. 현재 ERP 문서의 전체 진행률은 미산정입니다.</p>
-        </section>
-        <section id="prototype-progress" class="hero-progress" aria-labelledby="prototype-progress-title" title="20개 동일 점수 점검 중 14개 확인 완료. 진행 중·예정은 0점">
-          <h2 id="prototype-progress-title">프로토타입 준비</h2>
-          <div class="hero-progress-value"><strong id="progress-value">70%</strong></div>
-          <div id="progress-track" class="progress-track" role="progressbar" aria-label="프로토타입 기반 준비 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" aria-describedby="prototype-progress-description progress-remaining"><span id="progress-bar" style="width: 70%"></span></div>
-          <p id="prototype-progress-description">접속·로그인 후 기본 화면을 볼 수 있는 프로토타입 단계까지의 기반 준비율입니다.</p>
-          <p id="progress-remaining" class="progress-remaining">남은 준비 30%</p>
+          <h2 id="overall-progress-title">전체 완성도</h2>
+          <div class="hero-progress-value"><strong id="overall-progress-value">약 10%</strong></div>
+          <div id="overall-progress-track" class="progress-track" role="progressbar" aria-label="전체 ERP 구축 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="10"><span id="overall-progress-bar" style="width: 10%"></span></div>
+
         </section>
       </div>
     </section>
@@ -69,16 +80,99 @@
     </nav>
 
     <section id="panel-dashboard" class="tab-panel" role="tabpanel" aria-labelledby="tab-dashboard">
-      <section class="metric-grid" aria-label="현재 서비스 시작 전 기반 준비 수치">
-        <article class="metric-card metric-primary"><span class="metric-label">기반 준비 항목</span><strong id="total-count">20</strong><small>서비스 시작 전 점검</small><i aria-hidden="true">01</i></article>
-        <article class="metric-card"><span class="metric-label">확인 완료</span><strong id="done-count">14</strong><small>명시된 검증 기준 충족</small><i aria-hidden="true">02</i></article>
-        <article class="metric-card"><span class="metric-label">진행 중</span><strong id="progress-count">4</strong><small>실제 적용·운영 인수 남음</small><i aria-hidden="true">03</i></article>
-        <article class="metric-card"><span class="metric-label">예정</span><strong id="planned-count">2</strong><small>독립 실행기·공휴일 동기화</small><i aria-hidden="true">04</i></article>
+      <section class="metric-grid" aria-label="부서 구축 현황">
+        <article class="metric-card metric-primary"><span class="metric-label">전체 부서</span><strong id="total-count">3</strong></article>
+        <article class="metric-card"><span class="metric-label">구축 완료</span><strong id="done-count">0</strong></article>
+        <article class="metric-card"><span class="metric-label">구축 중</span><strong id="progress-count">1</strong></article>
+        <article class="metric-card"><span class="metric-label">완성도 0%</span><strong id="planned-count">2</strong></article>
       </section>
 
+      <section class="panel-card update-panel" aria-labelledby="scope-title">
+        <div class="panel-heading"><div><p class="eyebrow">DEPARTMENTS</p><h2 id="scope-title">부서별 현황</h2></div><span class="pill">3개 부서 · 업무 연결</span></div>
+        <div id="scope-grid" class="scope-grid"></div>
+        <div class="october-record"><details><summary>산정 기준</summary><div id="progress-basis" class="record-body"></div></details></div>
+      </section>
+      <aside class="foundation-note"><span>기초 구축</span><strong>약 7%</strong><p>ERP 초기 뼈대 기준 · 전체 완성도와 합산하지 않음</p></aside>
+      <!-- october-nineteenth-record:start -->
+      <section id="update-october-nineteenth" class="panel-card update-panel" aria-labelledby="update-october-nineteenth-title">
+        <div class="panel-heading"><div><p class="eyebrow">2026.10.19 / CURRENT ERP</p><h2 id="update-october-nineteenth-title">10월 19일 ERP 현황과 남은 인수</h2></div><span class="pill">개발 구현·운영 근거 구분</span></div>
+        <ul class="update-list">
+          <li><strong>전체 진행률</strong><span>10월 20일 마스터 평가로 전체 완성도 약 10%, 사업부 0%, 기술개발부 0%로 정정. 생산부 수치는 별도 확인. 개발 구현·검증을 완성도로 자동 환산하지 않으며 부서 평균으로 역산하지 않음</span></li>
+          <li><strong>현재 개발</strong><span>ERP 6a016b4 기준 47개 테이블·스키마 v9. 사업부 신청·컨테이너 결산, 생산 소형 분할 출고, 기술개발 QC, 독립 데이터로거와 개인 알림 읽음 DB 반영</span></li>
+          <li><strong>부서 연결</strong><span>생산 완료·QC 신청 → 기술개발 인수/통과 → 물류 보관. 사업부 컨테이너 묶음 신청 → 물류 승인, 소형 신청 → 생산 계획/실제 출고로 연결. 일반 부서 계정의 현업 인수는 별도</span></li>
+          <li><strong>실제 개발 확인</strong><span>관리자 세션으로 시험 QC 1개 통과·보관, 시험 소형 재고 6개를 2개/4개 분할 출고해 0개, 시험 컨테이너 2대 신청·물류 승인 확인. 시험 컨테이너의 에이징·실제 출고는 미실행</span></li>
+          <li><strong>마지막 운영 기록</strong><span>10월 16일 20261016-dashboard-r1·운영 31표/v9·공개 457항목/오류 0은 문서상 마지막 확인 결과. 신규 47표 모듈의 운영 배포·자료 이전과 오늘 운영 재조회는 없음</span></li>
+          <li><strong>남은 작업</strong><span>일반 부서 계정·실물/기기·엑셀 PC 저장/표시/인쇄·운영 복원·현업 인수, HDD 전환·세 PC 이전·공휴일 API. 해외구매 20단계와 기술개발 XML/장비/샘플/시험 범위는 보류</span></li>
+        </ul>
+        <div class="october-record">
+          <details class="record-group"><summary>사업부 신청·월말결산과 원본 엑셀</summary><div class="record-body">
+            <ul>
+              <li>사업부에 컨테이너 입출고 신청·소형제품 출고 신청·월말결산 3개 업무 메뉴 구현. 컨테이너는 실제 LOT·고객/소유사·고객 요청번호·운송·예정 일시·원본 증빙을 기록</li>
+              <li>한 고객 요청번호에 최대 100대의 컨테이너를 묶어 제출하고 제품별 LOT·명시 제품명·신청 당시 로거 번호를 보존. 같은 고객의 진행 중 요청번호 중복 거부, 변경은 재승인과 당시 이력 보존</li>
+              <li>소형은 자재에 등록한 완제품을 신청하고 생산부가 날짜별 수량 계획·실제 출고·실적 정정. 계획은 예약/차감하지 않으며 실제 출고와 재고·감사·UUID를 원자 저장. 부족/버전 충돌·계획 초과 정정은 거부</li>
+              <li>월말결산은 컨테이너 입출고·렌탈 1/2·보관의 5종만 제공. 소형은 결산 건수·요율·개별 정산 XLSX·전체 ZIP에서 제외하고 기존 자료는 보존. 단가·금액은 인증 엑셀에만 포함</li>
+              <li>원본 신청서의 병합·행 높이·열 너비·서명란·인쇄 영역과 반복 제품행을 유지하며 OOXML 관계·콘텐츠 유형을 재구성. 고객번호·각 로거·출고 예상 일시를 반복 시트에도 출력하고 과거 외부 링크·불필요 메타정보 제외</li>
+              <li>파일 전체 수신 뒤 XLSX 구성·응답 길이와 명시적 저장 링크를 확인. 격리 HTTP에서 일반 탭/로그인 유지 모두 9,674바이트 저장·값 일치 13항목 통과. 실제 개발 세션의 PC 저장·Microsoft Excel 표시/인쇄는 미확인</li>
+              <li>해외구매 20단계의 발주·공식 서식·승인·수입·송금은 별도 요구 범위로 보류. 이번 신청/결산 구현을 해외구매 전체 완료로 집계하지 않음</li>
+            </ul>
+          </div></details>
+          <details class="record-group"><summary>생산 완료·기술개발 QC·물류와 독립 데이터로거</summary><div class="record-body">
+            <ul>
+              <li>생산부의 생산 완료·QC 신청을 기술개발부가 인수·통과한 뒤 물류 보관으로 연결. QC 미통과 제품은 물류 재고·출고 대상에서 제외하고 생산/QC 처리 이력과 물류 제품·AS 이력을 담당별로 구분</li>
+              <li>완제품 분류와 QC 상태를 분리하고 BioKeeper 1800·BioKeeper 2700·BioKeeper 3300·BioKeeper OceanX 명시 선택 제공. 미확정 기존 LOT·소형 제품명은 추정하지 않으며 서비스 상품명·단가를 모델에서 자동 결정하지 않음</li>
+              <li>기술개발부 QC는 일부 신규 ERP 업무 구현 근거. 과거 제거한 챔버·예약·샘플·시험과 독립 XML 뷰어의 ERP 연계는 보류 범위 유지</li>
+              <li>독립 로거는 일련번호만 등록할 수 있고 LOT 연결·교체·해제·검교정 이력을 관리. 중복 연결·사용 중 LOT 덮어쓰기·버전 충돌 거부, 신청 당시 로거 스냅샷과 기존 검교정 보존</li>
+              <li>로거 업로드는 일련번호/연결 LOT의 2열 XLSX·최대 1,000행/5MiB. 파일 원문·행 버전과 미리보기를 재검사하고 전체 원자 반영. 컨테이너 기본정보의 LOT·생산일·소유사·로거·검교정·차기검교정 6열 CSV와 별도</li>
+            </ul>
+          </div></details>
+          <details class="record-group"><summary>공통 권한·알림·관리자와 DB/백업 경계</summary><div class="record-body">
+            <ul>
+              <li>10월 16일 자재 대시보드의 전체/재고 보유/구매 필요/등록 대기 4개 카드와 목록 필터를 연결. 카드/목록 전체 건수·검색/페이지·소수/미입력/0·안전재고 구분을 API 42개·모의 화면 235항목으로 확인한 당시 기록이며, 물류는 종류/소유사·상태별 카드와 목록 조건을 연결</li>
+              <li>화면의 부서 선택과 실제 활성 부서/개별 업무 권한을 분리. 권한 회수 후 동일 UUID 재확인도 재검사하고 결과 불명 요청의 원문·계정/창·UUID를 보존</li>
+              <li>자재 기준정보는 단위를 포함한 8개 메뉴로 구성하고 수정/삭제를 실제 생산부의 개별 권한으로 검사. 치수 추가는 수정 권한에 통합, 종류 삭제는 관리자만 허용하며 사용 중인 항목은 삭제 거부</li>
+              <li>알림 읽음은 개인 DB 0/1로 저장하고 신규/누락 상태는 0. 조회는 무쓰기, 개인 읽음 저장은 업무 감사·부서 백업 제외, 전체 서명 백업에는 포함. 새 탭/재로그인 유지·계정 분리 회귀와 실제 개발 기존 읽음 재저장 결과 구분</li>
+              <li>관리자 메뉴 확장 시 본문 공간 확보·비겹침, 부서 대시보드 첫 메뉴·날짜 묶음 중앙 이동과 모션/모바일/키보드 회귀 반영</li>
+              <li>개발 DB는 기존 31표 + 제품/QC 5표 + 개인 읽음 1표 + 사업부 9표 + 독립 로거 1표 = 47표/v9. 서명 v8/v9·구 모듈 없는 백업 호환, 기존 자료·계정·키·NAS 신원 보존</li>
+              <li>사업부 신청 연결 후 생산부만 과거로 복원하면 신청·실적·재고가 어긋나므로 거부하고 전체 서명 백업 사용. 격리 복원 검사는 실제 운영 복원 인수와 구분</li>
+            </ul>
+          </div></details>
+          <details class="record-group"><summary>실제 개발 시험과 현업 인수의 구분</summary><div class="record-body">
+            <div class="record-table" role="region" aria-label="10월 19일 실제 개발 시험 범위" tabindex="0"><table><thead><tr><th>업무</th><th>확인한 실제 개발 기록</th><th>남은 확인</th></tr></thead><tbody>
+              <tr><td>QC 연결</td><td>TEST-QC-20261019-01 시험 1개 등록·신청·인수/통과·물류 보관</td><td>일반 생산/기술개발/물류 계정의 역할별 현업 인수·실물 대조</td></tr>
+              <tr><td>소형 분할 출고</td><td>시험 자재 #104 입고 6개 → 실제 출고 2개/4개 → 재고 0개, 신청 #1 완료·원장/이력 보존</td><td>서로 다른 실적일·일반 부서 계정·실제 업무자료와 실물 수용</td></tr>
+              <tr><td>컨테이너 신청</td><td>시험 2대·각 로거, 신청 #2 저장·제출·물류 승인과 이력 확인</td><td>해당 시험의 에이징·사진·실제 출고/반입 미실행, 실기기 촬영·현업 인수</td></tr>
+              <tr><td>로거·엑셀</td><td>기존 연결 조회·시험 연결 미리보기 후 저장 없이 닫기, 파일 준비/직접 저장 링크 확인</td><td>신규 로거/일괄 업로드 실업무·실제 개발 세션 PC 파일 저장·Excel 표시/인쇄</td></tr>
+            </tbody></table></div>
+            <p>위 실제 화면은 기존 관리자 세션의 개발 시험이다. 기존 업무자료와 시험 기록을 보존하며 서로 다른 일반 부서 계정의 인수·운영 저장·현장 수용으로 확대하지 않는다.</p>
+          </div></details>
+          <details class="record-group"><summary>최신 QA·운영 기록과 남은 인수</summary><div class="record-body">
+            <div class="record-table" role="region" aria-label="10월 19일 최신 검증과 적용 경계" tabindex="0"><table><thead><tr><th>구분</th><th>최신 기록</th><th>해석 범위</th></tr></thead><tbody>
+              <tr><td>빌드·정적 검사</td><td>API·ERP 웹·관리자 개발 빌드/린트 통과</td><td>Windows 11·Conda scott의 격리 검사. 상시 서비스 교체 없음</td></tr>
+              <tr><td>전체 격리 API</td><td>기본 424개 중 411통과·13 Linux 생략, 별도 이전 8개 통과: 총 432개 중 419통과·13생략·실패 0</td><td>최초 실패·수정 전 검사와 이전 425개 실행을 최종에 중복 합산하지 않음</td></tr>
+              <tr><td>웹·도구 회귀</td><td>웹 199개 통과. 문서/Docker/실행기 45개 중 44통과·Linux 소켓 1생략</td><td>Linux 생략은 통과와 구분, 실제 Docker 서비스 실행/교체 검사 아님</td></tr>
+              <tr><td>합성 UI</td><td>사업부 71·로거 33·알림 83·부서 270·ERP 메뉴 47·관리자 메뉴 36, 총 540항목·오류 0</td><td>합성 응답 검사, 실제 업무자료 쓰기 0</td></tr>
+              <tr><td>격리 실제 API/DB 화면</td><td>제품/QC → 신청 → 승인/에이징/묶음출고 35항목, XLSX 수신 13항목 각각 통과</td><td>임시 DB·HTTP 검사, 기존 개발/운영 서비스·PC 저장 인수와 별도</td></tr>
+              <tr><td>문서</td><td>17파일 링크 425개·앵커 195개 오류 0, 개발 문서 포털 232항목·오류 0</td><td>16개 개발 문서·검색/목차/인증/반응형 검사, 운영 문서 제외 유지</td></tr>
+              <tr><td>마지막 운영</td><td>20261016-dashboard-r1·31표/v9·공개 457항목/오류 0, 당시 계정 25·메모 1·기존 백업 865개/신규 2개·자료/키/NAS 보존</td><td>Git 문서의 과거 결과 대조. 새 관리자 카드 실클릭은 당시 인증 미확보로 미확인. 오늘 운영·NAS·DB 재조회나 신규 모듈 배포 없음</td></tr>
+            </tbody></table></div>
+            <p>운영 복원·빈 내부 저장소의 NAS 복구·HDD 원본 전환, 실제 카메라·일반 부서 계정·현업 인수, 세 PC 실행기/TLS/방화벽/이전과 공휴일 API는 계속 남는다. 구현·격리 QA·개발 시험·과거 운영 검증을 하나의 완료 판정으로 합치지 않는다.</p>
+          </div></details>
+          <details class="record-group"><summary>산정 근거와 확인한 소스</summary><div class="record-body">
+            <p>10월 20일 마스터 완성도 평가를 우선하여 전체 약 10%, 사업부 0%, 기술개발부 0%로 정정. 이전 단계 가중 평균 45%는 현재 완성도로 사용하지 않는다. 아래 소스는 개발 기록의 근거이며 완성도 평가와 구분한다.</p>
+            <ul>
+              <li>근거 커밋: <code>6a016b4c967b06bd9d17caabca6b4b66c5a78116</code> · ERP 작업 트리의 미커밋 변경은 제외</li>
+              <li>현황/인수인계/검증: erp-docs/md/PROJECT_STATUS.md · AI_HANDOFF.md · VALIDATION.md</li>
+              <li>업무/DB/화면: erp-docs/md/DATABASE_README.md · UI_GUIDE.md와 해당 업무 API·화면 패치</li>
+              <li>사업부 해외구매 요구·기술개발 독립 XML 뷰어는 보류 범위의 근거로만 사용. 과거 제거 업무의 완료 재사용 제외</li>
+            </ul>
+          </div></details>
+        </div>
+      </section>
+      <!-- october-nineteenth-record:end -->
+      <details class="panel-card history-record"><summary>과거 작업 기록</summary>
       <!-- october-thirteenth-record:start -->
       <section id="update-october-thirteenth" class="panel-card update-panel" aria-labelledby="update-october-thirteenth-title">
-        <div class="panel-heading"><div><p class="eyebrow">2026.10.13 / CURRENT STATUS</p><h2 id="update-october-thirteenth-title">현재 ERP 상태 · 10월 13일 작업 반영</h2></div><span class="pill">소스·개발 검증·운영 근거 구분</span></div>
+        <div class="panel-heading"><div><p class="eyebrow">2026.10.13 / HISTORY</p><h2 id="update-october-thirteenth-title">10월 13일 당시 ERP 상태</h2></div><span class="pill">과거 기록</span></div>
         <ul class="update-list">
           <li><strong>최신 개발 소스</strong><span>부서별 대시보드 분리·생산부 현황, 기술 소개 6탭·발표형 구조도 6장, NAS와 독립된 개발 테스트 관리자 도구 반영. 최신 커밋 ea21f4e, 로컬 원격 추적 ref의 푸시 기록 확인</span></li>
           <li><strong>부서 요청 수집</strong><span>사업팀 해외구매 20단계·문서/단가 비교와 생산(물류)팀 제품·데이터로거 1:1 매칭 요청을 PDF에서 정리. 요구사항 문서화 단계이며 새 업무 화면·API·DB 구현은 미착수</span></li>
@@ -1299,49 +1393,15 @@
         </ul>
       </section>
 
-      <div class="dashboard-row">
-        <section class="panel-card scope-panel" aria-labelledby="scope-title">
-          <div class="panel-heading"><div><p class="eyebrow">SCOPE ARCHITECTURE</p><h2 id="scope-title">서비스 시작 전 기반 준비</h2></div><span class="pill">4개 영역</span></div>
-          <div id="scope-grid" class="scope-grid"></div>
-        </section>
-        <aside class="panel-card decision-panel" aria-labelledby="decision-title">
-          <div class="panel-heading"><div><p class="eyebrow">DECISION LOG</p><h2 id="decision-title">남은 운영 확인</h2></div><span class="signal-dot" aria-hidden="true"></span></div>
-          <ol class="decision-list">
-            <li><span>01</span><div><strong>외부 백업·복원</strong><p>NAS 저장 확인 기록 확보, 빈 내부 저장소 복구·HDD 전환·운영 복원 인수 남음</p></div></li>
-            <li><span>02</span><div><strong>관리자 실제 작업</strong><p>개발 HTTP 로그인·조회 확인, 운영 계정 변경·백업·복원 인수 남음</p></div></li>
-            <li><span>03</span><div><strong>세 PC 분리 운영</strong><p>독립 실행기·인증서·방화벽·DB 이전</p></div></li>
-            <li><span>04</span><div><strong>공휴일 동기화</strong><p>공식 API 수집·캐시·월간 갱신</p></div></li>
-          </ol>
-        </aside>
-      </div>
+      </details>
 
-      <section class="panel-card flow-panel" aria-labelledby="flow-title">
-        <div class="panel-heading"><div><p class="eyebrow">FOUNDATION HANDOFF</p><h2 id="flow-title">기반 준비 연결</h2></div><span class="section-number">01 / 03</span></div>
-        <div id="handoff-grid" class="handoff-grid"></div>
-      </section>
-
-      <section class="panel-card delivery-panel" aria-labelledby="delivery-title">
-        <div class="panel-heading"><div><p class="eyebrow">END-TO-END DELIVERY</p><h2 id="delivery-title">서비스 시작 전 준비 순서</h2></div><span class="section-number">02 / 03</span></div>
-        <div class="delivery-steps">
-          <article><span>01</span><h3>공통 기능</h3><p>NAS 인증·계정·DB·감사·홈</p></article>
-          <article><span>02</span><h3>보안 경계</h3><p>관리 권한·TLS 정책·문서·쿠키</p></article>
-          <article><span>03</span><h3>복구 인수</h3><p>NAS 저장 확인·HDD 전환·운영 복원</p></article>
-          <article><span>04</span><h3>분리 운영</h3><p>독립 실행기·세 PC 이전·망 구성</p></article>
-          <article><span>05</span><h3>시작 전 점검</h3><p>관리자 실제 작업·공휴일·회귀</p></article>
-        </div>
-      </section>
-
-      <section class="panel-card baseline-panel" aria-labelledby="baseline-title">
-        <div class="panel-heading"><div><p class="eyebrow">VERIFIED FOUNDATION</p><h2 id="baseline-title">확인 완료한 기반</h2></div><span id="baseline-count" class="pill pill-green">14개 확인</span></div>
-        <div id="baseline-grid" class="baseline-grid"></div>
-      </section>
     </section>
 
     <section id="panel-details" class="tab-panel" role="tabpanel" aria-labelledby="tab-details" hidden>
       <div class="detail-controls" aria-label="상세 업무 필터">
-        <label class="search-field"><span class="sr-only">업무 검색</span><input id="search" type="search" placeholder="기반 항목, 검증 기준, 근거 검색" autocomplete="off"></label>
-        <label class="select-field"><span>영역</span><select id="group-filter"><option value="all">전체 영역</option><option value="1">공통 기능</option><option value="2">보안·접근</option><option value="3">DB·복구</option><option value="4">배포·운영 준비</option></select></label>
-        <label class="select-field"><span>상태</span><select id="status-filter"><option value="all">전체 상태</option><option value="done">확인 완료</option><option value="in_progress">진행 중</option><option value="planned">예정</option></select></label>
+        <label class="search-field"><span class="sr-only">업무 검색</span><input id="search" type="search" placeholder="전체 업무, 수용 기준, 근거 검색" autocomplete="off"></label>
+        <div class="select-field"><span>영역</span><select id="group-filter" aria-label="영역"><option value="all">전체</option><option value="foundation">공통 기반</option><option value="production">생산부</option><option value="7">사업부</option><option value="8">기술개발부</option></select></div>
+        <div class="select-field"><span>상태</span><select id="status-filter" aria-label="상태"><option value="all">전체 상태</option><option value="done">확인 완료</option><option value="in_progress">진행 중</option><option value="planned">예정</option></select></div>
         <button id="toggle-all" class="outline-button" type="button">모두 접기</button>
       </div>
       <div class="result-line"><p id="result-summary" aria-live="polite"></p><span>행을 펼쳐 세부 검증 기준 확인</span></div>
@@ -1350,7 +1410,8 @@
     </section>
   </main>
 
-  <script src="./js/wbs-foundation.js"></script>
+  <script src="./js/wbs-current.js"></script>
   <script src="./js/wbs.js"></script>
+  <script src="./js/wbs-select.js"></script>
 </body>
 </html>
